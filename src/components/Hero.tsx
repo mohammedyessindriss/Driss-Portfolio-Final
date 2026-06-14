@@ -19,6 +19,7 @@ export default function Hero() {
     gsap.set('.hero-scroll-indicator', { autoAlpha: 0 });
     gsap.set('.hero-availability', { autoAlpha: 0, y: 10 });
     gsap.set('.hero-card', { yPercent: 110, autoAlpha: 0 });
+    gsap.set(cardRef.current, { scale: 1, transformOrigin: 'center center' });
     gsap.set('.card-photo', { autoAlpha: 0, x: -30 });
     gsap.set('.card-metrics', { autoAlpha: 0, y: 30 });
     gsap.set('.card-info', { autoAlpha: 0, x: 30 });
@@ -69,9 +70,9 @@ export default function Hero() {
       scrollTrigger: {
         trigger: containerRef.current,
         start: 'top top',
-        end: '+=2800',
+        end: '+=1600',
         pin: true,
-        scrub: 0.8,
+        scrub: 0.5,
         anticipatePin: 1,
       }
     });
@@ -141,13 +142,11 @@ export default function Hero() {
 
       // Phase 6: Card pulls back, CTA appears
       .to(cardRef.current, {
-        width: '88vw',
-        height: '88vh',
-        maxWidth: '1100px',
+        scale: 0.88,
         borderRadius: '32px',
-        duration: 1.5,
-        ease: 'power3.inOut',
-      }, 6.8)
+        duration: 1.4,
+        ease: 'expo.inOut',
+      }, 7.1)
       .to('.hero-cta', {
         autoAlpha: 1,
         y: 0,
@@ -160,7 +159,8 @@ export default function Hero() {
 
       // Phase 8: Everything exits upward, hero unpins
       .to('.hero-card', {
-        yPercent: -110,
+        scale: 0.7,
+        yPercent: -30,
         autoAlpha: 0,
         duration: 1.5,
         ease: 'power3.in',
@@ -218,32 +218,56 @@ export default function Hero() {
           padding: '0 24px',
         }}
       >
-        <div className="hero-availability" style={{
-          marginBottom: '28px',
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '8px',
-          padding: '6px 16px',
-          border: '1px solid rgba(32,124,169,0.2)',
-          borderRadius: '100px',
-          background: 'rgba(32,124,169,0.06)',
-        }}>
-          <span style={{
-            width: '6px',
-            height: '6px',
-            borderRadius: '50%',
-            background: '#207ca9',
-            animation: 'pulse-dot 2s ease-in-out infinite',
-          }} />
-          <span style={{
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: 500,
-            fontSize: '11px',
-            color: '#207ca9',
-            letterSpacing: '0.08em',
+        <div className="hero-availability" style={{ marginBottom: '28px' }}>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            border: '1px solid #E5E7EB',
+            borderRadius: '100px',
+            paddingLeft: '8px',
+            paddingRight: '12px',
+            paddingTop: '5px',
+            paddingBottom: '5px',
+            background: '#ffffff',
           }}>
-            Available for remote work · Tunis, Tunisia
-          </span>
+            <span style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '5px',
+              color: '#207ca9',
+              fontFamily: 'Inter, sans-serif',
+              fontWeight: 500,
+              fontSize: '12px',
+            }}>
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" clipRule="evenodd" d="M5 4a.75.75 0 0 1 .738.616l.252 1.388A1.25 1.25 0 0 0 6.996 7.01l1.388.252a.75.75 0 0 1 0 1.476l-1.388.252A1.25 1.25 0 0 0 5.99 9.996l-.252 1.388a.75.75 0 0 1-1.476 0L4.01 9.996A1.25 1.25 0 0 0 3.004 8.99l-1.388-.252a.75.75 0 0 1 0-1.476l1.388-.252A1.25 1.25 0 0 0 4.01 6.004l.252-1.388A.75.75 0 0 1 5 4m7-3a.75.75 0 0 1 .721.544l.195.682c.118.415.443.74.858.858l.682.195a.75.75 0 0 1 0 1.442l-.682.195a1.25 1.25 0 0 0-.858.858l-.195.682a.75.75 0 0 1-1.442 0l-.195-.682a1.25 1.25 0 0 0-.858-.858l-.682-.195a.75.75 0 0 1 0-1.442l.682-.195a1.25 1.25 0 0 0 .858-.858l.195-.682A.75.75 0 0 1 12 1m-2 10a.75.75 0 0 1 .728.568.97.97 0 0 0 .704.704.75.75 0 0 1 0 1.456.97.97 0 0 0-.704.704.75.75 0 0 1-1.456 0 .97.97 0 0 0-.704-.704.75.75 0 0 1 0-1.456.97.97 0 0 0 .704-.704A.75.75 0 0 1 10 11" fill="#207ca9"/>
+              </svg>
+              Available for remote work
+            </span>
+            <span style={{ color: '#9CA3AF', fontSize: '14px', lineHeight: '1' }}>•</span>
+            <a
+              href="https://www.linkedin.com/in/medyessin-driss/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+                color: '#6B7280',
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '12px',
+                textDecoration: 'none',
+              }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#207ca9')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#6B7280')}
+            >
+              Tunis, Tunisia
+              <svg style={{ marginTop: '1px' }} width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="m1 1 4 3.5L1 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          </div>
         </div>
 
         <h1
@@ -544,33 +568,54 @@ export default function Hero() {
 
               {/* Available indicator — below the tags */}
               <div style={{
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
-                padding: '10px 16px',
-                border: '1px solid rgba(74,222,128,0.3)',
+                border: '1px solid rgba(255,255,255,0.15)',
                 borderRadius: '100px',
-                background: 'rgba(74,222,128,0.08)',
+                paddingLeft: '8px',
+                paddingRight: '12px',
+                paddingTop: '5px',
+                paddingBottom: '5px',
+                background: 'rgba(255,255,255,0.06)',
                 width: 'fit-content',
               }}>
                 <span style={{
-                  width: '7px',
-                  height: '7px',
-                  borderRadius: '50%',
-                  background: '#4ade80',
-                  display: 'inline-block',
-                  animation: 'pulse-dot 2s ease-in-out infinite',
-                  flexShrink: 0,
-                }} />
-                <span style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  color: '#ffffff',
                   fontFamily: 'Inter, sans-serif',
-                  fontSize: '11px',
-                  color: 'rgba(255,255,255,0.8)',
-                  letterSpacing: '0.06em',
                   fontWeight: 500,
+                  fontSize: '12px',
                 }}>
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M5 4a.75.75 0 0 1 .738.616l.252 1.388A1.25 1.25 0 0 0 6.996 7.01l1.388.252a.75.75 0 0 1 0 1.476l-1.388.252A1.25 1.25 0 0 0 5.99 9.996l-.252 1.388a.75.75 0 0 1-1.476 0L4.01 9.996A1.25 1.25 0 0 0 3.004 8.99l-1.388-.252a.75.75 0 0 1 0-1.476l1.388-.252A1.25 1.25 0 0 0 4.01 6.004l.252-1.388A.75.75 0 0 1 5 4m7-3a.75.75 0 0 1 .721.544l.195.682c.118.415.443.74.858.858l.682.195a.75.75 0 0 1 0 1.442l-.682.195a1.25 1.25 0 0 0-.858.858l-.195.682a.75.75 0 0 1-1.442 0l-.195-.682a1.25 1.25 0 0 0-.858-.858l-.682-.195a.75.75 0 0 1 0-1.442l.682-.195a1.25 1.25 0 0 0 .858-.858l.195-.682A.75.75 0 0 1 12 1m-2 10a.75.75 0 0 1 .728.568.97.97 0 0 0 .704.704.75.75 0 0 1 0 1.456.97.97 0 0 0-.704.704.75.75 0 0 1-1.456 0 .97.97 0 0 0-.704-.704.75.75 0 0 1 0-1.456.97.97 0 0 0 .704-.704A.75.75 0 0 1 10 11" fill="#4ade80"/>
+                  </svg>
                   Open to remote work
                 </span>
+                <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '14px', lineHeight: '1' }}>•</span>
+                <a
+                  href="https://www.linkedin.com/in/medyessin-driss/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    color: 'rgba(255,255,255,0.6)',
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: '12px',
+                    textDecoration: 'none',
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#ffffff')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
+                >
+                  Connect
+                  <svg style={{ marginTop: '1px' }} width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m1 1 4 3.5L1 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </a>
               </div>
             </div>
           </div>

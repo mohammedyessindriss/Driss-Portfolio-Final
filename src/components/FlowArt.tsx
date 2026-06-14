@@ -46,9 +46,33 @@ export default function FlowArt({ children }: FlowArtProps) {
             start: 'top bottom',
             end: 'top 30%',
             scrub: true,
+            onLeaveBack: () => {
+              const prevSection = sections[i - 1];
+              if (prevSection) {
+                gsap.set(prevSection, { visibility: 'visible' });
+              }
+            },
           },
         });
         if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
+
+        const hideTrigger = ScrollTrigger.create({
+          trigger: section,
+          start: 'top 0%',
+          onEnter: () => {
+            const prevSection = sections[i - 1];
+            if (prevSection) {
+              gsap.set(prevSection, { visibility: 'hidden' });
+            }
+          },
+          onLeaveBack: () => {
+            const prevSection = sections[i - 1];
+            if (prevSection) {
+              gsap.set(prevSection, { visibility: 'visible' });
+            }
+          },
+        });
+        triggers.push(hideTrigger);
       }
 
       if (i < sections.length - 1) {
@@ -62,6 +86,31 @@ export default function FlowArt({ children }: FlowArtProps) {
           })
         );
       }
+
+      // Blur entrance animation for metrics
+      const metricItems = section.querySelectorAll<HTMLElement>('.flow-metric-item');
+      metricItems.forEach((item, metricIndex) => {
+        gsap.set(item, { autoAlpha: 0, filter: 'blur(12px)', y: 8 });
+
+        const metricTrigger = ScrollTrigger.create({
+          trigger: section,
+          start: 'top 65%',
+          onEnter: () => {
+            gsap.to(item, {
+              autoAlpha: 1,
+              filter: 'blur(0px)',
+              y: 0,
+              duration: 0.65,
+              delay: metricIndex * 0.14,
+              ease: 'power2.out',
+            });
+          },
+          onLeaveBack: () => {
+            gsap.set(item, { autoAlpha: 0, filter: 'blur(12px)', y: 8 });
+          },
+        });
+        triggers.push(metricTrigger);
+      });
     });
 
     ScrollTrigger.refresh();

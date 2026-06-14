@@ -36,7 +36,7 @@ export const PROJECTS = [
     period: "Jun 2025–Jul 2026",
     role: "Marketing & Communications Director",
     tagline: "Drove 717% LinkedIn impression growth and maintained ISO 9001 certification",
-    backgroundColor: "#2e3785",
+    backgroundColor: "#207ca9",
     textColor: "#ffffff",
     borderColor: "rgba(255,255,255,0.25)",
     isLight: false,

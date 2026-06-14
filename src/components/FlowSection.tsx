@@ -42,6 +42,7 @@ export default function FlowSection({
         minHeight: '100vh',
         width: '100%',
         overflow: 'hidden',
+        backgroundColor: backgroundColor,
       }}
     >
       <div
@@ -54,8 +55,8 @@ export default function FlowSection({
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          padding: 'clamp(24px, 4vw, 56px)',
-          paddingTop: 'clamp(80px, 8vw, 100px)',
+          padding: 'clamp(32px, 4vw, 64px)',
+          paddingTop: 'clamp(88px, 8vw, 112px)',
           willChange: 'transform',
           transformOrigin: 'bottom left',
         }}
@@ -124,6 +125,54 @@ export default function FlowSection({
             {tagline}
           </p>
 
+          {/* KEY METRICS */}
+          <div
+            style={{
+              display: 'flex',
+              gap: '32px',
+              marginTop: '28px',
+              flexWrap: 'wrap',
+            }}
+          >
+            {metrics.map((metric, i) => (
+              <div
+                key={i}
+                className="flow-metric-item"
+                style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}
+              >
+                <div style={{
+                  fontFamily: 'Outfit, sans-serif',
+                  fontWeight: 800,
+                  fontSize: 'clamp(20px, 2.5vw, 30px)',
+                  color: textColor,
+                  lineHeight: 1,
+                  letterSpacing: '-0.01em',
+                }}>
+                  {metric.value}
+                </div>
+                <div style={{
+                  fontFamily: 'Inter, sans-serif',
+                  fontWeight: 400,
+                  fontSize: '11px',
+                  color: mutedColor,
+                  letterSpacing: '0.05em',
+                  textTransform: 'uppercase',
+                }}>
+                  {metric.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* DIVIDER */}
+          <div style={{
+            width: '100%',
+            height: '1px',
+            background: borderColor,
+            marginTop: '28px',
+            marginBottom: '24px',
+          }} />
+
           {/* CREATIVE WORK PREVIEWS */}
           <div style={{
             display: 'grid',
@@ -140,7 +189,7 @@ export default function FlowSection({
                 className={`work-preview-${index}`}
                 style={{
                   position: 'relative',
-                  aspectRatio: '4/3',
+                  aspectRatio: '1080 / 1350',
                   borderRadius: '10px',
                   overflow: 'hidden',
                   display: 'block',
@@ -195,21 +244,42 @@ export default function FlowSection({
                   position: 'absolute',
                   inset: 0,
                   display: 'flex',
+                  flexDirection: 'column',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  gap: '8px',
                 }}>
+                  <div style={{
+                    fontFamily: 'Outfit, sans-serif',
+                    fontWeight: 800,
+                    fontSize: '10px',
+                    letterSpacing: '0.25em',
+                    color: isLight ? 'rgba(32,124,169,0.3)' : 'rgba(255,255,255,0.2)',
+                    textTransform: 'uppercase',
+                  }}>
+                    {['THE WORK', 'CREATIVE', 'CAMPAIGN'][index]}
+                  </div>
                   <svg
-                    width="28"
-                    height="28"
+                    width="22"
+                    height="22"
                     viewBox="0 0 24 24"
                     fill="none"
-                    stroke={isLight ? 'rgba(32,124,169,0.3)' : 'rgba(255,255,255,0.2)'}
+                    stroke={isLight ? 'rgba(32,124,169,0.2)' : 'rgba(255,255,255,0.15)'}
                     strokeWidth="1"
                   >
                     <rect x="3" y="3" width="18" height="18" rx="2" />
                     <circle cx="8.5" cy="8.5" r="1.5" />
                     <polyline points="21 15 16 10 5 21" />
                   </svg>
+                  <div style={{
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: '9px',
+                    letterSpacing: '0.15em',
+                    color: isLight ? 'rgba(32,124,169,0.2)' : 'rgba(255,255,255,0.15)',
+                    textTransform: 'uppercase',
+                  }}>
+                    1080 × 1350
+                  </div>
                 </div>
 
                 {/* Hover overlay */}
@@ -259,46 +329,6 @@ export default function FlowSection({
               </a>
             ))}
           </div>
-        </div>
-
-        {/* BOTTOM ROW — METRICS */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '16px',
-        }}>
-          {metrics.map((metric, i) => (
-            <div
-              key={i}
-              style={{
-                padding: '20px 24px',
-                border: `1px solid ${borderColor}`,
-                borderRadius: '12px',
-                background: metricBg,
-              }}
-            >
-              <div style={{
-                fontFamily: 'Outfit, sans-serif',
-                fontWeight: 800,
-                fontSize: 'clamp(22px, 3vw, 36px)',
-                color: textColor,
-                lineHeight: 1,
-                letterSpacing: '-0.01em',
-              }}>
-                {metric.value}
-              </div>
-              <div style={{
-                fontFamily: 'Inter, sans-serif',
-                fontWeight: 400,
-                fontSize: '12px',
-                color: mutedColor,
-                marginTop: '6px',
-                lineHeight: 1.4,
-              }}>
-                {metric.label}
-              </div>
-            </div>
-          ))}
         </div>
 
         {/* THIN BOTTOM LINE */}
