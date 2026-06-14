@@ -12,41 +12,66 @@ export default function Hero() {
   useGSAP(() => {
     // const isMobile = window.innerWidth < 768; // Removed as it is not actively used in animation logic yet
 
-    // INITIAL STATES — set before any animation
-    gsap.set('.hero-line-1', { autoAlpha: 0, y: 40 });
-    gsap.set('.hero-line-2', { autoAlpha: 0, y: 40 });
-    gsap.set('.hero-sub', { autoAlpha: 0, y: 24 });
+    // INITIAL STATES
+    gsap.set('.hero-line-1', { autoAlpha: 0, filter: 'blur(20px)', scale: 1.02 });
+    gsap.set('.hero-line-2', { autoAlpha: 0, clipPath: 'inset(0 100% 0 0)' });
+    gsap.set('.hero-sub', { autoAlpha: 0, y: 16 });
     gsap.set('.hero-scroll-indicator', { autoAlpha: 0 });
+    gsap.set('.hero-availability', { autoAlpha: 0, y: 10 });
     gsap.set('.hero-card', { yPercent: 110, autoAlpha: 0 });
     gsap.set('.card-photo', { autoAlpha: 0, x: -30 });
     gsap.set('.card-metrics', { autoAlpha: 0, y: 30 });
     gsap.set('.card-info', { autoAlpha: 0, x: 30 });
     gsap.set('.hero-cta', { autoAlpha: 0, y: 20, visibility: 'visible' });
 
-    // ENTRANCE TIMELINE — plays on load, no scroll trigger
-    const entranceTl = gsap.timeline({ delay: 0.3 });
+    // ENTRANCE TIMELINE — total duration approximately 4 seconds
+    const entranceTl = gsap.timeline({ delay: 0.5 });
+
     entranceTl
+      // "Hi. I'm Yessin —" blurs in slowly over 1.8 seconds
       .to('.hero-line-1', {
-        autoAlpha: 1, y: 0, duration: 0.9, ease: 'power3.out'
+        autoAlpha: 1,
+        filter: 'blur(0px)',
+        scale: 1,
+        duration: 1.8,
+        ease: 'power2.out',
       })
+      // After line 1 finishes, "a marketing student..." sweeps left to right
       .to('.hero-line-2', {
-        autoAlpha: 1, y: 0, duration: 0.9, ease: 'power3.out'
-      }, '-=0.6')
+        autoAlpha: 1,
+        clipPath: 'inset(0 0% 0 0)',
+        duration: 1.0,
+        ease: 'power3.inOut',
+      }, '+=0.1')
+      // Subheading fades up
       .to('.hero-sub', {
-        autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out'
-      }, '-=0.4')
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.6,
+        ease: 'power2.out',
+      }, '-=0.2')
+      // Availability badge
+      .to('.hero-availability', {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.5,
+        ease: 'power2.out',
+      }, '-=0.1')
+      // Scroll indicator
       .to('.hero-scroll-indicator', {
-        autoAlpha: 1, duration: 0.5, ease: 'power2.out'
-      }, '-=0.2');
+        autoAlpha: 1,
+        duration: 0.4,
+        ease: 'power2.out',
+      }, '-=0.1');
 
     // SCROLL TIMELINE — pinned sequence
     const scrollTl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
         start: 'top top',
-        end: '+=5000',
+        end: '+=2800',
         pin: true,
-        scrub: 1.2,
+        scrub: 0.8,
         anticipatePin: 1,
       }
     });
@@ -193,7 +218,7 @@ export default function Hero() {
           padding: '0 24px',
         }}
       >
-        <div style={{
+        <div className="hero-availability" style={{
           marginBottom: '28px',
           display: 'inline-flex',
           alignItems: 'center',
@@ -338,21 +363,90 @@ export default function Hero() {
               padding: 'auto md:48px'
             }}
           >
-            <div className="card-photo" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div className="card-photo" style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'flex-end',
+              paddingRight: '16px',
+            }}>
               <div style={{
-                width: '100%',
+                width: '80%',
                 aspectRatio: '3/4',
                 borderRadius: '12px',
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05))',
-                border: '1px solid rgba(255,255,255,0.15)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'rgba(255,255,255,0.4)',
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '13px',
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))',
+                border: '1px solid rgba(255,255,255,0.2)',
+                position: 'relative',
+                overflow: 'hidden',
+                cursor: 'pointer',
               }}>
-                [ Photo ]
+                {/* Photo placeholder — replace src with real photo later */}
+                <img
+                  src="/photo.jpg"
+                  alt="Mohammed Yessin Driss"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    borderRadius: '12px',
+                    display: 'block',
+                  }}
+                  onError={e => {
+                    // Fallback if photo not found
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
+
+                {/* Fallback placeholder shown when no photo */}
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'rgba(255,255,255,0.3)',
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: '13px',
+                }}>
+                  [ Photo ]
+                </div>
+
+                {/* LinkedIn hover overlay */}
+                <a
+                  href="https://www.linkedin.com/in/medyessin-driss/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="photo-linkedin-overlay"
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'rgba(32,124,169,0.85)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '12px',
+                    borderRadius: '12px',
+                    opacity: 0,
+                    transition: 'opacity 0.3s ease',
+                    textDecoration: 'none',
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
+                  onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
+                >
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="#ffffff">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                  <span style={{
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: 500,
+                    fontSize: '12px',
+                    color: '#ffffff',
+                    letterSpacing: '0.05em',
+                  }}>
+                    Connect on LinkedIn
+                  </span>
+                </a>
               </div>
             </div>
 
@@ -420,42 +514,60 @@ export default function Hero() {
             <div className="card-info" style={{
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'space-between',
-              marginTop: '24px',
+              justifyContent: 'center',
+              gap: '32px',
             }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-start' }}>
-                {['Brand Launch', 'B2B Marketing', 'SaaS Growth', 'Community & Ads'].map(tag => (
-                  <div key={tag} style={{
-                    padding: '8px 16px',
-                    border: '1px solid rgba(255,255,255,0.15)',
-                    borderRadius: '100px',
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '11px',
-                    color: 'rgba(255,255,255,0.7)',
-                    letterSpacing: '0.05em',
-                    display: 'inline-block',
-                    width: 'fit-content',
-                  }}>
+              {/* Category tags */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {['Brand Launch', 'B2B Marketing', 'SaaS Growth', 'Community & Ads'].map((tag, i) => (
+                  <div
+                    key={tag}
+                    style={{
+                      padding: '8px 16px',
+                      border: '1px solid rgba(255,255,255,0.25)',
+                      borderRadius: '100px',
+                      fontFamily: 'Inter, sans-serif',
+                      fontSize: '11px',
+                      color: 'rgba(255,255,255,0.85)',
+                      letterSpacing: '0.08em',
+                      display: 'inline-block',
+                      width: 'fit-content',
+                      background: 'rgba(255,255,255,0.08)',
+                      backdropFilter: 'blur(8px)',
+                      animation: `pulse-dot ${2 + i * 0.3}s ease-in-out infinite`,
+                    }}
+                  >
                     {tag}
                   </div>
                 ))}
               </div>
 
-              <div style={{ marginTop: '32px' }}>
-                <div style={{
-                  width: '8px',
-                  height: '8px',
+              {/* Available indicator — below the tags */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '10px 16px',
+                border: '1px solid rgba(74,222,128,0.3)',
+                borderRadius: '100px',
+                background: 'rgba(74,222,128,0.08)',
+                width: 'fit-content',
+              }}>
+                <span style={{
+                  width: '7px',
+                  height: '7px',
                   borderRadius: '50%',
                   background: '#4ade80',
                   display: 'inline-block',
-                  marginRight: '8px',
                   animation: 'pulse-dot 2s ease-in-out infinite',
+                  flexShrink: 0,
                 }} />
                 <span style={{
                   fontFamily: 'Inter, sans-serif',
                   fontSize: '11px',
-                  color: 'rgba(255,255,255,0.6)',
-                  letterSpacing: '0.08em',
+                  color: 'rgba(255,255,255,0.8)',
+                  letterSpacing: '0.06em',
+                  fontWeight: 500,
                 }}>
                   Open to remote work
                 </span>
