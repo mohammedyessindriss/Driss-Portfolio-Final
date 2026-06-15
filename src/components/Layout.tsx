@@ -4,7 +4,7 @@ import { SITE_CONFIG } from '@/lib/constants';
 const NAV_ITEMS = [
   { label: 'Work', href: '#work' },
   { label: 'About', href: '#about' },
-  { label: 'Now', href: '#now' },
+    { label: 'Contact', href: '#contact' },
   { label: 'LinkedIn', href: SITE_CONFIG.linkedin, external: true },
 ];
 

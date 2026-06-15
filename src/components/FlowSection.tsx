@@ -75,7 +75,7 @@ export default function FlowSection({
             color: mutedColor,
             textTransform: 'uppercase',
           }}>
-            {number} — {category}
+            {number} · {category}
           </span>
           <div style={{
             textAlign: 'right',

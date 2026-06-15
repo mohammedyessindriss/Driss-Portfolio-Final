@@ -14,7 +14,7 @@ export default function Hero() {
 
     // INITIAL STATES
     gsap.set('.hero-line-1', { autoAlpha: 0, filter: 'blur(20px)', scale: 1.02 });
-    gsap.set('.hero-line-2', { autoAlpha: 0, clipPath: 'inset(0 100% 0 0)' });
+    gsap.set('.hero-line-2', { autoAlpha: 0, clipPath: 'inset(0 100% 0 0)', filter: 'blur(8px)' });
     gsap.set('.hero-sub', { autoAlpha: 0, y: 16 });
     gsap.set('.hero-scroll-indicator', { autoAlpha: 0 });
     gsap.set('.hero-availability', { autoAlpha: 0, y: 10 });
@@ -34,16 +34,17 @@ export default function Hero() {
         autoAlpha: 1,
         filter: 'blur(0px)',
         scale: 1,
-        duration: 1.8,
+        duration: 1.4,
         ease: 'power2.out',
       })
       // After line 1 finishes, "a marketing student..." sweeps left to right
       .to('.hero-line-2', {
         autoAlpha: 1,
         clipPath: 'inset(0 0% 0 0)',
-        duration: 1.0,
+        filter: 'blur(0px)',
+        duration: 0.75,
         ease: 'power3.inOut',
-      }, '+=0.1')
+      }, '-=0.05')
       // Subheading fades up
       .to('.hero-sub', {
         autoAlpha: 1,

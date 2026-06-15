@@ -2,6 +2,9 @@ import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
 import FlowArt from '@/components/FlowArt';
 import FlowSection from '@/components/FlowSection';
+import VisualWork from '@/components/VisualWork';
+import About from '@/components/About';
+import Footer from '@/components/Footer';
 import { SITE_CONFIG, PROJECTS } from '@/lib/constants';
 
 export default function App() {
@@ -26,33 +29,11 @@ export default function App() {
             isLight={project.isLight}
           />
         ))}
+        <VisualWork />
       </FlowArt>
 
-      <div id="about" style={{
-        minHeight: '100vh',
-        background: '#FAFAF9',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: 'Inter',
-        color: '#9CA3AF',
-        fontSize: '13px',
-      }}>
-        About section coming in Prompt 5
-      </div>
-
-      <div id="now" style={{
-        minHeight: '100vh',
-        background: '#F4F4F5',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: 'Inter',
-        color: '#9CA3AF',
-        fontSize: '13px',
-      }}>
-        Now section coming in Prompt 5
-      </div>
+      <About />
+      <Footer />
     </Layout>
   );
 }
