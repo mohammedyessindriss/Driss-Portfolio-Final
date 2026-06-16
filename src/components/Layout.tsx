@@ -24,17 +24,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="relative min-h-screen bg-[#FAFAF9]">
-      {/* LEFT SIDEBAR — desktop only */}
-      <aside className="fixed left-0 top-0 bottom-0 w-16 hidden md:flex flex-col items-center justify-center bg-transparent z-40">
-        <div className="absolute left-1/2 w-[1px] h-full bg-[#E5E7EB] -translate-x-1/2" />
-        <span
-          className="uppercase text-[#9CA3AF] text-[9px] font-body bg-[#FAFAF9] py-4 relative z-10"
-          style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', letterSpacing: '0.3em' }}
-        >
-          {SITE_CONFIG.shortName}
-        </span>
-      </aside>
-
       {/* NAV OUTER WRAPPER — always full width, fixed */}
       <div
         style={{
@@ -71,7 +60,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               alignItems: 'center',
               justifyContent: 'space-between',
               height: '56px',
-              paddingLeft: '80px',
+              paddingLeft: '32px',
               paddingRight: '32px',
             }}
           >
@@ -227,7 +216,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </div>
 
       {/* MAIN CONTENT */}
-      <main style={{ paddingLeft: '64px' }}>
+      <main style={{ paddingLeft: '0px' }}>
         {children}
       </main>
     </div>

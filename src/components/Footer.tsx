@@ -310,23 +310,26 @@ export default function Footer() {
               left: '50%',
               transform: 'translateX(-50%)',
               zIndex: 0,
+              width: '100%',
+              textAlign: 'center',
             }}
           >
             DRISS
           </div>
 
-          {/* MARQUEE — top of footer */}
+          {/* ANGLED MARQUEE — diagonal sash across top of footer */}
           <div style={{
             position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            borderBottom: '1px solid rgba(32,124,169,0.1)',
-            background: 'rgba(250,250,249,0.7)',
-            backdropFilter: 'blur(8px)',
-            padding: '12px 0',
-            overflow: 'hidden',
+            top: '120px',
+            left: '-5%',
+            right: '-5%',
             zIndex: 10,
+            transform: 'rotate(-3deg)',
+            overflow: 'hidden',
+            background: '#ffffff',
+            padding: '18px 0',
+            pointerEvents: 'none',
+            boxShadow: '0 8px 40px rgba(0,0,0,0.12), 0 2px 12px rgba(0,0,0,0.08)',
           }}>
             <div
               className="footer-marquee-track"
@@ -334,7 +337,7 @@ export default function Footer() {
                 display: 'flex',
                 width: 'max-content',
                 alignItems: 'center',
-                gap: '32px',
+                gap: '56px',
               }}
             >
               {marqueeItems.map((item, i) => (
@@ -342,10 +345,10 @@ export default function Footer() {
                   key={i}
                   style={{
                     fontFamily: 'Inter, sans-serif',
-                    fontSize: '10px',
+                    fontSize: '13px',
                     fontWeight: item === '✦' ? 400 : 600,
-                    letterSpacing: item === '✦' ? '0' : '0.25em',
-                    color: item === '✦' ? '#207ca9' : '#9CA3AF',
+                    letterSpacing: item === '✦' ? '0' : '0.2em',
+                    color: item === '✦' ? '#207ca9' : '#0F0F0F',
                     textTransform: 'uppercase',
                     whiteSpace: 'nowrap',
                   }}
@@ -365,7 +368,7 @@ export default function Footer() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '80px 32px 0',
+            padding: '240px 32px 0',
             textAlign: 'center',
           }}>
 
@@ -478,7 +481,7 @@ export default function Footer() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            padding: '24px clamp(24px, 5vw, 64px) 32px',
+            padding: '32px clamp(24px, 5vw, 64px) 48px',
             borderTop: '1px solid #E5E7EB',
           }}>
 
@@ -493,43 +496,6 @@ export default function Footer() {
             }}>
               © 2026 Mohammed Yessin Driss
             </span>
-
-            {/* Crafted badge */}
-            <div className="footer-glass-pill" style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '8px 16px',
-              borderRadius: '100px',
-            }}>
-              <span style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '10px',
-                fontWeight: 600,
-                letterSpacing: '0.2em',
-                color: '#9CA3AF',
-                textTransform: 'uppercase',
-              }}>
-                Crafted with
-              </span>
-              <span className="footer-heartbeat" style={{
-                fontSize: '13px',
-                color: '#ef4444',
-                display: 'inline-block',
-              }}>
-                ❤
-              </span>
-              <span style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '10px',
-                fontWeight: 600,
-                letterSpacing: '0.2em',
-                color: '#9CA3AF',
-                textTransform: 'uppercase',
-              }}>
-                in Tunis
-              </span>
-            </div>
 
             {/* Back to top */}
             <button

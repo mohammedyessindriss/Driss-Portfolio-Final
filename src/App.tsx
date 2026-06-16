@@ -27,6 +27,7 @@ export default function App() {
             textColor={project.textColor}
             borderColor={project.borderColor}
             isLight={project.isLight}
+            creatives={[...project.creatives]}
           />
         ))}
         <VisualWork />

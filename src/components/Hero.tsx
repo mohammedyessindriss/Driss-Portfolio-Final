@@ -407,7 +407,7 @@ export default function Hero() {
               }}>
                 {/* Photo placeholder — replace src with real photo later */}
                 <img
-                  src="/photo.jpg"
+                  src="https://i.ibb.co/Z6RCfcpC/050A3100.jpg"
                   alt="Mohammed Yessin Driss"
                   style={{
                     width: '100%',
@@ -415,6 +415,8 @@ export default function Hero() {
                     objectFit: 'cover',
                     borderRadius: '12px',
                     display: 'block',
+                    position: 'relative',
+                    zIndex: 1,
                   }}
                   onError={e => {
                     // Fallback if photo not found
@@ -422,19 +424,16 @@ export default function Hero() {
                   }}
                 />
 
-                {/* Fallback placeholder shown when no photo */}
+                {/* Gradient overlay matching placeholder style */}
                 <div style={{
                   position: 'absolute',
                   inset: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'rgba(255,255,255,0.3)',
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: '13px',
-                }}>
-                  [ Photo ]
-                </div>
+                  backgroundImage: `radial-gradient(circle at 20% 30%, rgba(32,124,169,0.15) 0%, transparent 60%),
+                    radial-gradient(circle at 80% 70%, rgba(35,41,107,0.1) 0%, transparent 50%)`,
+                  borderRadius: '12px',
+                  zIndex: 2,
+                  pointerEvents: 'none',
+                }} />
 
                 {/* LinkedIn hover overlay */}
                 <a
@@ -455,6 +454,7 @@ export default function Hero() {
                     opacity: 0,
                     transition: 'opacity 0.3s ease',
                     textDecoration: 'none',
+                    zIndex: 3,
                   }}
                   onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
                   onMouseLeave={e => (e.currentTarget.style.opacity = '0')}

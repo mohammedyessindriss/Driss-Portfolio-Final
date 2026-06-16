@@ -25,6 +25,11 @@ export const PROJECTS = [
       { value: "32,600%", label: "Reaction increase" },
       { value: "ISO 9001", label: "Certification maintained" },
     ],
+    creatives: [
+      { img: '', href: '#' },
+      { img: '', href: '#' },
+      { img: '', href: '#' },
+    ],
   },
   {
     id: "bume",
@@ -41,6 +46,11 @@ export const PROJECTS = [
       { value: "0→2,500", label: "TikTok followers" },
       { value: "90K+", label: "Video views" },
       { value: "100", label: "Paying students" },
+    ],
+    creatives: [
+      { img: 'https://i.ibb.co/7tGxRP95/Screenshot-2026-06-16-030538.png', href: 'https://www.tiktok.com/@bume.tn/video/7528161061174791430' },
+      { img: 'https://i.ibb.co/fd2LQjz1/Screenshot-2026-06-16-030711.png', href: 'https://www.tiktok.com/@bume.tn/video/7532238543142341893' },
+      { img: 'https://i.ibb.co/23vjjcxC/Artboard-1.png', href: '#' },
     ],
   },
   {
@@ -59,6 +69,11 @@ export const PROJECTS = [
       { value: "120+", label: "Customer interviews" },
       { value: "1", label: "Pricing strategy rebuilt" },
     ],
+    creatives: [
+      { img: 'https://i.ibb.co/gbGnc3y9/Artboard-5.png', href: 'https://www.instagram.com/p/DF_H3RDspxt/?img_index=1' },
+      { img: 'https://i.ibb.co/9HgJ8128/Screenshot-2026-06-16-031447.png', href: 'https://www.instagram.com/p/DHgzZics4BQ/' },
+      { img: 'https://i.ibb.co/9ktDbS2z/Screenshot-2026-06-16-033933.png', href: 'https://www.tiktok.com/@croki.tn/video/7473239488903384326' },
+    ],
   },
   {
     id: "skills4trade",
@@ -75,6 +90,11 @@ export const PROJECTS = [
       { value: "100%", label: "Solo marketing operation" },
       { value: "3", label: "Channels built from zero" },
       { value: "Direct", label: "CEO coordination" },
+    ],
+    creatives: [
+      { img: '', href: '#' },
+      { img: '', href: '#' },
+      { img: '', href: '#' },
     ],
   },
 ] as const;

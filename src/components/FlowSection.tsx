@@ -15,6 +15,7 @@ interface FlowSectionProps {
   textColor: string;
   borderColor: string;
   isLight: boolean;
+  creatives: { img: string; href: string }[];
 }
 
 export default function FlowSection({
@@ -29,6 +30,7 @@ export default function FlowSection({
   textColor,
   borderColor,
   isLight,
+  creatives,
 }: FlowSectionProps) {
   const mutedColor = isLight ? 'rgba(15,15,15,0.45)' : 'rgba(255,255,255,0.5)';
   const metricBg = isLight ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.06)';
@@ -180,13 +182,12 @@ export default function FlowSection({
             gap: '12px',
             marginTop: '32px',
           }}>
-            {[0, 1, 2].map((index) => (
+            {creatives.map((item, index) => (
               <a
                 key={index}
-                href="#"
+                href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`work-preview-${index}`}
                 style={{
                   position: 'relative',
                   aspectRatio: '1080 / 1350',
@@ -195,102 +196,39 @@ export default function FlowSection({
                   display: 'block',
                   cursor: 'pointer',
                   border: `1px solid ${borderColor}`,
-                  background: isLight
-                    ? 'rgba(32,124,169,0.06)'
-                    : 'rgba(255,255,255,0.06)',
                   textDecoration: 'none',
                 }}
               >
-                {/* Animated background pattern */}
+                {/* Real image */}
+                <img
+                  src={item.img}
+                  alt={`Creative ${index + 1}`}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block',
+                  }}
+                />
+
+                {/* Gradient overlay */}
                 <div style={{
                   position: 'absolute',
                   inset: 0,
                   backgroundImage: isLight
-                    ? `radial-gradient(circle at ${20 + index * 30}% ${30 + index * 20}%, rgba(32,124,169,0.15) 0%, transparent 60%),
-                       radial-gradient(circle at ${80 - index * 20}% ${70 - index * 15}%, rgba(35,41,107,0.1) 0%, transparent 50%)`
-                    : `radial-gradient(circle at ${20 + index * 30}% ${30 + index * 20}%, rgba(255,255,255,0.1) 0%, transparent 60%),
-                       radial-gradient(circle at ${80 - index * 20}% ${70 - index * 15}%, rgba(255,255,255,0.06) 0%, transparent 50%)`,
-                  animation: `floatGradient${index} ${4 + index}s ease-in-out infinite alternate`,
+                    ? `radial-gradient(circle at 20% 30%, rgba(32,124,169,0.12) 0%, transparent 60%),
+                       radial-gradient(circle at 80% 70%, rgba(35,41,107,0.08) 0%, transparent 50%)`
+                    : `radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08) 0%, transparent 60%),
+                       radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05) 0%, transparent 50%)`,
+                  pointerEvents: 'none',
                 }} />
-
-                {/* Grid lines decoration */}
-                <div style={{
-                  position: 'absolute',
-                  inset: 0,
-                  backgroundSize: '24px 24px',
-                  backgroundImage: isLight
-                    ? `linear-gradient(to right, rgba(32,124,169,0.06) 1px, transparent 1px),
-                       linear-gradient(to bottom, rgba(32,124,169,0.06) 1px, transparent 1px)`
-                    : `linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-                       linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)`,
-                }} />
-
-                {/* Corner number */}
-                <div style={{
-                  position: 'absolute',
-                  top: '10px',
-                  left: '12px',
-                  fontFamily: 'Outfit, sans-serif',
-                  fontWeight: 800,
-                  fontSize: '11px',
-                  letterSpacing: '0.15em',
-                  color: isLight ? 'rgba(32,124,169,0.4)' : 'rgba(255,255,255,0.25)',
-                }}>
-                  {String(index + 1).padStart(2, '0')}
-                </div>
-
-                {/* Center icon */}
-                <div style={{
-                  position: 'absolute',
-                  inset: 0,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '8px',
-                }}>
-                  <div style={{
-                    fontFamily: 'Outfit, sans-serif',
-                    fontWeight: 800,
-                    fontSize: '10px',
-                    letterSpacing: '0.25em',
-                    color: isLight ? 'rgba(32,124,169,0.3)' : 'rgba(255,255,255,0.2)',
-                    textTransform: 'uppercase',
-                  }}>
-                    {['THE WORK', 'CREATIVE', 'CAMPAIGN'][index]}
-                  </div>
-                  <svg
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke={isLight ? 'rgba(32,124,169,0.2)' : 'rgba(255,255,255,0.15)'}
-                    strokeWidth="1"
-                  >
-                    <rect x="3" y="3" width="18" height="18" rx="2" />
-                    <circle cx="8.5" cy="8.5" r="1.5" />
-                    <polyline points="21 15 16 10 5 21" />
-                  </svg>
-                  <div style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '9px',
-                    letterSpacing: '0.15em',
-                    color: isLight ? 'rgba(32,124,169,0.2)' : 'rgba(255,255,255,0.15)',
-                    textTransform: 'uppercase',
-                  }}>
-                    1080 × 1350
-                  </div>
-                </div>
 
                 {/* Hover overlay */}
                 <div
-                  className="preview-hover"
                   style={{
                     position: 'absolute',
                     inset: 0,
-                    background: isLight
-                      ? 'rgba(32,124,169,0.88)'
-                      : 'rgba(0,0,0,0.75)',
+                    background: isLight ? 'rgba(32,124,169,0.88)' : 'rgba(0,0,0,0.75)',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -303,14 +241,7 @@ export default function FlowSection({
                   onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
                   onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
                 >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#ffffff"
-                    strokeWidth="2"
-                  >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                     <polyline points="15 3 21 3 21 9" />
                     <line x1="10" y1="14" x2="21" y2="3" />
