@@ -276,7 +276,7 @@ export default function Hero() {
           style={{
             fontFamily: 'Outfit, sans-serif',
             fontWeight: 800,
-            fontSize: 'clamp(48px, 8vw, 96px)',
+            fontSize: 'clamp(28px, 7vw, 96px)',
             lineHeight: 0.9,
             color: '#207ca9',
             margin: 0,
@@ -290,7 +290,7 @@ export default function Hero() {
           style={{
             fontFamily: 'Outfit, sans-serif',
             fontWeight: 800,
-            fontSize: 'clamp(48px, 8vw, 96px)',
+            fontSize: 'clamp(28px, 7vw, 96px)',
             lineHeight: 0.9,
             color: '#23296b',
             margin: '8px 0 0 0',
@@ -305,7 +305,7 @@ export default function Hero() {
           style={{
             fontFamily: 'Inter, sans-serif',
             fontWeight: 300,
-            fontSize: 'clamp(15px, 2vw, 18px)',
+            fontSize: 'clamp(13px, 3.5vw, 18px)',
             color: '#6B7280',
             maxWidth: '480px',
             lineHeight: 1.7,
@@ -384,8 +384,8 @@ export default function Hero() {
             className="flex flex-col md:grid h-full p-8 overflow-y-auto md:overflow-visible"
             style={{
               gap: '32px',
-              gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)',
-              padding: 'auto md:48px'
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              padding: 'clamp(16px, 4vw, 48px)'
             }}
           >
             <div className="card-photo" style={{
@@ -423,6 +423,27 @@ export default function Hero() {
                     e.currentTarget.style.display = 'none';
                   }}
                 />
+
+                {/* Premium color overlay */}
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'linear-gradient(180deg, rgba(32,124,169,0.06) 0%, rgba(35,41,107,0.28) 100%)',
+                  mixBlendMode: 'multiply',
+                  pointerEvents: 'none',
+                  zIndex: 1,
+                  borderRadius: '12px',
+                }} />
+
+                {/* Vignette depth */}
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.2) 100%)',
+                  pointerEvents: 'none',
+                  zIndex: 2,
+                  borderRadius: '12px',
+                }} />
 
                 {/* Gradient overlay matching placeholder style */}
                 <div style={{
@@ -641,7 +662,7 @@ export default function Hero() {
         <h2 style={{
           fontFamily: 'Outfit, sans-serif',
           fontWeight: 800,
-          fontSize: 'clamp(36px, 6vw, 72px)',
+          fontSize: 'clamp(24px, 6vw, 72px)',
           color: '#ffffff',
           lineHeight: 0.95,
           letterSpacing: '-0.02em',

@@ -38,23 +38,30 @@ export default function FlowArt({ children }: FlowArtProps) {
       if (i > 0) {
         gsap.set(inner, { rotation: 30, transformOrigin: 'bottom left' });
 
-        const tween = gsap.to(inner, {
-          rotation: 0,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top bottom',
-            end: 'top 30%',
-            scrub: true,
-            onLeaveBack: () => {
-              const prevSection = sections[i - 1];
-              if (prevSection) {
-                gsap.set(prevSection, { visibility: 'visible' });
-              }
-            },
+        const rotateTrigger = ScrollTrigger.create({
+          trigger: section,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+          onEnter: () => {
+            gsap.to(inner, {
+              rotation: 0,
+              duration: 1.2,
+              ease: 'power3.out',
+            });
+          },
+          onLeaveBack: () => {
+            gsap.to(inner, {
+              rotation: 30,
+              duration: 0.6,
+              ease: 'power2.in',
+            });
+            const prevSection = sections[i - 1];
+            if (prevSection) {
+              gsap.set(prevSection, { visibility: 'visible' });
+            }
           },
         });
-        if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
+        triggers.push(rotateTrigger);
 
         const hideTrigger = ScrollTrigger.create({
           trigger: section,
@@ -80,7 +87,7 @@ export default function FlowArt({ children }: FlowArtProps) {
           ScrollTrigger.create({
             trigger: section,
             start: 'bottom bottom',
-            end: 'bottom -80%',
+            end: 'bottom -180%',
             pin: true,
             pinSpacing: false,
           })

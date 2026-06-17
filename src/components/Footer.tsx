@@ -66,7 +66,7 @@ const FOOTER_STYLES = `
   }
 
   .footer-giant-text {
-    font-size: 28vw;
+    font-size: clamp(120px, 28vw, 400px);
     line-height: 0.75;
     font-weight: 900;
     letter-spacing: -0.05em;
@@ -320,7 +320,7 @@ export default function Footer() {
           {/* ANGLED MARQUEE — diagonal sash across top of footer */}
           <div style={{
             position: 'absolute',
-            top: '120px',
+            top: 'clamp(60px, 10vw, 120px)',
             left: '-5%',
             right: '-5%',
             zIndex: 10,
@@ -391,7 +391,7 @@ export default function Footer() {
               style={{
                 fontFamily: 'Outfit, sans-serif',
                 fontWeight: 800,
-                fontSize: 'clamp(40px, 7vw, 88px)',
+                fontSize: 'clamp(28px, 7vw, 88px)',
                 color: '#23296b',
                 letterSpacing: '-0.03em',
                 lineHeight: 0.95,
@@ -481,7 +481,7 @@ export default function Footer() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            padding: '32px clamp(24px, 5vw, 64px) 48px',
+            padding: '24px clamp(12px, 4vw, 64px) 32px',
             borderTop: '1px solid #E5E7EB',
           }}>
 

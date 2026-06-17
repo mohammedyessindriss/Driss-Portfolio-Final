@@ -32,7 +32,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           left: 0,
           right: 0,
           zIndex: 50,
-          padding: scrolled ? '12px 24px 0' : '0',
+          padding: scrolled ? '12px clamp(8px, 3vw, 24px) 0' : '0',
           transition: 'padding 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
           pointerEvents: 'none',
         }}
@@ -60,8 +60,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               alignItems: 'center',
               justifyContent: 'space-between',
               height: '56px',
-              paddingLeft: '32px',
-              paddingRight: '32px',
+              paddingLeft: 'clamp(16px, 4vw, 32px)',
+              paddingRight: 'clamp(16px, 4vw, 32px)',
             }}
           >
             {/* Left: Name */}
@@ -70,14 +70,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               style={scrolled ? {
                 fontFamily: 'Outfit, sans-serif',
                 fontWeight: 700,
-                fontSize: '13px',
+                fontSize: 'clamp(11px, 3vw, 13px)',
                 color: '#0F0F0F',
                 textDecoration: 'none',
                 transition: 'color 0.2s ease',
               } : {
                 fontFamily: 'Outfit, sans-serif',
                 fontWeight: 700,
-                fontSize: '13px',
+                fontSize: 'clamp(11px, 3vw, 13px)',
                 textDecoration: 'none',
                 background: 'linear-gradient(135deg, #207ca9 0%, #23296b 100%)',
                 WebkitBackgroundClip: 'text',
@@ -187,6 +187,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {menuOpen && (
             <div style={{
               padding: '16px 32px 24px',
+              maxHeight: '80vh',
+              overflowY: 'auto' as const,
               borderTop: '1px solid #E5E7EB',
               display: 'flex',
               flexDirection: 'column',

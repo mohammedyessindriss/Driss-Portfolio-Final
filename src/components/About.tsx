@@ -126,7 +126,7 @@ export default function About() {
       id="about"
       style={{
         background: '#FAFAF9',
-        padding: 'clamp(40px, 4vw, 60px) clamp(32px, 5vw, 80px)',
+        padding: 'clamp(32px, 4vw, 60px) clamp(16px, 5vw, 80px)',
         position: 'relative',
       }}
     >
@@ -201,7 +201,7 @@ export default function About() {
           <p style={{
             fontFamily: 'Inter, sans-serif',
             fontWeight: 500,
-            fontSize: 'clamp(21px, 2.5vw, 28px)',
+            fontSize: 'clamp(16px, 3.5vw, 28px)',
             color: '#0F0F0F',
             lineHeight: 1.75,
             margin: 0,
@@ -237,7 +237,7 @@ export default function About() {
           position: 'relative',
           zIndex: 1,
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: 'clamp(40px, 6vw, 80px)',
           alignItems: 'start',
         }}>

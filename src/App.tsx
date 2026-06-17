@@ -16,6 +16,7 @@ export default function App() {
         {PROJECTS.map((project, i) => (
           <FlowSection
             key={project.id}
+            heading={i === 0 ? 'what was built under my direction' : undefined}
             number={String(i + 1).padStart(2, '0')}
             title={project.title}
             role={project.role}
