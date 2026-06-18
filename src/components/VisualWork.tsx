@@ -48,7 +48,7 @@ export default function VisualWork() {
         position: 'relative',
         minHeight: '100vh',
         width: '100%',
-        backgroundColor: '#FAFAF9',
+        backgroundColor: '#FFFFFF',
         display: 'flex',
         flexDirection: 'column',
         padding: 'clamp(32px, 4vw, 64px)',
@@ -106,7 +106,7 @@ export default function VisualWork() {
           letterSpacing: '0.1em',
           textTransform: 'uppercase',
         }}>
-          Social Media · 1080 × 1350
+          Social Media · 1080 × 1350 & 1080 × 1080
         </span>
       </div>
 
@@ -142,26 +142,37 @@ export default function VisualWork() {
         </p>
       </div>
 
-      {/* 3x3 IMAGE GRID */}
+      {/* 3xX IMAGE GRID */}
       <div style={{
         position: 'relative',
         zIndex: 1,
         display: 'grid',
         gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: '12px',
+        gap: '24px 12px',
         width: '80%',
         margin: '0 auto',
       }}>
         {[
-          { img: 'https://i.ibb.co/ZpBXyJLH/Screenshot-2026-06-17-013608.png', href: 'https://www.linkedin.com/posts/kamka_the-architecture-activity-7471184583817023489-WbQD', clickable: true },
-          { img: 'https://i.ibb.co/b5FvzWnD/Screenshot-2026-06-17-013714.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7470037072959922176', clickable: true },
-          { img: 'https://i.ibb.co/Rp3tsBLh/Screenshot-2026-06-17-013800.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7468964911960711169', clickable: true },
-          { img: 'https://i.ibb.co/tPX4bHPK/10th-Post-Kamka.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7463166787321278464', clickable: true },
-          { img: 'https://i.ibb.co/fVz3qDCC/Screenshot-2026-06-17-014020.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7460705580635164673', clickable: true },
-          { img: 'https://i.ibb.co/Vcb7y1MD/Screenshot-2026-06-17-014116.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7454816699846967296', clickable: true },
-          { img: 'https://i.ibb.co/VpNwYXhH/Screenshot-2026-06-17-014202.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7447206616883519488', clickable: true },
-          { img: 'https://i.ibb.co/Y4WF4gwW/Screenshot-2026-06-17-014402.png', href: '#', clickable: false },
-          { img: 'https://i.ibb.co/zHWg5W8w/image.jpg', href: '#', clickable: false },
+          { img: 'https://i.ibb.co/ZpBXyJLH/Screenshot-2026-06-17-013608.png', href: 'https://www.linkedin.com/posts/kamka_the-architecture-activity-7471184583817023489-WbQD', clickable: true, ratio: '1080 / 1350' },
+          { img: 'https://i.ibb.co/b5FvzWnD/Screenshot-2026-06-17-013714.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7470037072959922176', clickable: true, ratio: '1080 / 1350' },
+          { img: 'https://i.ibb.co/Rp3tsBLh/Screenshot-2026-06-17-013800.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7468964911960711169', clickable: true, ratio: '1080 / 1350' },
+          { img: 'https://i.ibb.co/tPX4bHPK/10th-Post-Kamka.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7463166787321278464', clickable: true, ratio: '1080 / 1350' },
+          { img: 'https://i.ibb.co/fVz3qDCC/Screenshot-2026-06-17-014020.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7460705580635164673', clickable: true, ratio: '1080 / 1350' },
+          { img: 'https://i.ibb.co/Vcb7y1MD/Screenshot-2026-06-17-014116.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7454816699846967296', clickable: true, ratio: '1080 / 1350' },
+          { img: 'https://i.ibb.co/VpNwYXhH/Screenshot-2026-06-17-014202.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7447206616883519488', clickable: true, ratio: '1080 / 1350' },
+          { img: 'https://i.ibb.co/9km7crcB/Screenshot-2026-06-18-185154.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7473359019823362048', clickable: true, ratio: '1080 / 1350' },
+          { img: 'https://i.ibb.co/ymFvqfqK/8th-Post-Kamka.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7455888805896781824', clickable: true, ratio: '1080 / 1350' },
+          
+          // Additional 9 photo placeholders with aspect ratios of 1080*1080
+          { img: 'https://i.ibb.co/JwVkzmQY/Artboard-3-1.png', href: '#', clickable: false, ratio: '1080 / 1080' },
+          { img: 'https://i.ibb.co/bj9yYChH/Artboard-1-2.png', href: '#', clickable: false, ratio: '1080 / 1080' },
+          { img: 'https://i.ibb.co/992LR1X9/Artboard-3.png', href: '#', clickable: false, ratio: '1080 / 1080' },
+          { img: 'https://i.ibb.co/G45KLqR5/Artboard-1-3.png', href: '#', clickable: false, ratio: '1080 / 1080' },
+          { img: 'https://i.ibb.co/Zpmkh55h/Artboard-2-1.png', href: '#', clickable: false, ratio: '1080 / 1080' },
+          { img: 'https://i.ibb.co/vCbLYbjR/Artboard-1.png', href: '#', clickable: false, ratio: '1080 / 1080' },
+          { img: 'https://i.ibb.co/27bkSfKb/5-3.png', href: '#', clickable: false, ratio: '1080 / 1080' },
+          { img: 'https://i.ibb.co/5b9JdWm/Artboard-1-4.png', href: '#', clickable: false, ratio: '1080 / 1080' },
+          { img: 'https://i.ibb.co/4wskvwwd/Artboard-1-1.png', href: '#', clickable: false, ratio: '1080 / 1080' },
         ].map((item, index) => (
           <div key={index} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <a
@@ -171,7 +182,7 @@ export default function VisualWork() {
               style={{
                 position: 'relative',
                 width: '100%',
-                aspectRatio: '1080 / 1350',
+                aspectRatio: item.ratio,
                 height: 'auto',
                 borderRadius: '10px',
                 overflow: 'hidden',

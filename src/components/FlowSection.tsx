@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from 'motion/react';
+import React from 'react';
+import { Heart, MessageCircle, Send, Bookmark } from 'lucide-react';
 
 interface Metric {
   value: string;
@@ -8,6 +8,8 @@ interface Metric {
 }
 
 interface FlowSectionProps {
+  isTbsJe?: boolean;
+  sectionLabel?: string;
   heading?: string;
   number: string;
   title: string;
@@ -20,10 +22,16 @@ interface FlowSectionProps {
   textColor: string;
   borderColor: string;
   isLight: boolean;
+  hasGradientTheme?: boolean;
   creatives: { img: string; href: string }[];
+  children?: React.ReactNode;
 }
 
+const TWEEN_EASE = [0.16, 1, 0.3, 1] as const;
+
 export default function FlowSection({
+  isTbsJe,
+  sectionLabel,
   heading,
   number,
   title,
@@ -36,40 +44,20 @@ export default function FlowSection({
   textColor,
   borderColor,
   isLight,
+  hasGradientTheme,
   creatives,
+  children,
 }: FlowSectionProps) {
   const mutedColor = isLight ? 'rgba(15,15,15,0.45)' : 'rgba(255,255,255,0.5)';
   const metricBg = isLight ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.06)';
   const accentColor = isLight ? '#207ca9' : 'rgba(255,255,255,0.9)';
-
-  useEffect(() => {
-    const inner = document.querySelector('.flow-section-heading-inner');
-    if (!inner) return;
-    gsap.set(inner, { yPercent: 100, autoAlpha: 0 });
-    const trigger = ScrollTrigger.create({
-      trigger: '.flow-section-heading',
-      start: 'top 80%',
-      onEnter: () => {
-        gsap.to(inner, {
-          yPercent: 0,
-          autoAlpha: 1,
-          duration: 0.7,
-          ease: 'power3.out',
-        });
-      },
-      onLeaveBack: () => {
-        gsap.set(inner, { yPercent: 100, autoAlpha: 0 });
-      },
-    });
-    return () => trigger.kill();
-  }, []);
 
   return (
     <section
       data-flow-section
       style={{
         position: 'relative',
-        minHeight: '200vh',
+        minHeight: isTbsJe ? '340vh' : '200vh',
         width: '100%',
         overflow: 'hidden',
         backgroundColor: backgroundColor,
@@ -79,9 +67,10 @@ export default function FlowSection({
         className="flow-inner"
         style={{
           position: 'relative',
-          minHeight: '200vh',
+          minHeight: isTbsJe ? '340vh' : '200vh',
           width: '100%',
           backgroundColor,
+          overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-start',
@@ -92,125 +81,238 @@ export default function FlowSection({
           transformOrigin: 'bottom left',
         }}
       >
-        {/* TOP ROW */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
-        }}>
-          <span style={{
-            fontFamily: 'Inter, sans-serif',
-            fontSize: '11px',
-            fontWeight: 500,
-            letterSpacing: '0.2em',
-            color: mutedColor,
-            textTransform: 'uppercase',
-          }}>
-            {number} · {category}
-          </span>
+        {hasGradientTheme && (
+          <>
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              width: '100%',
+              height: '100%',
+              backgroundImage: 'radial-gradient(ellipse 80% 60% at top right, rgba(32,124,169,0.18) 0%, transparent 70%)',
+              pointerEvents: 'none',
+              zIndex: 0,
+            }} />
+
+            <div style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              backgroundImage: 'radial-gradient(ellipse 80% 60% at bottom left, rgba(32,124,169,0.12) 0%, transparent 70%)',
+              pointerEvents: 'none',
+              zIndex: 0,
+            }} />
+          </>
+        )}
+        {/* PHASE 1: HEADER & INTRO */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.15 } }
+          }}
+        >
+          {/* TOP ROW */}
           <div style={{
-            textAlign: 'right',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
           }}>
-            <div style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: '11px',
-              color: mutedColor,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-            }}>
-              {role}
-            </div>
-            <div style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: '11px',
-              color: mutedColor,
-              marginTop: '4px',
-            }}>
-              {period}
-            </div>
-          </div>
-        </div>
-
-        {/* CENTER — TITLE */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          marginTop: '32px',
-        }}>
-          <h2 style={{
-            fontFamily: 'Outfit, sans-serif',
-            fontWeight: 800,
-            fontSize: 'clamp(2.2rem, 10vw, 10rem)',
-            lineHeight: 0.88,
-            color: accentColor,
-            letterSpacing: '-0.02em',
-            margin: 0,
-          }}>
-            {title}
-          </h2>
-          <p style={{
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: 300,
-            fontSize: 'clamp(15px, 2vw, 19px)',
-            color: mutedColor,
-            maxWidth: '520px',
-            lineHeight: 1.65,
-            marginTop: '20px',
-          }}>
-            {tagline}
-          </p>
-
-          {/* KEY METRICS */}
-          <div
-            style={{
-              display: 'flex',
-              gap: 'clamp(16px, 4vw, 32px)',
-              marginTop: '8px',
-              flexWrap: 'wrap' as const,
-            }}
-          >
-            {heading && (
+            <motion.span 
+              variants={{
+                hidden: { opacity: 0, y: 15 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: TWEEN_EASE } }
+              }}
+              style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '14px',
+                fontWeight: 600,
+                letterSpacing: '0.2em',
+                color: '#23296b',
+                textTransform: 'uppercase',
+              }}
+            >
+              {number} · {category}
+            </motion.span>
+            <motion.div 
+              variants={{
+                hidden: { opacity: 0, y: 15 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: TWEEN_EASE } }
+              }}
+              style={{ textAlign: 'right' }}
+            >
               <div style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '14px',
+                color: '#23296b',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+              }}>
+                {role}
+              </div>
+              <div style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '14px',
+                color: '#23296b',
+                marginTop: '4px',
+              }}>
+                {period}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* MAIN TITLE */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            marginTop: '32px',
+          }}>
+            <motion.h2 
+              variants={{
+                hidden: { opacity: 0, filter: 'blur(12px)', letterSpacing: '0em' },
+                visible: { opacity: 1, filter: 'blur(0px)', letterSpacing: '-0.02em', transition: { duration: 1.2, ease: TWEEN_EASE } }
+              }}
+              style={{
+                willChange: 'transform, opacity, filter',
+                fontFamily: 'Outfit, sans-serif',
+                fontWeight: 800,
+                fontSize: 'clamp(2.2rem, 9vw, 7.5rem)',
+                lineHeight: 0.88,
+                margin: 0,
+                backgroundImage: 'linear-gradient(135deg, #23296b 0%, #207ca9 100%)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              {title}
+            </motion.h2>
+            <motion.p 
+              variants={{
+                hidden: { opacity: 0, y: 25 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: TWEEN_EASE } }
+              }}
+              style={{
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: 400,
+                fontSize: 'clamp(17px, 2.4vw, 23px)',
+                color: '#23296b',
+                maxWidth: '520px',
+                lineHeight: 1.65,
+                marginTop: isTbsJe ? '20px' : '32px',
+              }}
+            >
+              {tagline}
+            </motion.p>
+          </div>
+        </motion.div>
+
+        {/* METRICS & HEADINGS WRAPPER */}
+        {heading ? (
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.15 } }
+            }}
+            style={{ marginTop: '28px' }}
+          >
+            {/* TBS JE Phase 2 & 3: separate heading then metrics */}
+            <motion.div 
+              variants={{
+                hidden: { clipPath: 'inset(0 100% 0 0)', opacity: 0 },
+                visible: { clipPath: 'inset(0 0% 0 0)', opacity: 1, transition: { duration: 1, ease: TWEEN_EASE } }
+              }}
+              style={{
                 width: '100%',
                 margin: '24px 0 28px',
                 overflow: 'hidden',
-              }}>
-                <div
-                  className="flow-section-heading"
-                  style={{ overflow: 'hidden', display: 'inline-block' }}
-                >
-                  <span
-                    className="flow-section-heading-inner"
-                    style={{
-                      display: 'block',
-                      fontFamily: 'Outfit, sans-serif',
-                      fontWeight: 800,
-                      fontSize: 'clamp(22px, 3vw, 38px)',
-                      color: '#207ca9',
-                      letterSpacing: '-0.02em',
-                      lineHeight: 1.1,
-                      paddingBottom: '4px',
-                      borderBottom: '2px solid rgba(32,124,169,0.2)',
-                      paddingRight: '16px',
-                    }}
-                  >
-                    {heading}
-                  </span>
-                </div>
+              }}
+            >
+              <div style={{ overflow: 'hidden', display: 'inline-block' }}>
+                <span style={{
+                  display: 'block',
+                  fontFamily: 'Outfit, sans-serif',
+                  fontWeight: 800,
+                  fontSize: 'clamp(22px, 3vw, 38px)',
+                  color: '#207ca9',
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.1,
+                  paddingBottom: '4px',
+                  borderBottom: '2px solid rgba(32,124,169,0.2)',
+                  paddingRight: '16px',
+                }}>
+                  {heading}
+                </span>
               </div>
-            )}
+            </motion.div>
+
+            <div style={{ display: 'flex', gap: 'clamp(16px, 4vw, 32px)', flexWrap: 'wrap' }}>
+              {metrics.map((metric, i) => (
+                <motion.div
+                  key={i}
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.95 },
+                    visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: TWEEN_EASE } }
+                  }}
+                  style={{ display: 'flex', flexDirection: 'column', gap: '3px', willChange: 'transform, opacity' }}
+                >
+                  <div style={{
+                    fontFamily: 'Outfit, sans-serif',
+                    fontWeight: 800,
+                    fontSize: 'clamp(28px, 3.5vw, 42px)',
+                    color: '#23296b',
+                    lineHeight: 1,
+                    letterSpacing: '-0.01em',
+                  }}>
+                    {metric.value}
+                  </div>
+                  <div style={{
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: 600,
+                    fontSize: '13px',
+                    color: '#23296b',
+                    letterSpacing: '0.05em',
+                    textTransform: 'uppercase',
+                  }}>
+                    {metric.label}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        ) : (
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.15, delayChildren: 0.4 } } // Delayed per rules (Phase 3 for Standard pages)
+            }}
+            style={{ marginTop: '48px', display: 'flex', gap: 'clamp(16px, 4vw, 32px)', flexWrap: 'wrap' }}
+          >
             {metrics.map((metric, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="flow-metric-item"
-                style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}
+                variants={{
+                  hidden: { opacity: 0, scale: 0.95 },
+                  visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: TWEEN_EASE } }
+                }}
+                style={{ display: 'flex', flexDirection: 'column', gap: '3px', willChange: 'transform, opacity' }}
               >
                 <div style={{
                   fontFamily: 'Outfit, sans-serif',
                   fontWeight: 800,
-                  fontSize: 'clamp(20px, 2.5vw, 30px)',
-                  color: textColor,
+                  fontSize: 'clamp(28px, 3.5vw, 42px)',
+                  color: '#23296b',
                   lineHeight: 1,
                   letterSpacing: '-0.01em',
                 }}>
@@ -218,229 +320,174 @@ export default function FlowSection({
                 </div>
                 <div style={{
                   fontFamily: 'Inter, sans-serif',
-                  fontWeight: 400,
-                  fontSize: '11px',
-                  color: mutedColor,
+                  fontWeight: 600,
+                  fontSize: '13px',
+                  color: '#23296b',
                   letterSpacing: '0.05em',
                   textTransform: 'uppercase',
                 }}>
                   {metric.label}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
+        )}
 
-          {/* DIVIDER */}
-          <div style={{
-            width: '100%',
-            height: '1px',
-            background: borderColor,
-            marginTop: '28px',
-            marginBottom: '24px',
-          }} />
-
-          {/* CREATIVE WORK PREVIEWS */}
-          <div style={{
-            width: '100%',
-            overflowX: 'auto',
-            WebkitOverflowScrolling: 'touch' as const,
-          }}>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '12px',
-              marginTop: '24px',
-              width: '100%',
-            }}>
-            {creatives.map((item, index) => (
-              <div key={index} style={{
-                display: 'flex',
-                flexDirection: 'column',
-                maxWidth: 'clamp(240px, 30vw, 380px)',
-                margin: '0 auto',
-                width: '100%',
-              }}>
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    position: 'relative',
-                    width: '100%',
-                    height: '480px',
-                    borderRadius: '10px',
-                    overflow: 'hidden',
-                    display: 'block',
-                    cursor: 'pointer',
-                    border: `1px solid ${borderColor}`,
-                    textDecoration: 'none',
-                    flexShrink: 0,
-                  }}
-                >
-                  {/* Real image */}
-                  {item.img ? (
-                    <img
-                      src={item.img}
-                      alt={`Creative ${index + 1}`}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        objectPosition: 'top',
-                        display: 'block',
-                        position: 'absolute',
-                        inset: 0,
-                      }}
-                    />
-                  ) : (
-                    <div style={{
-                      width: '100%',
-                      height: '100%',
-                      background: isLight ? 'rgba(32,124,169,0.05)' : 'rgba(255,255,255,0.05)',
-                      display: 'block',
-                      position: 'absolute',
-                      inset: 0,
-                    }} />
-                  )}
-
-                  {/* Premium color overlay */}
-                  <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: isLight
-                      ? 'linear-gradient(180deg, rgba(32,124,169,0.08) 0%, rgba(35,41,107,0.22) 100%)'
-                      : 'linear-gradient(180deg, rgba(35,41,107,0.1) 0%, rgba(0,0,0,0.35) 100%)',
-                    mixBlendMode: 'multiply',
-                    pointerEvents: 'none',
-                    zIndex: 1,
-                  }} />
-
-                  {/* Subtle vignette for depth */}
-                  <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.18) 100%)',
-                    pointerEvents: 'none',
-                    zIndex: 2,
-                  }} />
-
-                  {/* Hover overlay */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      background: isLight ? 'rgba(32,124,169,0.88)' : 'rgba(0,0,0,0.75)',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '8px',
-                      opacity: 0,
-                      transition: 'opacity 0.25s ease',
-                      borderRadius: '10px',
-                    }}
-                    onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
-                    onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
-                  >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2">
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                      <polyline points="15 3 21 3 21 9" />
-                      <line x1="10" y1="14" x2="21" y2="3" />
-                    </svg>
-                    <span style={{
-                      fontFamily: 'Inter, sans-serif',
-                      fontWeight: 500,
-                      fontSize: '11px',
-                      color: '#ffffff',
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                    }}>
-                      View post
-                    </span>
-                  </div>
-                </a>
-                {/* Social engagement icons bar */}
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  paddingTop: '10px',
-                  paddingLeft: '2px',
-                  paddingRight: '2px',
-                }}>
-                  {/* Left icons: heart, comment, send */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                    {/* Heart */}
-                    <svg
-                      width="22"
-                      height="22"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke={isLight ? 'rgba(15,15,15,0.5)' : 'rgba(255,255,255,0.5)'}
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                    </svg>
-                    {/* Comment bubble */}
-                    <svg
-                      width="22"
-                      height="22"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke={isLight ? 'rgba(15,15,15,0.5)' : 'rgba(255,255,255,0.5)'}
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                    </svg>
-                    {/* Send/Share */}
-                    <svg
-                      width="22"
-                      height="22"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke={isLight ? 'rgba(15,15,15,0.5)' : 'rgba(255,255,255,0.5)'}
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="22" y1="2" x2="11" y2="13" />
-                      <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                    </svg>
-                  </div>
-                  {/* Right icon: bookmark */}
-                  <svg
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke={isLight ? 'rgba(15,15,15,0.5)' : 'rgba(255,255,255,0.5)'}
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-                  </svg>
-                </div>
-              </div>
-            ))}
-            </div>
-          </div>
-        </div>
-
-        {/* THIN BOTTOM LINE */}
+        {/* DIVIDER */}
         <div style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
+          width: '100%',
           height: '1px',
           background: borderColor,
+          marginTop: '28px',
+          marginBottom: '24px',
         }} />
+
+        {/* SECTION LABEL & GRIDS */}
+        {sectionLabel && (
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.15 } }
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '56px', marginBottom: '32px' }}>
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { opacity: 1, transition: { duration: 0.8, ease: TWEEN_EASE } }
+                }}
+                style={{
+                  fontFamily: 'Outfit, sans-serif',
+                  fontSize: 'clamp(24px, 3vw, 36px)',
+                  fontWeight: 800,
+                  letterSpacing: '-0.01em',
+                  backgroundImage: 'linear-gradient(135deg, #23296b 0%, #207ca9 100%)',
+                  WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {sectionLabel}
+              </motion.div>
+              <motion.div 
+                variants={{
+                  hidden: { scaleX: 0 },
+                  visible: { scaleX: 1, transition: { duration: 1, ease: TWEEN_EASE } }
+                }}
+                style={{ flex: 1, height: '2px', background: 'linear-gradient(90deg, rgba(32,124,169,0.3), transparent)', transformOrigin: 'left' }} 
+              />
+            </div>
+
+            <div style={{ width: '100%', overflowX: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: '20px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(280px, 1fr))', gap: '32px', marginTop: '24px', width: '100%', maxWidth: '1024px', margin: '24px auto 0' }}>
+                {creatives.map((creative, i) => {
+                  return (
+                    <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                      <motion.a
+                        href={creative.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        variants={{
+                          hidden: { opacity: 0, y: 30 },
+                          visible: { opacity: 1, y: 0, transition: { duration: 0.8, "ease": TWEEN_EASE } }
+                        }}
+                        style={{
+                          aspectRatio: '1080 / 1350',
+                          borderRadius: '12px',
+                          overflow: 'hidden',
+                          display: 'block',
+                          position: 'relative',
+                          background: 'linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.05) 100%)',
+                          cursor: 'pointer',
+                          border: `1px solid ${borderColor}`,
+                          willChange: 'transform, opacity',
+                        }}
+                      >
+                        <motion.img
+                          variants={{
+                            hidden: { filter: 'blur(10px)', opacity: 0 },
+                            visible: { filter: 'blur(0px)', opacity: 1, transition: { duration: 1, delay: 0.2, "ease": TWEEN_EASE } }
+                          }}
+                          src={creative.img}
+                          alt={`Creative ${i + 1}`}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            display: 'block',
+                          }}
+                          loading="lazy"
+                        />
+                        <div style={{
+                          position: 'absolute',
+                          inset: 0,
+                          background: 'rgba(32,124,169,0.8)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          opacity: 0,
+                          transition: 'opacity 0.25s ease',
+                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.opacity = '0'; }}
+                        >
+                          <span style={{
+                            fontFamily: 'Inter, sans-serif',
+                            fontWeight: 600,
+                            fontSize: '15px',
+                            color: '#ffffff',
+                            letterSpacing: '0.1em',
+                            textTransform: 'uppercase',
+                          }}>
+                            View
+                          </span>
+                        </div>
+                      </motion.a>
+                      <motion.div
+                        variants={{
+                          hidden: { opacity: 0 },
+                          visible: { opacity: 1, transition: { duration: 0.8, delay: 0.3, "ease": TWEEN_EASE } }
+                        }}
+                        style={{ 
+                          display: 'flex', 
+                          justifyContent: 'space-between', 
+                          alignItems: 'center',
+                          padding: '0 4px',
+                          color: '#6B7280'
+                        }}
+                      >
+                        <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                          <Heart size={24} strokeWidth={1.5} style={{ cursor: 'pointer', transition: 'color 0.2s', ...({':hover':{color: '#111827'}} as any) }} />
+                          <MessageCircle size={24} strokeWidth={1.5} style={{ cursor: 'pointer', transition: 'color 0.2s', ...({':hover':{color: '#111827'}} as any) }} />
+                          <Send size={24} strokeWidth={1.5} style={{ cursor: 'pointer', transition: 'color 0.2s', ...({':hover':{color: '#111827'}} as any) }} />
+                        </div>
+                        <Bookmark size={24} strokeWidth={1.5} style={{ cursor: 'pointer', transition: 'color 0.2s', ...({':hover':{color: '#111827'}} as any) }} />
+                      </motion.div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {children}
       </div>
+
+      {/* THIN BOTTOM LINE */}
+      <div style={{
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: '1px',
+        background: borderColor,
+        opacity: 0.5,
+      }} />
     </section>
   );
 }

@@ -22,8 +22,40 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, external?: boolean) => {
+    if (external) return;
+    setMenuOpen(false);
+
+    if (href === '#about') {
+      e.preventDefault();
+      // Smooth scroll to Slide 3 inside the pinned container (corresponds to scroll position 2600px)
+      window.scrollTo({
+        top: 2600,
+        behavior: 'smooth'
+      });
+    } else if (href === '#work') {
+      e.preventDefault();
+      // Smooth scroll to work section
+      const element = document.getElementById('work');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.scrollTo({
+          top: 4500,
+          behavior: 'smooth'
+        });
+      }
+    } else if (href === '#contact') {
+      e.preventDefault();
+      const element = document.getElementById('contact');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
-    <div className="relative min-h-screen bg-[#FAFAF9]">
+    <div className="relative min-h-screen bg-[#FFFFFF]">
       {/* NAV OUTER WRAPPER — always full width, fixed */}
       <div
         style={{
@@ -111,7 +143,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   href={item.href}
                   target={item.external ? '_blank' : undefined}
                   rel={item.external ? 'noopener noreferrer' : undefined}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, item.href, item.external)}
                   style={scrolled ? {
                     fontFamily: 'Inter, sans-serif',
                     fontWeight: 500,
@@ -200,7 +232,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   href={item.href}
                   target={item.external ? '_blank' : undefined}
                   rel={item.external ? 'noopener noreferrer' : undefined}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, item.href, item.external)}
                   style={{
                     fontFamily: 'Inter, sans-serif',
                     fontWeight: 500,

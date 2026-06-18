@@ -415,7 +415,7 @@ export default function Footer() {
                 margin: '0 0 48px',
               }}
             >
-              I'm available for remote work this summer. If you're building something and need someone who thinks before they execute — let's talk.
+              I'm available for remote work this summer. If you're building something and need someone who thinks before they execute: let's talk.
             </p>
 
             {/* Actions */}
