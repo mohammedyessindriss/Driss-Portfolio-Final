@@ -4,6 +4,9 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({
+  ignoreMobileResize: true,
+});
 
 interface SoftwareItem {
   name: string;
@@ -68,6 +71,10 @@ export default function Hero() {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
+    if (typeof window !== 'undefined' && ScrollTrigger.isTouch === 1) {
+      ScrollTrigger.normalizeScroll(true);
+    }
+
     // INITIAL STATES
     gsap.set('.hero-line-1', { autoAlpha: 0, filter: 'blur(20px)', scale: 1.02 });
     gsap.set('.hero-line-2', { autoAlpha: 0, clipPath: 'inset(0 100% 0 0)', filter: 'blur(8px)' });
@@ -252,6 +259,144 @@ export default function Hero() {
         .animate-float-3 { animation: floatYoyo3 4s ease-in-out infinite; }
         .animate-float-4 { animation: floatYoyo4 4.8s ease-in-out infinite; }
         .animate-float-5 { animation: floatYoyo5 3.8s ease-in-out infinite; }
+
+        .slide3-container {
+          padding-left: 16px;
+          padding-right: 16px;
+          padding-top: 55px;
+          padding-bottom: 24px;
+        }
+        @media (min-width: 640px) {
+          .slide3-container {
+            padding-left: 32px;
+            padding-right: 32px;
+            padding-top: 75px;
+            padding-bottom: 32px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .slide3-container {
+            padding-left: clamp(24px, 6vw, 110px);
+            padding-right: clamp(24px, 6vw, 110px);
+            padding-top: clamp(90px, 12vh, 130px);
+            padding-bottom: clamp(40px, 6vh, 90px);
+          }
+        }
+
+        .slide3-corner-box {
+          top: 10px;
+          left: 10px;
+          right: 10px;
+          bottom: 10px;
+        }
+        @media (min-width: 640px) {
+          .slide3-corner-box {
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+          }
+        }
+        @media (min-width: 768px) {
+          .slide3-corner-box {
+            top: 40px;
+            left: 40px;
+            right: 40px;
+            bottom: 40px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .slide3-corner-box {
+            top: 64px;
+            left: 64px;
+            right: 64px;
+            bottom: 64px;
+          }
+        }
+
+        .education-card {
+          padding: 16px 20px;
+          min-height: 120px;
+          gap: 16px;
+        }
+        @media (min-width: 480px) {
+          .education-card {
+            padding: 20px 24px;
+            min-height: 140px;
+            gap: 20px;
+          }
+        }
+        @media (min-width: 640px) {
+          .education-card {
+            padding: 24px 30px;
+            min-height: 180px;
+            gap: 24px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .education-card {
+            padding: 32px 36px;
+            min-height: 210px;
+            gap: 24px;
+          }
+        }
+
+        .education-logo-container {
+          width: 44px;
+          height: 44px;
+          padding: 6px;
+        }
+        @media (min-width: 480px) {
+          .education-logo-container {
+            width: 52px;
+            height: 52px;
+            padding: 8px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .education-logo-container {
+            width: 64px;
+            height: 64px;
+            padding: 10px;
+          }
+        }
+
+        .tool-pill {
+          padding: 6px 12px;
+          gap: 6px;
+          font-size: 10px;
+        }
+        @media (min-width: 480px) {
+          .tool-pill {
+            padding: 8px 16px;
+            gap: 8px;
+            font-size: 11px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .tool-pill {
+            padding: 10px 20px;
+            gap: 12px;
+            font-size: 12px;
+          }
+        }
+
+        .tool-logo-container {
+          width: 14px;
+          height: 14px;
+        }
+        @media (min-width: 480px) {
+          .tool-logo-container {
+            width: 17px;
+            height: 17px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .tool-logo-container {
+            width: 20px;
+            height: 20px;
+          }
+        }
       `}</style>
 
       {/* Background Mesh Gradient */}
@@ -484,9 +629,10 @@ export default function Hero() {
             overflow: 'hidden',
             position: 'relative',
             pointerEvents: 'auto',
+            willChange: 'transform, width, height',
           }}
         >
-          <div className="card-scroll-track" style={{ width: '100%', height: '300vh', display: 'flex', flexDirection: 'column' }}>
+          <div className="card-scroll-track" style={{ width: '100%', height: '300vh', display: 'flex', flexDirection: 'column', willChange: 'transform' }}>
             
             {/* --- SLIDE 1: HERO CONTENT --- */}
             <div className="w-full h-[100vh] flex flex-col md:flex-row items-center justify-center relative overflow-hidden px-8">
@@ -565,19 +711,18 @@ export default function Hero() {
 
             {/* --- SLIDE 2: ABOUT NARRATIVE (Centered, huge typography, pristine breathing room, and premium design ticks) --- */}
             <div className="w-full h-[100vh] flex flex-col justify-center items-center px-8 md:px-16 lg:px-24 relative z-10">
-              
-              {/* Corner design framing boundaries & ticks for premium editorial styling layout in State 2 */}
-              <div className="absolute inset-10 md:inset-16 pointer-events-none border border-white/5 opacity-50 z-0 select-none">
+                           {/* Corner design framing boundaries & ticks for premium editorial styling layout in State 2 */}
+              <div className="absolute slide3-corner-box pointer-events-none border border-white/5 opacity-50 z-0 select-none">
                 <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-white/30" />
                 <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-white/30" />
                 <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-white/30" />
                 <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white/30" />
                 
                 {/* Tactical metadata coordinates */}
-                <div className="absolute top-6 left-6 font-mono text-[9px] text-white/30 tracking-[0.25em] uppercase">
+                <div className="absolute top-3 left-4 sm:top-6 sm:left-6 font-mono text-[8px] sm:text-[9px] text-white/30 tracking-[0.25em] uppercase">
                   LOC. 36.8065° N // 10.1815° E
                 </div>
-                <div className="absolute top-6 right-6 font-mono text-[9px] text-white/30 tracking-[0.25em] uppercase">
+                <div className="absolute top-3 right-4 sm:top-6 sm:right-6 font-mono text-[8px] sm:text-[9px] text-white/30 tracking-[0.25em] uppercase">
                   SECTION_02 // PHILOSOPHY
                 </div>
               </div>
@@ -597,10 +742,10 @@ export default function Hero() {
                     return (
                       <span key={i} className="inline-block overflow-hidden whitespace-nowrap" style={{ verticalAlign: 'bottom' }}>
                         <span className="vcr-inner inline-block" style={{ 
-                          fontWeight: isHigh ? 700 : 400,
-                          color: isHigh ? '#ffffff' : 'rgba(255, 255, 255, 0.65)',
-                          borderBottom: isHigh ? '2px solid #207ca9' : 'none',
-                          paddingBottom: isHigh ? '2px' : '0px',
+                           fontWeight: isHigh ? 700 : 400,
+                           color: isHigh ? '#ffffff' : 'rgba(255, 255, 255, 0.65)',
+                           borderBottom: isHigh ? '2px solid #207ca9' : 'none',
+                           paddingBottom: isHigh ? '2px' : '0px',
                         }}>
                           {word}
                         </span>
@@ -615,44 +760,33 @@ export default function Hero() {
             {/* --- SLIDE 3: METADATA GRID (Highly padded, luxury layout, structured custom tools capsule system) --- */}
             <div 
               id="about"
-              className="w-full h-[100vh] flex flex-col justify-center relative z-10"
-              style={{
-                paddingLeft: 'clamp(24px, 6vw, 110px)',
-                paddingRight: 'clamp(24px, 6vw, 110px)',
-                paddingTop: 'clamp(90px, 12vh, 130px)',
-                paddingBottom: 'clamp(40px, 6vh, 90px)',
-              }}
+              className="w-full h-[100vh] flex flex-col justify-center relative z-10 slide3-container"
             >
               
               {/* Corner design boundary ticks for State 3 */}
-              <div className="absolute inset-10 md:inset-16 pointer-events-none border border-white/5 opacity-50 z-0 select-none">
+              <div className="absolute slide3-corner-box pointer-events-none border border-white/5 opacity-50 z-0 select-none">
                 <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-white/30" />
                 <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-white/30" />
                 <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-white/30" />
                 <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white/30" />
               </div>
 
-              <div className="w-full max-w-[1300px] xl:max-w-[1400px] flex flex-col gap-10 md:gap-14 lg:gap-16 items-start justify-center relative z-10 px-4">
+              <div className="w-full max-w-[1300px] xl:max-w-[1400px] flex flex-col gap-3.5 sm:gap-6 md:gap-10 lg:gap-16 items-start justify-center relative z-10 px-1 sm:px-4">
                 
                 {/* Upper grid for Education & Currently list */}
-                <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 lg:gap-24 items-start text-left">
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 md:gap-16 lg:gap-24 items-start text-left">
                   
                   {/* Left Column: Education & Languages */}
-                  <div className="flex flex-col gap-6 md:gap-8">
+                  <div className="flex flex-col gap-3 sm:gap-6 md:gap-8">
                       <div className="about-anim-fade">
-                        <div className="text-white/40 text-[11px] uppercase tracking-[0.3em] font-medium mb-3">Education</div>
+                        <div className="text-white/40 text-[11px] uppercase tracking-[0.3em] font-medium mb-1.5 sm:mb-2.5 md:mb-3">Education</div>
                         <div 
-                          className="relative group overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-md flex items-center transition-all duration-350 hover:border-[#207ca9]/40 hover:bg-white/[0.06] max-w-xl shadow-lg"
-                          style={{
-                            padding: '32px 36px',
-                            minHeight: '210px',
-                            gap: '24px',
-                          }}
+                          className="relative group overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-md flex items-center transition-all duration-350 hover:border-[#207ca9]/40 hover:bg-white/[0.06] max-w-xl shadow-lg education-card"
                         >
                           {/* Secondary subtle glow */}
                           <div className="absolute -left-12 -top-12 w-24 h-24 bg-[#207ca9]/15 rounded-full blur-2xl group-hover:scale-130 transition-transform duration-500" />
                           
-                          <div className="relative flex-shrink-0 flex items-center justify-center w-16 h-16 rounded-xl bg-white/10 border border-white/15 overflow-hidden backdrop-blur-sm shadow-inner transition-transform duration-300 group-hover:scale-105" style={{ padding: '10px' }}>
+                          <div className="relative flex-shrink-0 flex items-center justify-center rounded-xl bg-white/10 border border-white/15 overflow-hidden backdrop-blur-sm shadow-inner transition-transform duration-300 group-hover:scale-105 education-logo-container">
                             <img 
                               src="https://i.ibb.co/N2dGgxX8/logo-hu3d8e5f27ad81de36e24c8e7a513aea7c-89571-0x70-resize-lanczos-3-1.png" 
                               alt="Tunis Business School Logo" 
@@ -660,30 +794,29 @@ export default function Hero() {
                               referrerPolicy="no-referrer"
                             />
                           </div>
-                          <div className="relative z-10 flex flex-col gap-1.5">
-                            <div className="text-white font-outfit text-xl md:text-2xl font-bold tracking-tight">Tunis Business School</div>
-                            <div className="text-white/70 text-sm md:text-base font-medium">BSc Business Administration · Sophomore</div>
-                            <div className="text-[#207ca9] text-[9.5px] uppercase tracking-[0.2em] font-mono mt-1 font-semibold leading-relaxed">First Public English-Speaking Business School in Tunisia</div>
+                          <div className="relative z-10 flex flex-col gap-1 sm:gap-1.5">
+                            <div className="text-white font-outfit text-base xs:text-lg sm:text-xl md:text-2xl font-bold tracking-tight">Tunis Business School</div>
+                            <div className="text-white/70 text-xs xs:text-sm md:text-base font-medium">BSc Business Administration · Sophomore</div>
+                            <div className="text-[#207ca9] text-[8px] xs:text-[9px] sm:text-[9.5px] uppercase tracking-[0.2em] font-mono mt-1 font-semibold leading-relaxed">First Public English-Speaking Business School in Tunisia</div>
                           </div>
                         </div>
                       </div>
 
                       <div className="about-anim-fade">
-                        <div className="text-white/40 text-[11px] uppercase tracking-[0.3em] font-medium mb-2.5">Languages</div>
-                        <div className="text-white/80 text-base md:text-lg tracking-wide">Arabic · French · English</div>
+                        <div className="text-white/40 text-[11px] uppercase tracking-[0.3em] font-medium mb-1 sm:mb-2 md:mb-2.5">Languages</div>
+                        <div className="text-white/80 text-xs xs:text-base md:text-lg tracking-wide">Arabic · French · English</div>
                       </div>
                   </div>
 
                   {/* Right Column: Currently & Quote (Pulled to the bottom a little bit) */}
-                  <div className="flex flex-col gap-8 md:gap-10 pt-1 md:pt-14 justify-end">
+                  <div className="flex flex-col gap-3 sm:gap-6 md:gap-10 pt-0 md:pt-14 justify-end">
                       <div className="about-anim-fade">
-                        <div className="text-white/40 text-[11px] uppercase tracking-[0.3em] font-medium mb-4">Currently</div>
-                        <div className="flex flex-col gap-4">
+                        <div className="text-white/40 text-[11px] uppercase tracking-[0.3em] font-medium mb-1.5 sm:mb-3 md:mb-4">Currently</div>
+                        <div className="flex flex-col gap-1.5 sm:gap-3 md:gap-4">
                           {CURRENTLY.map((item, i) => (
                             <div 
                               key={i} 
-                              className="text-white/80 text-base md:text-lg border-l-2 border-white/20"
-                              style={{ paddingLeft: '1.75rem' }}
+                              className="text-white/80 text-xs xs:text-base md:text-lg border-l-2 border-white/20 pl-4 sm:pl-7"
                             >
                               {item}
                             </div>
@@ -692,10 +825,9 @@ export default function Hero() {
                       </div>
 
                       <div 
-                        className="about-anim-fade border-l-2 border-[#207ca9] mt-2 md:mt-4"
-                        style={{ paddingLeft: '1.75rem' }}
+                        className="about-anim-fade border-l-2 border-[#207ca9] mt-1 sm:mt-2 md:mt-4 pl-4 sm:pl-7"
                       >
-                        <p className="italic text-white/60 text-sm md:text-base m-0 leading-relaxed max-w-[420px]">
+                        <p className="italic text-white/60 text-xs xs:text-sm md:text-base m-0 leading-relaxed max-w-[420px]">
                           "The learning happens in production, not just in textbooks."
                         </p>
                       </div>
@@ -705,18 +837,17 @@ export default function Hero() {
 
                 {/* Lower Row: Full Width Tools & Software (With wrap creating 2 or 3 lines) */}
                 <div className="w-full about-anim-fade">
-                  <div className="text-white/40 text-[11px] uppercase tracking-[0.3em] font-medium mb-4">Tools & Software</div>
-                  <div className="flex flex-wrap gap-3.5 w-full max-w-full">
+                  <div className="text-white/40 text-[11px] uppercase tracking-[0.3em] font-medium mb-1.5 sm:mb-3 md:mb-4">Tools & Software</div>
+                  <div className="flex flex-wrap gap-1.5 xs:gap-2 sm:gap-3 lg:gap-3.5 w-full max-w-full">
                       {SOFTWARE_ITEMS.map(item => (
                         <span 
                           key={item.name} 
-                          className="flex items-center gap-3 text-xs md:text-sm font-mono tracking-tight text-white/80 bg-[#207ca9]/12 border border-[#207ca9]/25 rounded-full hover:bg-white/10 hover:border-white/35 hover:text-white transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] select-none group/pill cursor-default"
+                          className="flex items-center font-mono tracking-tight text-white/80 bg-[#207ca9]/12 border border-[#207ca9]/25 rounded-full hover:bg-white/10 hover:border-white/35 hover:text-white transition-all duration-350 hover:scale-[1.02] active:scale-[0.98] select-none group/pill cursor-default tool-pill"
                           style={{
-                            padding: '10px 20px',
                             textShadow: '0 1px 1.5px rgba(0,0,0,0.25)'
                           }}
                         >
-                          <div className="w-5 h-5 flex items-center justify-center relative flex-shrink-0">
+                          <div className="flex items-center justify-center relative flex-shrink-0 tool-logo-container">
                             <img 
                               src={item.customIcon || `https://cdn.simpleicons.org/${item.slug}/${item.color}`}
                               alt={`${item.name} Logo`}

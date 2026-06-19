@@ -81,14 +81,14 @@ export default function VisualWork() {
       }} />
 
       {/* TOP ROW */}
-      <div style={{
-        position: 'relative',
-        zIndex: 1,
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        marginBottom: '48px',
-      }}>
+      <div 
+        className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0"
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          marginBottom: '48px',
+        }}
+      >
         <span style={{
           fontFamily: 'Inter, sans-serif',
           fontSize: '11px',
@@ -143,15 +143,14 @@ export default function VisualWork() {
       </div>
 
       {/* 3xX IMAGE GRID */}
-      <div style={{
-        position: 'relative',
-        zIndex: 1,
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: '24px 12px',
-        width: '80%',
-        margin: '0 auto',
-      }}>
+      <div 
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-8 gap-x-3 sm:gap-x-4 w-[95%] sm:w-[90%] md:w-[80%]"
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          margin: '0 auto',
+        }}
+      >
         {[
           { img: 'https://i.ibb.co/ZpBXyJLH/Screenshot-2026-06-17-013608.png', href: 'https://www.linkedin.com/posts/kamka_the-architecture-activity-7471184583817023489-WbQD', clickable: true, ratio: '1080 / 1350' },
           { img: 'https://i.ibb.co/b5FvzWnD/Screenshot-2026-06-17-013714.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7470037072959922176', clickable: true, ratio: '1080 / 1350' },

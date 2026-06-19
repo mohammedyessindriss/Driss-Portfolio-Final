@@ -320,7 +320,7 @@ export default function Footer() {
           {/* ANGLED MARQUEE — diagonal sash across top of footer */}
           <div style={{
             position: 'absolute',
-            top: 'clamp(60px, 10vw, 120px)',
+            top: 'clamp(115px, 15vw, 180px)',
             left: '-5%',
             right: '-5%',
             zIndex: 10,

@@ -226,11 +226,7 @@ export default function BrandGuideline() {
         style={{ marginBottom: '120px' }}
       >
         <motion.div variants={fadeUpVariant} style={labelStyle}>02. Logo Suite</motion.div>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-          gap: '20px',
-        }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 w-full">
           {LOGOS.map((logo) => (
             <motion.div key={logo.label} variants={fadeUpVariant} style={{
               background: '#ffffff',
@@ -457,12 +453,7 @@ export default function BrandGuideline() {
             style={{ flex: 1, height: '2px', background: 'linear-gradient(90deg, rgba(32,124,169,0.3), transparent)', transformOrigin: 'left' }}
           />
         </div>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-          gap: '24px',
-          width: '100%',
-        }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
           {[
             { img: 'https://i.ibb.co/spfbLptJ/Screenshot-2026-06-18-015737.png' },
             { img: 'https://i.ibb.co/QjN6bH0R/Screenshot-2026-06-18-015747.png' },
@@ -534,12 +525,7 @@ export default function BrandGuideline() {
             style={{ flex: 1, height: '2px', background: 'linear-gradient(90deg, rgba(32,124,169,0.3), transparent)', transformOrigin: 'left' }}
           />
         </div>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-          gap: '24px',
-          width: '100%',
-        }}>
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 w-full">
           {[
             {
               type: 'link',
