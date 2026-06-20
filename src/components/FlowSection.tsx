@@ -202,7 +202,7 @@ export default function FlowSection({
                 fontWeight: 400,
                 fontSize: 'clamp(17px, 2.4vw, 23px)',
                 color: '#23296b',
-                maxWidth: '520px',
+                maxWidth: isTbsJe ? '780px' : '520px',
                 lineHeight: 1.65,
                 marginTop: isTbsJe ? '20px' : '32px',
               }}
@@ -361,14 +361,13 @@ export default function FlowSection({
                 }}
                 style={{
                   fontFamily: 'Outfit, sans-serif',
-                  fontSize: 'clamp(24px, 3vw, 36px)',
+                  fontSize: 'clamp(20px, 5vw, 36px)',
                   fontWeight: 800,
                   letterSpacing: '-0.01em',
                   backgroundImage: 'linear-gradient(135deg, #23296b 0%, #207ca9 100%)',
                   WebkitBackgroundClip: 'text',
                   backgroundClip: 'text',
                   color: 'transparent',
-                  whiteSpace: 'nowrap',
                 }}
               >
                 {sectionLabel}
@@ -382,71 +381,129 @@ export default function FlowSection({
               />
             </div>
 
-            <div style={{ width: '100%', overflowX: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: '20px' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(280px, 1fr))', gap: '32px', marginTop: '24px', width: '100%', maxWidth: '1024px', margin: '24px auto 0' }}>
+            <div 
+              data-scrollable="true" 
+              style={{ 
+                width: '100%', 
+                overflowX: 'auto', 
+                WebkitOverflowScrolling: 'touch', 
+                paddingBottom: '20px',
+                touchAction: 'pan-x',
+              }}
+            >
+              <div 
+                data-scrollable="true" 
+                style={{ 
+                  display: 'grid', 
+                  gridTemplateColumns: 'repeat(3, minmax(280px, 1fr))', 
+                  gap: '32px', 
+                  marginTop: '24px', 
+                  width: '100%', 
+                  maxWidth: '1024px', 
+                  margin: '24px auto 0',
+                  touchAction: 'pan-x',
+                }}
+              >
                 {creatives.map((creative, i) => {
+                  const hasLink = creative.href && creative.href !== '#';
                   return (
                     <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                      <motion.a
-                        href={creative.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        variants={{
-                          hidden: { opacity: 0, y: 30 },
-                          visible: { opacity: 1, y: 0, transition: { duration: 0.8, "ease": TWEEN_EASE } }
-                        }}
-                        style={{
-                          aspectRatio: '1080 / 1350',
-                          borderRadius: '12px',
-                          overflow: 'hidden',
-                          display: 'block',
-                          position: 'relative',
-                          background: 'linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.05) 100%)',
-                          cursor: 'pointer',
-                          border: `1px solid ${borderColor}`,
-                          willChange: 'transform, opacity',
-                        }}
-                      >
-                        <motion.img
+                      {hasLink ? (
+                        <motion.a
+                          href={creative.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           variants={{
-                            hidden: { filter: 'blur(10px)', opacity: 0 },
-                            visible: { filter: 'blur(0px)', opacity: 1, transition: { duration: 1, delay: 0.2, "ease": TWEEN_EASE } }
+                            hidden: { opacity: 0, y: 30 },
+                            visible: { opacity: 1, y: 0, transition: { duration: 0.8, "ease": TWEEN_EASE } }
                           }}
-                          src={creative.img}
-                          alt={`Creative ${i + 1}`}
                           style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
+                            aspectRatio: '1080 / 1350',
+                            borderRadius: '12px',
+                            overflow: 'hidden',
                             display: 'block',
+                            position: 'relative',
+                            background: 'linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.05) 100%)',
+                            cursor: 'pointer',
+                            border: `1px solid ${borderColor}`,
+                            willChange: 'transform, opacity',
                           }}
-                          loading="lazy"
-                        />
-                        <div style={{
-                          position: 'absolute',
-                          inset: 0,
-                          background: 'rgba(32,124,169,0.8)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          opacity: 0,
-                          transition: 'opacity 0.25s ease',
-                        }}
-                        onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.opacity = '0'; }}
                         >
-                          <span style={{
-                            fontFamily: 'Inter, sans-serif',
-                            fontWeight: 600,
-                            fontSize: '15px',
-                            color: '#ffffff',
-                            letterSpacing: '0.1em',
-                            textTransform: 'uppercase',
-                          }}>
-                            View
-                          </span>
-                        </div>
-                      </motion.a>
+                          <motion.img
+                            variants={{
+                              hidden: { filter: 'blur(10px)', opacity: 0 },
+                              visible: { filter: 'blur(0px)', opacity: 1, transition: { duration: 1, delay: 0.2, "ease": TWEEN_EASE } }
+                            }}
+                            src={creative.img}
+                            alt={`Creative ${i + 1}`}
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover',
+                              display: 'block',
+                            }}
+                            loading="lazy"
+                          />
+                          <div style={{
+                            position: 'absolute',
+                            inset: 0,
+                            background: 'rgba(32,124,169,0.8)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            opacity: 0,
+                            transition: 'opacity 0.25s ease',
+                          }}
+                          onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
+                          onMouseLeave={(e) => { e.currentTarget.style.opacity = '0'; }}
+                          >
+                            <span style={{
+                              fontFamily: 'Inter, sans-serif',
+                              fontWeight: 600,
+                              fontSize: '15px',
+                              color: '#ffffff',
+                              letterSpacing: '0.1em',
+                              textTransform: 'uppercase',
+                            }}>
+                              View
+                            </span>
+                          </div>
+                        </motion.a>
+                      ) : (
+                        <motion.div
+                          variants={{
+                            hidden: { opacity: 0, y: 30 },
+                            visible: { opacity: 1, y: 0, transition: { duration: 0.8, "ease": TWEEN_EASE } }
+                          }}
+                          style={{
+                            aspectRatio: '1080 / 1350',
+                            borderRadius: '12px',
+                            overflow: 'hidden',
+                            display: 'block',
+                            position: 'relative',
+                            background: 'linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.05) 100%)',
+                            cursor: 'default',
+                            border: `1px solid ${borderColor}`,
+                            willChange: 'transform, opacity',
+                          }}
+                        >
+                          <motion.img
+                            variants={{
+                              hidden: { filter: 'blur(10px)', opacity: 0 },
+                              visible: { filter: 'blur(0px)', opacity: 1, transition: { duration: 1, delay: 0.2, "ease": TWEEN_EASE } }
+                            }}
+                            src={creative.img}
+                            alt={`Creative ${i + 1}`}
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover',
+                              display: 'block',
+                            }}
+                            loading="lazy"
+                          />
+                        </motion.div>
+                      )}
                       <motion.div
                         variants={{
                           hidden: { opacity: 0 },

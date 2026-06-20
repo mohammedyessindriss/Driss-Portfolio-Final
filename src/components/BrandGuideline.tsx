@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 
 const COLORS = [
@@ -134,14 +134,13 @@ export default function BrandGuideline() {
           }}
           style={{
             fontFamily: 'Outfit, sans-serif',
-            fontSize: 'clamp(24px, 3vw, 36px)',
+            fontSize: 'clamp(20px, 5vw, 36px)',
             fontWeight: 800,
             letterSpacing: '-0.01em',
             backgroundImage: 'linear-gradient(135deg, #23296b 0%, #207ca9 100%)',
             WebkitBackgroundClip: 'text',
             backgroundClip: 'text',
             color: 'transparent',
-            whiteSpace: 'nowrap',
           }}
         >
           Event Rebranding · HEXideate
@@ -433,14 +432,13 @@ export default function BrandGuideline() {
             }}
             style={{
               fontFamily: 'Outfit, sans-serif',
-              fontSize: 'clamp(24px, 3vw, 36px)',
+              fontSize: 'clamp(20px, 5vw, 36px)',
               fontWeight: 800,
               letterSpacing: '-0.01em',
               backgroundImage: 'linear-gradient(135deg, #23296b 0%, #207ca9 100%)',
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
               color: 'transparent',
-              whiteSpace: 'nowrap',
             }}
           >
             Presentation Materials
@@ -505,14 +503,13 @@ export default function BrandGuideline() {
             }}
             style={{
               fontFamily: 'Outfit, sans-serif',
-              fontSize: 'clamp(24px, 3vw, 36px)',
+              fontSize: 'clamp(20px, 5vw, 36px)',
               fontWeight: 800,
               letterSpacing: '-0.01em',
               backgroundImage: 'linear-gradient(135deg, #23296b 0%, #207ca9 100%)',
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
               color: 'transparent',
-              whiteSpace: 'nowrap',
             }}
           >
             Printing Materials
@@ -557,64 +554,201 @@ export default function BrandGuideline() {
               return <PrintingFlipCard key={i} imgFront={item.imgFront!} imgBack={item.imgBack!} labelFront={item.labelFront!} labelBack={item.labelBack!} />;
             }
             return (
-              <motion.a
-                key={i}
-                variants={fadeUpVariant}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  width: '100%',
-                  aspectRatio: '2480 / 3508',
-                  borderRadius: '14px',
-                  overflow: 'hidden',
-                  border: '1px solid #E5E7EB',
-                  background: 'rgba(32,124,169,0.04)',
-                  position: 'relative',
-                  margin: '0 auto',
-                  display: 'block',
-                  textDecoration: 'none',
-                  cursor: 'pointer',
-                  willChange: 'transform, opacity',
-                }}
-              >
-                <motion.img
-                  variants={{
-                    hidden: { filter: 'blur(10px)', opacity: 0 },
-                    visible: { filter: 'blur(0px)', opacity: 1, transition: { duration: 1, delay: 0.2, ease: TWEEN_EASE } }
-                  }}
-                  src={item.img}
-                  alt={item.label}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', willChange: 'filter, opacity' }}
-                />
-                <div
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'rgba(32,124,169,0.85)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    opacity: 0,
-                    transition: 'opacity 0.25s ease',
-                  }}
-                  onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
-                  onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
-                >
-                  <span style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontWeight: 600,
-                    fontSize: '13px',
-                    color: '#ffffff',
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
-                  }}>
-                    {item.label}
-                  </span>
-                </div>
-              </motion.a>
+              <React.Fragment key={i}>
+                {i === 0 ? (
+                  <motion.a
+                    variants={fadeUpVariant}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      width: '100%',
+                      aspectRatio: '2480 / 3508',
+                      borderRadius: '14px',
+                      overflow: 'hidden',
+                      border: '1px solid #E5E7EB',
+                      background: 'rgba(32,124,169,0.04)',
+                      position: 'relative',
+                      margin: '0 auto',
+                      display: 'block',
+                      textDecoration: 'none',
+                      cursor: 'pointer',
+                      willChange: 'transform, opacity',
+                    }}
+                  >
+                    <motion.img
+                      variants={{
+                        hidden: { filter: 'blur(10px)', opacity: 0 },
+                        visible: { filter: 'blur(0px)', opacity: 1, transition: { duration: 1, delay: 0.2, ease: TWEEN_EASE } }
+                      }}
+                      src={item.img}
+                      alt={item.label}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', willChange: 'filter, opacity' }}
+                    />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: 'rgba(32,124,169,0.85)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        opacity: 0,
+                        transition: 'opacity 0.25s ease',
+                      }}
+                      onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
+                      onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
+                    >
+                      <span style={{
+                        fontFamily: 'Inter, sans-serif',
+                        fontWeight: 600,
+                        fontSize: '13px',
+                        color: '#ffffff',
+                        letterSpacing: '0.08em',
+                        textTransform: 'uppercase',
+                      }}>
+                        {item.label}
+                      </span>
+                    </div>
+                  </motion.a>
+                ) : (
+                  <motion.div
+                    variants={fadeUpVariant}
+                    style={{
+                      width: '100%',
+                      aspectRatio: '2480 / 3508',
+                      borderRadius: '14px',
+                      overflow: 'hidden',
+                      border: '1px solid #E5E7EB',
+                      background: 'rgba(32,124,169,0.04)',
+                      position: 'relative',
+                      margin: '0 auto',
+                      display: 'block',
+                      cursor: 'default',
+                      willChange: 'transform, opacity',
+                    }}
+                  >
+                    <motion.img
+                      variants={{
+                        hidden: { filter: 'blur(10px)', opacity: 0 },
+                        visible: { filter: 'blur(0px)', opacity: 1, transition: { duration: 1, delay: 0.2, ease: TWEEN_EASE } }
+                      }}
+                      src={item.img}
+                      alt={item.label}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', willChange: 'filter, opacity' }}
+                    />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: 'rgba(32,124,169,0.85)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        opacity: 0,
+                        transition: 'opacity 0.25s ease',
+                      }}
+                      onMouseEnter={e => (e.currentTarget.style.opacity = '0.9')}
+                      onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
+                    >
+                      <span style={{
+                        fontFamily: 'Inter, sans-serif',
+                        fontWeight: 600,
+                        fontSize: '13px',
+                        color: '#ffffff',
+                        letterSpacing: '0.08em',
+                        textTransform: 'uppercase',
+                        textAlign: 'center',
+                        padding: '0 8px',
+                      }}>
+                        {item.label}
+                      </span>
+                    </div>
+                  </motion.div>
+                )}
+              </React.Fragment>
             );
           })}
+        </div>
+      </motion.div>
+
+      {/* SOCIAL MEDIA PERFORMANCE METRICS */}
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={blockVariants}
+        style={{ marginTop: '96px' }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '56px' }}>
+          <motion.div 
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { duration: 0.8, ease: TWEEN_EASE } }
+            }}
+            style={{
+              fontFamily: 'Outfit, sans-serif',
+              fontSize: 'clamp(20px, 5vw, 36px)',
+              fontWeight: 800,
+              letterSpacing: '-0.01em',
+              backgroundImage: 'linear-gradient(135deg, #23296b 0%, #207ca9 100%)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              color: 'transparent',
+            }}
+          >
+            Social Media Performance Metrics
+          </motion.div>
+          <motion.div 
+            variants={{
+              hidden: { scaleX: 0 },
+              visible: { scaleX: 1, transition: { duration: 1, ease: TWEEN_EASE } }
+            }}
+            style={{ flex: 1, height: '2px', background: 'linear-gradient(90deg, rgba(32,124,169,0.3), transparent)', transformOrigin: 'left' }}
+          />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+          {[
+            { url: 'https://i.ibb.co/1fHfWbD4/Screenshot-2025-10-07-003034.png', label: 'Facebook Metrics', background: 'rgba(24, 119, 242, 0.8)' },
+            { url: 'https://i.ibb.co/LdLBXcmQ/image-6.png', label: 'Instagram Metrics', background: 'linear-gradient(45deg, rgba(250, 126, 30, 0.8), rgba(214, 41, 118, 0.8), rgba(150, 47, 191, 0.8), rgba(79, 91, 213, 0.8))' },
+            { url: 'https://i.ibb.co/gM7b3WML/image-1-2.png', label: 'Linkedin Metrics', background: 'rgba(10, 102, 194, 0.8)' }
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              variants={fadeUpVariant}
+              className="group cursor-pointer"
+              style={{
+                width: '100%',
+                aspectRatio: '1340 / 900',
+                borderRadius: '14px',
+                overflow: 'hidden',
+                border: '1px solid #E5E7EB',
+                background: 'rgba(32,124,169,0.04)',
+                position: 'relative',
+                willChange: 'transform, opacity',
+              }}
+            >
+              <motion.img
+                variants={{
+                  hidden: { filter: 'blur(10px)', opacity: 0 },
+                  visible: { filter: 'blur(0px)', opacity: 1, transition: { duration: 1, delay: 0.2 + i * 0.1, ease: TWEEN_EASE } }
+                }}
+                src={item.url}
+                alt={item.label}
+                className="transition-transform duration-700 ease-out group-hover:scale-105"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', willChange: 'filter, opacity, transform' }}
+                referrerPolicy="no-referrer"
+              />
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out flex items-center justify-center pointer-events-none"
+                style={{ background: item.background }}
+              >
+                <span className="text-white font-outfit font-semibold text-lg md:text-xl tracking-tight translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                  {item.label}
+                </span>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </motion.div>
     </div>

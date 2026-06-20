@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { SITE_CONFIG } from '@/lib/constants';
 
 const NAV_ITEMS = [
-  { label: 'Work', href: '#work' },
   { label: 'About', href: '#about' },
-    { label: 'Contact', href: '#contact' },
+  { label: 'Work', href: '#work' },
+  { label: 'Contact', href: '#contact' },
   { label: 'LinkedIn', href: SITE_CONFIG.linkedin, external: true },
 ];
 
@@ -88,6 +88,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {/* NAV CONTENT ROW */}
           <div
             style={{
+              position: 'relative',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -135,8 +136,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               Mohammed Yessin Driss
             </a>
 
-            {/* Right: Desktop links */}
-            <div className="hidden md:flex" style={{ gap: '32px' }}>
+            {/* Center: Desktop links */}
+            <div className="hidden md:flex" style={{
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
+              gap: '32px'
+            }}>
               {NAV_ITEMS.map(item => (
                 <a
                   key={item.label}

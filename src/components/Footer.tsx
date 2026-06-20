@@ -4,19 +4,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SITE_CONFIG } from '@/lib/constants';
 
 const MARQUEE_CONTENT = [
-  'Brand Builder',
+  'Six brands, two years',
   '✦',
-  'Marketing Operator',
+  'Based in Tunis',
   '✦',
-  'Tunis, Tunisia',
+  'Open to remote work',
   '✦',
-  'Available for Remote Work',
-  '✦',
-  'Curious Builder',
-  '✦',
-  'Five Brands Built',
-  '✦',
-  'One Year In',
+  'Marketing, mostly figured out by doing it',
   '✦',
 ];
 
@@ -415,7 +409,7 @@ export default function Footer() {
                 margin: '0 0 48px',
               }}
             >
-              I'm available for remote work this summer. If you're building something and need someone who thinks before they execute: let's talk.
+              I'm available for remote work. If you're building something and need an extra hand, let's talk.
             </p>
 
             {/* Actions */}

@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { Sparkles } from 'lucide-react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -32,14 +33,14 @@ const SOFTWARE_ITEMS: SoftwareItem[] = [
 ];
 
 const CURRENTLY = [
-  'Building this portfolio',
-  'Studying business strategy at TBS',
-  'Open to remote marketing roles',
+  'Reading about how AI is changing marketing',
+  'Learning the skills that are actually in demand right now',
+  'Open to remote roles',
 ];
 
-const paragraphText = "I'm drawn to problems that don't have obvious answers. How do you build an audience with no following? How do you position a startup nobody has heard of? I've been working through those questions in real organizations since my first year of university. I'm still asking them.";
+const paragraphText = "I'm drawn to problems that don't have obvious answers. How do you build an audience with no following? How do you position a startup nobody has heard of? I've been working through those questions in real organizations for the past two years. I'm still asking them.";
 const paragraphWords = paragraphText.split(' ');
-const highlightedWords = ['problems', 'obvious', 'answers', 'audience', 'position', 'startup', 'organizations', 'university'];
+const highlightedWords = ['problems', 'obvious', 'answers', 'audience', 'position', 'startup', 'organizations', 'years'];
 
 const GlassPill = ({ children, className, style }: any) => (
   <div className={className} style={{
@@ -77,7 +78,7 @@ export default function Hero() {
 
     // INITIAL STATES
     gsap.set('.hero-line-1', { autoAlpha: 0, filter: 'blur(20px)', scale: 1.02 });
-    gsap.set('.hero-line-2', { autoAlpha: 0, clipPath: 'inset(0 100% 0 0)', filter: 'blur(8px)' });
+    gsap.set('.hero-line-2', { autoAlpha: 0, clipPath: 'inset(0 100% -12% 0)', filter: 'blur(8px)' });
     gsap.set('.hero-sub', { autoAlpha: 0, y: 16 });
     gsap.set('.hero-scroll-indicator', { autoAlpha: 0 });
     gsap.set('.hero-availability', { autoAlpha: 0, y: 10 });
@@ -97,7 +98,7 @@ export default function Hero() {
 
     entranceTl
       .to('.hero-line-1', { autoAlpha: 1, filter: 'blur(0px)', scale: 1, duration: 1.4, ease: 'power2.out' })
-      .to('.hero-line-2', { autoAlpha: 1, clipPath: 'inset(0 0% 0 0)', filter: 'blur(0px)', duration: 0.75, ease: 'power3.inOut' }, '-=0.05')
+      .to('.hero-line-2', { autoAlpha: 1, clipPath: 'inset(0 0% -12% 0)', filter: 'blur(0px)', duration: 0.75, ease: 'power3.inOut' }, '-=0.05')
       .to('.hero-gradient', { autoAlpha: 1, duration: 2, ease: 'power1.inOut' }, '<')
       .to('.hero-sub', { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.2')
       .to('.hero-availability', { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.1')
@@ -284,30 +285,30 @@ export default function Hero() {
         }
 
         .slide3-corner-box {
-          top: 10px;
+          top: clamp(90px, 11vh, 120px);
           left: 10px;
           right: 10px;
-          bottom: 10px;
+          bottom: 24px;
         }
         @media (min-width: 640px) {
           .slide3-corner-box {
-            top: 20px;
+            top: clamp(110px, 13vh, 140px);
             left: 20px;
             right: 20px;
-            bottom: 20px;
+            bottom: 32px;
           }
         }
         @media (min-width: 768px) {
           .slide3-corner-box {
-            top: 40px;
+            top: clamp(130px, 15vh, 160px);
             left: 40px;
             right: 40px;
-            bottom: 40px;
+            bottom: 48px;
           }
         }
         @media (min-width: 1024px) {
           .slide3-corner-box {
-            top: 64px;
+            top: clamp(140px, 17vh, 180px);
             left: 64px;
             right: 64px;
             bottom: 64px;
@@ -459,14 +460,15 @@ export default function Hero() {
         className="hero-text-wrapper"
         style={{
           position: 'absolute',
+          inset: '0',
           zIndex: 10,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           textAlign: 'center',
-          width: '100%',
           padding: '0 24px',
+          paddingTop: '80px',
         }}
       >
         <div className="hero-availability" style={{ marginBottom: '28px' }}>
@@ -548,7 +550,7 @@ export default function Hero() {
             letterSpacing: '-0.02em',
           }}
         >
-          a marketing student who builds brands for real.
+          I study business and I do marketing.
         </h1>
 
         <p
@@ -563,7 +565,7 @@ export default function Hero() {
             marginTop: '28px',
           }}
         >
-          Sophomore at Tunis Business School. One year in, five brands built, results documented.
+          For the past two years, I've worked with six organizations on their marketing. A few numbers from that time are below.
         </p>
 
         <div
@@ -711,20 +713,12 @@ export default function Hero() {
 
             {/* --- SLIDE 2: ABOUT NARRATIVE (Centered, huge typography, pristine breathing room, and premium design ticks) --- */}
             <div className="w-full h-[100vh] flex flex-col justify-center items-center px-8 md:px-16 lg:px-24 relative z-10">
-                           {/* Corner design framing boundaries & ticks for premium editorial styling layout in State 2 */}
+                            {/* Corner design framing boundaries & ticks for premium editorial styling layout in State 2 */}
               <div className="absolute slide3-corner-box pointer-events-none border border-white/5 opacity-50 z-0 select-none">
                 <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-white/30" />
                 <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-white/30" />
                 <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-white/30" />
                 <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white/30" />
-                
-                {/* Tactical metadata coordinates */}
-                <div className="absolute top-3 left-4 sm:top-6 sm:left-6 font-mono text-[8px] sm:text-[9px] text-white/30 tracking-[0.25em] uppercase">
-                  LOC. 36.8065° N // 10.1815° E
-                </div>
-                <div className="absolute top-3 right-4 sm:top-6 sm:right-6 font-mono text-[8px] sm:text-[9px] text-white/30 tracking-[0.25em] uppercase">
-                  SECTION_02 // PHILOSOPHY
-                </div>
               </div>
 
               <div style={{ textAlign: 'center', width: '100%', maxWidth: '980px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 10 }}>
@@ -760,28 +754,40 @@ export default function Hero() {
             {/* --- SLIDE 3: METADATA GRID (Highly padded, luxury layout, structured custom tools capsule system) --- */}
             <div 
               id="about"
-              className="w-full h-[100vh] flex flex-col justify-center relative z-10 slide3-container"
+              className="w-full h-[100vh] flex flex-col justify-start relative z-10 slide3-container pt-[12vh] sm:pt-[14vh] pb-12 overflow-y-auto px-4 sm:px-8 md:px-12"
             >
               
-              {/* Corner design boundary ticks for State 3 */}
-              <div className="absolute slide3-corner-box pointer-events-none border border-white/5 opacity-50 z-0 select-none">
-                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-white/30" />
-                <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-white/30" />
-                <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-white/30" />
-                <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white/30" />
-              </div>
-
-              <div className="w-full max-w-[1300px] xl:max-w-[1400px] flex flex-col gap-3.5 sm:gap-6 md:gap-10 lg:gap-16 items-start justify-center relative z-10 px-1 sm:px-4">
+              <div className="w-full max-w-[1300px] xl:max-w-[1400px] mx-auto relative z-10 p-6 sm:p-10 md:p-14 lg:p-16">
                 
-                {/* Upper grid for Education & Currently list */}
-                <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 md:gap-16 lg:gap-24 items-start text-left">
+                {/* Corner design boundary ticks tightly framing the whole content boundaries */}
+                <div className="absolute inset-0 pointer-events-none border border-white/5 opacity-50 z-0 select-none">
+                  <div className="absolute top-0 left-0 w-5 h-5 border-t border-l border-white/30" />
+                  <div className="absolute top-0 right-0 w-5 h-5 border-t border-r border-white/30" />
+                  <div className="absolute bottom-0 left-0 w-5 h-5 border-b border-l border-white/30" />
+                  <div className="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-white/30" />
+                </div>
+
+                <div className="relative z-10 w-full flex flex-col gap-6 sm:gap-10 md:gap-16 items-stretch justify-start">
                   
-                  {/* Left Column: Education & Languages */}
-                  <div className="flex flex-col gap-3 sm:gap-6 md:gap-8">
+                  {/* Rearranged grid layout: Left for Education + Tools & Software, Right for Currently + Quote + Languages */}
+                  <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-16 md:gap-24 items-start text-left">
+                  
+                  {/* Left Column: Education & Tools & Software (wrapped directly below) */}
+                  <div className="flex flex-col gap-12 sm:gap-16 md:gap-20">
+                      {/* EDUCATION SECTION */}
                       <div className="about-anim-fade">
-                        <div className="text-white/40 text-[11px] uppercase tracking-[0.3em] font-medium mb-1.5 sm:mb-2.5 md:mb-3">Education</div>
+                        <div style={{
+                          fontFamily: 'Outfit, sans-serif',
+                          fontSize: 'clamp(20px, 2.2vw, 28px)',
+                          fontWeight: 950,
+                          letterSpacing: '0.28em',
+                          color: '#ffffff',
+                          marginBottom: '42px',
+                          textTransform: 'uppercase',
+                          display: 'block'
+                        }}>Education</div>
                         <div 
-                          className="relative group overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-md flex items-center transition-all duration-350 hover:border-[#207ca9]/40 hover:bg-white/[0.06] max-w-xl shadow-lg education-card"
+                           className="relative group overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-md flex items-center transition-all duration-350 hover:border-[#207ca9]/40 hover:bg-white/[0.06] max-w-xl shadow-lg education-card"
                         >
                           {/* Secondary subtle glow */}
                           <div className="absolute -left-12 -top-12 w-24 h-24 bg-[#207ca9]/15 rounded-full blur-2xl group-hover:scale-130 transition-transform duration-500" />
@@ -802,68 +808,112 @@ export default function Hero() {
                         </div>
                       </div>
 
-                      <div className="about-anim-fade">
-                        <div className="text-white/40 text-[11px] uppercase tracking-[0.3em] font-medium mb-1 sm:mb-2 md:mb-2.5">Languages</div>
-                        <div className="text-white/80 text-xs xs:text-base md:text-lg tracking-wide">Arabic · French · English</div>
+                      {/* TOOLS & SOFTWARE SECTION */}
+                      <div className="about-anim-fade animate-title-space">
+                        <div style={{
+                          fontFamily: 'Outfit, sans-serif',
+                          fontSize: 'clamp(20px, 2.2vw, 28px)',
+                          fontWeight: 950,
+                          letterSpacing: '0.28em',
+                          color: '#ffffff',
+                          marginBottom: '42px',
+                          textTransform: 'uppercase',
+                          display: 'block'
+                        }}>Tools & Software</div>
+                        <div className="flex flex-wrap gap-1.5 xs:gap-2 sm:gap-3 lg:gap-3.5 w-full max-w-full">
+                            {SOFTWARE_ITEMS.map(item => (
+                              <span 
+                                key={item.name} 
+                                className="flex items-center font-mono tracking-tight text-white/80 bg-[#207ca9]/12 border border-[#207ca9]/25 rounded-full hover:bg-white/10 hover:border-white/35 hover:text-white transition-all duration-350 hover:scale-[1.02] active:scale-[0.98] select-none group/pill cursor-default tool-pill"
+                                style={{
+                                  textShadow: '0 1px 1.5px rgba(0,0,0,0.25)'
+                                }}
+                              >
+                                <div className="flex items-center justify-center relative flex-shrink-0 tool-logo-container">
+                                  <img 
+                                    src={item.customIcon || `https://cdn.simpleicons.org/${item.slug}/${item.color}`}
+                                    alt={`${item.name} Logo`}
+                                    className="w-full h-full object-contain filter group-hover/pill:brightness-125 transition-all duration-300 group-hover/pill:scale-110"
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer"
+                                  />
+                                </div>
+                                <span className="leading-none">{item.name}</span>
+                              </span>
+                            ))}
+                        </div>
                       </div>
                   </div>
 
-                  {/* Right Column: Currently & Quote (Pulled to the bottom a little bit) */}
-                  <div className="flex flex-col gap-3 sm:gap-6 md:gap-10 pt-0 md:pt-14 justify-end">
+                  {/* Right Column: Currently, Quote & Languages of TBS JE */}
+                  <div className="flex flex-col gap-12 sm:gap-16">
+                      {/* CURRENTLY SECTION */}
                       <div className="about-anim-fade">
-                        <div className="text-white/40 text-[11px] uppercase tracking-[0.3em] font-medium mb-1.5 sm:mb-3 md:mb-4">Currently</div>
-                        <div className="flex flex-col gap-1.5 sm:gap-3 md:gap-4">
+                        <div style={{
+                          fontFamily: 'Outfit, sans-serif',
+                          fontSize: 'clamp(20px, 2.2vw, 28px)',
+                          fontWeight: 950,
+                          letterSpacing: '0.28em',
+                          color: '#ffffff',
+                          marginBottom: '42px',
+                          textTransform: 'uppercase',
+                          display: 'block'
+                        }}>Currently</div>
+                        <div className="flex flex-col gap-6 sm:gap-8">
                           {CURRENTLY.map((item, i) => (
                             <div 
                               key={i} 
-                              className="text-white/80 text-xs xs:text-base md:text-lg border-l-2 border-white/20 pl-4 sm:pl-7"
+                              className="flex items-start gap-4 sm:gap-6 py-2 group/curr"
                             >
-                              {item}
+                              <div className="flex-shrink-0 mt-1 sm:mt-1.5 p-1.5 bg-[#207ca9]/20 rounded-lg border border-[#207ca9]/40 text-[#4fc3f7] group-hover/curr:scale-110 group-hover/curr:bg-[#207ca9]/35 group-hover/curr:text-white transition-all duration-300">
+                                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
+                              </div>
+                              <div className="text-white font-semibold text-sm xs:text-lg md:text-xl leading-relaxed pt-0.5">
+                                {item}
+                              </div>
                             </div>
                           ))}
                         </div>
                       </div>
 
-                      <div 
-                        className="about-anim-fade border-l-2 border-[#207ca9] mt-1 sm:mt-2 md:mt-4 pl-4 sm:pl-7"
-                      >
-                        <p className="italic text-white/60 text-xs xs:text-sm md:text-base m-0 leading-relaxed max-w-[420px]">
-                          "The learning happens in production, not just in textbooks."
-                        </p>
+                      {/* QUOTE SECTION */}
+                      <div className="about-anim-fade flex items-stretch gap-6 sm:gap-8 mt-6 relative py-1">
+                        {/* Elegant gradient left-accent vertical bar */}
+                        <div className="relative w-[4px] flex-shrink-0 rounded-full bg-gradient-to-b from-[#4fc3f7] via-[#207ca9] to-transparent shadow-[0_0_12px_rgba(79,195,247,0.35)]" />
+                        
+                        <div className="relative flex-1 pl-4 sm:pl-6 md:pl-8">
+                          {/* Elegant Quote marks watermark decoration */}
+                          <div className="absolute -left-2 sm:-left-1 -top-5 sm:-top-7 text-[#4fc3f7]/15 select-none pointer-events-none font-serif text-7xl sm:text-8xl leading-none">
+                            “
+                          </div>
+                          
+                          <p className="italic text-white/85 font-outfit font-light text-sm xs:text-lg sm:text-xl m-0 leading-relaxed max-w-[460px] tracking-wide relative z-10">
+                            The learning happens in production, not just in textbooks.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* LANGUAGES SECTION */}
+                      <div className="about-anim-fade mt-6 sm:mt-10 md:mt-12">
+                        <div style={{
+                          fontFamily: 'Outfit, sans-serif',
+                          fontSize: 'clamp(20px, 2.2vw, 28px)',
+                          fontWeight: 950,
+                          letterSpacing: '0.28em',
+                          color: '#ffffff',
+                          marginBottom: '42px',
+                          textTransform: 'uppercase',
+                          display: 'block'
+                        }}>Languages</div>
+                        <div className="text-white font-semibold text-base xs:text-xl md:text-2xl tracking-wide">Arabic · French · English</div>
                       </div>
                   </div>
 
                 </div>
 
-                {/* Lower Row: Full Width Tools & Software (With wrap creating 2 or 3 lines) */}
-                <div className="w-full about-anim-fade">
-                  <div className="text-white/40 text-[11px] uppercase tracking-[0.3em] font-medium mb-1.5 sm:mb-3 md:mb-4">Tools & Software</div>
-                  <div className="flex flex-wrap gap-1.5 xs:gap-2 sm:gap-3 lg:gap-3.5 w-full max-w-full">
-                      {SOFTWARE_ITEMS.map(item => (
-                        <span 
-                          key={item.name} 
-                          className="flex items-center font-mono tracking-tight text-white/80 bg-[#207ca9]/12 border border-[#207ca9]/25 rounded-full hover:bg-white/10 hover:border-white/35 hover:text-white transition-all duration-350 hover:scale-[1.02] active:scale-[0.98] select-none group/pill cursor-default tool-pill"
-                          style={{
-                            textShadow: '0 1px 1.5px rgba(0,0,0,0.25)'
-                          }}
-                        >
-                          <div className="flex items-center justify-center relative flex-shrink-0 tool-logo-container">
-                            <img 
-                              src={item.customIcon || `https://cdn.simpleicons.org/${item.slug}/${item.color}`}
-                              alt={`${item.name} Logo`}
-                              className="w-full h-full object-contain filter group-hover/pill:brightness-125 transition-all duration-300 group-hover/pill:scale-110"
-                              loading="lazy"
-                              referrerPolicy="no-referrer"
-                            />
-                          </div>
-                          <span className="leading-none">{item.name}</span>
-                        </span>
-                      ))}
-                  </div>
-                </div>
-
               </div>
             </div>
+          </div>
 
           </div>
         </div>
@@ -893,7 +943,7 @@ export default function Hero() {
           letterSpacing: '-0.02em',
           marginBottom: '24px',
         }}>
-          Start the dissection.
+          The work.
         </h2>
         <p style={{
           fontFamily: 'Inter, sans-serif',
@@ -904,7 +954,7 @@ export default function Hero() {
           lineHeight: 1.7,
           marginBottom: '40px',
         }}>
-          Five brands. One year. Results documented layer by layer.
+          Six brands over two years, broken down piece by piece.
         </p>
         <a
           href="#work"
