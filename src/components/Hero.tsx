@@ -3,6 +3,7 @@ import { Sparkles } from 'lucide-react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import SparkleBackground from '@/components/SparkleBackground';
 
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.config({
@@ -438,6 +439,7 @@ export default function Hero() {
           }}
         />
       </div>
+      <SparkleBackground />
 
       <div
         className="hero-grid"
@@ -534,6 +536,7 @@ export default function Hero() {
             color: '#207ca9',
             margin: 0,
             letterSpacing: '-0.02em',
+            textShadow: '0 0 16px rgba(56, 189, 248, 0.35), 0 0 30px rgba(32, 124, 169, 0.2)',
           }}
         >
           Hi. I'm Yessin
@@ -548,6 +551,7 @@ export default function Hero() {
             color: '#23296b',
             margin: '8px 0 0 0',
             letterSpacing: '-0.02em',
+            textShadow: '0 0 16px rgba(96, 165, 250, 0.3), 0 0 30px rgba(35, 41, 107, 0.18)',
           }}
         >
           I study business and I do marketing.

@@ -154,265 +154,123 @@ export default function BrandGuideline() {
         />
       </motion.div>
 
-      {/* 01 — THE CONCEPT */}
+      {/* 01 — 04 SPLIT SCREEN BRAND GUIDELINES PRESENTATION */}
       <motion.div 
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.15 }}
         variants={blockVariants}
-        style={{ marginBottom: '120px' }}
+        style={{ marginBottom: '80px' }}
       >
-        <motion.div variants={fadeUpVariant} style={labelStyle}>01. The Concept</motion.div>
-
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: 'clamp(32px, 5vw, 64px)',
-          alignItems: 'start',
-        }}>
-          <motion.p variants={fadeUpVariant} style={{
-            fontFamily: 'Outfit, sans-serif',
-            fontWeight: 700,
-            fontSize: 'clamp(24px, 3.2vw, 36px)',
-            color: '#23296b',
-            lineHeight: 1.25,
-            letterSpacing: '-0.01em',
-            margin: 0,
-          }}>
-            HEXideate is TBS Junior Enterprise's annual hackathon: minimalist, sharp, and built for participants with ideas worth building.
-          </motion.p>
-
-          <motion.div variants={fadeUpVariant} style={{
-            borderLeft: '2px solid rgba(32,124,169,0.2)',
-            paddingLeft: '28px',
-          }}>
-            <p style={{
-              fontFamily: 'Inter, sans-serif',
-              fontWeight: 400,
-              fontSize: 'clamp(15px, 1.6vw, 17px)',
-              color: '#6B7280',
-              lineHeight: 1.9,
-              margin: 0,
-            }}>
-              The mark is built from a fused{' '}
-              <span style={{ color: '#23296b', fontWeight: 600 }}>H+I monogram</span>,{' '}
-              Hex and Ideate compressed into a single geometric form. The two letterforms share a{' '}
-              <span style={{ color: '#23296b', fontWeight: 600 }}>structural stem</span>,
-              creating an inseparable connection between the two words.
-            </p>
-            <p style={{
-              fontFamily: 'Inter, sans-serif',
-              fontWeight: 400,
-              fontSize: 'clamp(15px, 1.6vw, 17px)',
-              color: '#6B7280',
-              lineHeight: 1.9,
-              margin: '20px 0 0',
-            }}>
-              The{' '}
-              <span style={{ color: '#C9972A', fontWeight: 600 }}>gold diagonal crossbar</span>{' '}
-              is the defining element, angled at 15°, it introduces dynamic tension between structure and creativity.
-            </p>
-          </motion.div>
-        </div>
-      </motion.div>
-
-      {/* 02 — LOGO SUITE */}
-      <motion.div 
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={blockVariants}
-        style={{ marginBottom: '120px' }}
-      >
-        <motion.div variants={fadeUpVariant} style={labelStyle}>02. Logo Suite</motion.div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 w-full">
-          {LOGOS.map((logo) => (
-            <motion.div key={logo.label} variants={fadeUpVariant} style={{
-              background: '#ffffff',
-              border: '1px solid #E5E7EB',
-              borderRadius: '18px',
-              overflow: 'hidden',
-              display: 'flex',
-              flexDirection: 'column',
-              willChange: 'transform, opacity',
-            }}>
-              <div style={{
-                background: 'linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 100%)',
-                padding: logo.size === 'large' ? '48px 32px' : '36px 32px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                minHeight: '180px',
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch w-full">
+          {/* LEFT COLUMN: 01. The Concept & 03. Color Palette */}
+          <div className="flex flex-col gap-6">
+            {/* 01. THE CONCEPT */}
+            <motion.div 
+              variants={fadeUpVariant}
+              className="bg-white/90 backdrop-blur-sm border border-slate-200/80 rounded-2xl p-6 md:p-8 shadow-xs flex flex-col justify-center flex-1"
+            >
+              <div style={labelStyle} className="!mb-4">01. The Concept</div>
+              <h3 style={{
+                fontFamily: 'Outfit, sans-serif',
+                fontWeight: 700,
+                fontSize: 'clamp(20px, 2.2vw, 28px)',
+                color: '#23296b',
+                lineHeight: 1.35,
+                letterSpacing: '-0.01em',
+                margin: 0,
               }}>
-                <motion.img
-                  variants={{
-                    hidden: { filter: 'blur(10px)', opacity: 0 },
-                    visible: { filter: 'blur(0px)', opacity: 1, transition: { duration: 1, delay: 0.2, ease: TWEEN_EASE } }
-                  }}
-                  src={logo.img}
-                  alt={logo.label}
-                  style={{
-                    maxWidth: '100%',
-                    maxHeight: logo.size === 'large' ? '110px' : '80px',
-                    objectFit: 'contain',
-                    willChange: 'opacity, filter',
-                  }}
-                />
+                HEXideate is TBS Junior Enterprise's annual hackathon: minimalist, sharp, and built for ideas worth building.
+              </h3>
+            </motion.div>
+
+            {/* 03. COLOR PALETTE */}
+            <motion.div 
+              variants={fadeUpVariant}
+              className="bg-white/90 backdrop-blur-sm border border-slate-200/80 rounded-2xl p-6 shadow-xs"
+            >
+              <div style={labelStyle} className="!mb-3">03. Color Palette</div>
+              <div className="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-3 gap-3">
+                {COLORS.map((color) => (
+                  <div key={color.hex} className="flex flex-col gap-1.5 p-2 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                    <div 
+                      className="w-full h-11 rounded-lg border border-black/5 shadow-2xs" 
+                      style={{ background: color.hex }} 
+                    />
+                    <div>
+                      <div className="font-['Outfit'] font-bold text-xs text-[#16193e] truncate">
+                        {color.name}
+                      </div>
+                      <div className="font-['Inter'] font-semibold text-[11px] text-[#207ca9]">
+                        {color.hex.toUpperCase()}
+                      </div>
+                      <div className="font-['Inter'] text-[10px] text-slate-500 leading-tight mt-0.5 line-clamp-1" title={color.usage}>
+                        {color.usage}
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div style={{
-                padding: '18px 20px',
-                borderTop: '1px solid #E5E7EB',
-              }}>
-                <div style={{
-                  fontFamily: 'Outfit, sans-serif',
-                  fontWeight: 700,
-                  fontSize: '15px',
-                  color: '#16193e',
-                  marginBottom: '4px',
-                }}>
-                  {logo.label}
+            </motion.div>
+          </div>
+
+          {/* RIGHT COLUMN: 02. Logo Suite & 04. Typography */}
+          <div className="flex flex-col gap-6">
+            {/* 02. LOGO SUITE */}
+            <motion.div 
+              variants={fadeUpVariant}
+              className="bg-white/90 backdrop-blur-sm border border-slate-200/80 rounded-2xl p-6 shadow-xs flex-1 flex flex-col"
+            >
+              <div style={labelStyle} className="!mb-3">02. Logo Suite</div>
+              <div className="grid grid-cols-2 gap-3 flex-1">
+                {LOGOS.map((logo) => (
+                  <div key={logo.label} className="bg-slate-50/70 border border-slate-200/70 rounded-xl overflow-hidden flex items-center justify-center p-4 group hover:border-slate-300 transition-all min-h-[100px]">
+                    <img
+                      src={logo.img}
+                      alt={logo.label}
+                      className="max-w-full max-h-[64px] object-contain filter group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* 04. TYPOGRAPHY */}
+            <motion.div 
+              variants={fadeUpVariant}
+              className="bg-white/90 backdrop-blur-sm border border-slate-200/80 rounded-2xl p-6 shadow-xs"
+            >
+              <div style={labelStyle} className="!mb-3">04. Typography</div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col justify-between">
+                  <div className="font-['Big_Shoulders_Display',sans-serif] font-bold text-3xl text-[#16193e] tracking-tight leading-none mb-2">
+                    IDEATE
+                  </div>
+                  <div className="font-['Inter'] text-[10px] text-[#23296b] font-medium leading-tight">
+                    Big Shoulders Display Bold · Titles
+                  </div>
                 </div>
-                <div style={{
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: '12px',
-                  color: '#9CA3AF',
-                  lineHeight: 1.5,
-                }}>
-                  {logo.usage}
+
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col justify-between">
+                  <div className="font-['Big_Shoulders_Display',sans-serif] font-normal text-3xl text-[#2c4a8f] tracking-tight leading-none mb-2">
+                    HEX
+                  </div>
+                  <div className="font-['Inter'] text-[10px] text-[#23296b] font-medium leading-tight">
+                    Big Shoulders Regular · Subheadings
+                  </div>
+                </div>
+
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col justify-between">
+                  <div className="font-['Outfit'] font-medium text-xs text-slate-700 leading-snug mb-2">
+                    Minimalist & sharp type system.
+                  </div>
+                  <div className="font-['Inter'] text-[10px] text-[#23296b] font-medium leading-tight">
+                    Outfit Regular · Body Copy
+                  </div>
                 </div>
               </div>
             </motion.div>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* 03 — COLOR PALETTE */}
-      <motion.div 
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={blockVariants}
-        style={{ marginBottom: '100px' }}
-      >
-        <motion.div variants={fadeUpVariant} style={labelStyle}>03. Color Palette</motion.div>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-          gap: '16px',
-        }}>
-          {COLORS.map((color) => (
-            <motion.div key={color.hex} variants={fadeUpVariant} style={{ display: 'flex', flexDirection: 'column', gap: '12px', willChange: 'transform, opacity' }}>
-              <div style={{
-                width: '100%',
-                height: '120px',
-                borderRadius: '12px',
-                background: color.hex,
-                border: '1px solid rgba(0,0,0,0.06)',
-              }} />
-              <div>
-                <div style={{
-                  fontFamily: 'Outfit, sans-serif',
-                  fontWeight: 700,
-                  fontSize: '15px',
-                  color: '#16193e',
-                }}>
-                  {color.name}
-                </div>
-                <div style={{
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: '13px',
-                  color: '#23296b',
-                  marginTop: '2px',
-                  fontWeight: 600,
-                }}>
-                  {color.hex.toUpperCase()}
-                </div>
-                <div style={{
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: '12px',
-                  color: '#23296b',
-                  marginTop: '4px',
-                  lineHeight: 1.4,
-                }}>
-                  {color.usage}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* 04 — TYPOGRAPHY */}
-      <motion.div 
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={blockVariants}
-        style={{ marginBottom: '100px' }}
-      >
-        <motion.div variants={fadeUpVariant} style={labelStyle}>04. Typography</motion.div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-          <motion.div variants={fadeUpVariant} style={{ borderBottom: '1px solid #E5E7EB', paddingBottom: '24px', willChange: 'transform, opacity' }}>
-            <div style={{
-              fontFamily: '"Big Shoulders Display", sans-serif',
-              fontWeight: 700,
-              fontSize: 'clamp(32px, 5vw, 56px)',
-              color: '#16193e',
-              letterSpacing: '-0.01em',
-              lineHeight: 1,
-            }}>
-              IDEATE
-            </div>
-            <div style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: '13px',
-              color: '#23296b',
-              marginTop: '10px',
-            }}>
-              Big Shoulders Display - Bold · Event headlines, titles, hero text
-            </div>
-          </motion.div>
-
-          <motion.div variants={fadeUpVariant} style={{ borderBottom: '1px solid #E5E7EB', paddingBottom: '24px', willChange: 'transform, opacity' }}>
-            <div style={{
-              fontFamily: '"Big Shoulders Display", sans-serif',
-              fontWeight: 400,
-              fontSize: 'clamp(32px, 5vw, 56px)',
-              color: '#2c4a8f',
-              letterSpacing: '-0.01em',
-              lineHeight: 1,
-            }}>
-              HEX
-            </div>
-            <div style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: '13px',
-              color: '#23296b',
-              marginTop: '10px',
-            }}>
-              Big Shoulders Display - Regular · Wordmark, secondary headings, large labels
-            </div>
-          </motion.div>
-
-          <motion.div variants={fadeUpVariant} style={{ willChange: 'transform, opacity' }}>
-            <div style={{
-              fontFamily: 'Outfit, sans-serif',
-              fontWeight: 400,
-              fontSize: 'clamp(16px, 2vw, 20px)',
-              color: '#6B7280',
-              lineHeight: 1.6,
-            }}>
-              Outfit Regular: Body copy in documents, presentations, and digital materials.
-            </div>
-            <div style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: '13px',
-              color: '#23296b',
-              marginTop: '10px',
-            }}>
-              Outfit - Regular · Pairs naturally with the geometric weight of Big Shoulders
-            </div>
-          </motion.div>
+          </div>
         </div>
       </motion.div>
 

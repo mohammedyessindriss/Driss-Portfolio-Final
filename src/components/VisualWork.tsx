@@ -44,6 +44,7 @@ export default function VisualWork() {
   return (
     <section
       ref={sectionRef}
+      id="visual-work"
       style={{
         position: 'relative',
         minHeight: '100vh',
