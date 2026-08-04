@@ -17,37 +17,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       setScrolled(window.scrollY > 10);
     };
 
-    const updateHashOnScroll = () => {
-      const sections = [
-        { id: 'contact', hash: '/#contact' },
-        { id: 'about', hash: '/#about' },
-        { id: 'work', hash: '/#work' },
-      ];
-      // Hero is at top
-      if (window.scrollY < 300) {
-        window.history.replaceState(null, '', '/');
-        return;
-      }
-      for (const section of sections) {
-        const el = document.getElementById(section.id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 120) {
-            window.history.replaceState(null, '', section.hash);
-            return;
-          }
-        }
-      }
-      window.history.replaceState(null, '', '/#work');
-    };
-
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('scroll', updateHashOnScroll, { passive: true });
     // Check initial scroll position
     onScroll();
     return () => {
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('scroll', updateHashOnScroll);
     };
   }, []);
 

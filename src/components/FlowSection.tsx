@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import React from 'react';
-import { Heart, MessageCircle, Send, Bookmark } from 'lucide-react';
+import { Heart, MessageCircle, Send, Bookmark, Sparkles } from 'lucide-react';
 
 interface Metric {
   value: string;
@@ -23,7 +23,7 @@ interface FlowSectionProps {
   borderColor: string;
   isLight: boolean;
   hasGradientTheme?: boolean;
-  creatives: { img: string; href: string }[];
+  creatives: { img: string; href: string; platform?: 'tiktok' | 'instagram' | 'none'; type?: string }[];
   children?: React.ReactNode;
 }
 
@@ -404,13 +404,13 @@ export default function FlowSection({
                   touchAction: 'pan-x',
                 }}
               >
-                {creatives.map((creative, i) => {
-                  const hasLink = creative.href && creative.href !== '#';
+                {creatives.map((item, i) => {
+                  const hasLink = item.href && item.href !== '#';
                   return (
-                    <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                       {hasLink ? (
                         <motion.a
-                          href={creative.href}
+                          href={item.href}
                           target="_blank"
                           rel="noopener noreferrer"
                           variants={{
@@ -434,7 +434,7 @@ export default function FlowSection({
                               hidden: { filter: 'blur(10px)', opacity: 0 },
                               visible: { filter: 'blur(0px)', opacity: 1, transition: { duration: 1, delay: 0.2, "ease": TWEEN_EASE } }
                             }}
-                            src={creative.img}
+                            src={item.img}
                             alt={`Creative ${i + 1}`}
                             style={{
                               width: '100%',
@@ -492,7 +492,7 @@ export default function FlowSection({
                               hidden: { filter: 'blur(10px)', opacity: 0 },
                               visible: { filter: 'blur(0px)', opacity: 1, transition: { duration: 1, delay: 0.2, "ease": TWEEN_EASE } }
                             }}
-                            src={creative.img}
+                            src={item.img}
                             alt={`Creative ${i + 1}`}
                             style={{
                               width: '100%',
@@ -524,6 +524,38 @@ export default function FlowSection({
                         </div>
                         <Bookmark size={24} strokeWidth={1.5} style={{ cursor: 'pointer', transition: 'color 0.2s', ...({':hover':{color: '#111827'}} as any) }} />
                       </motion.div>
+
+                      {item.type && (
+                        <div style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                          marginTop: '4px',
+                          paddingLeft: '2px',
+                        }}>
+                          <Sparkles
+                            size={11}
+                            style={{
+                              flexShrink: 0,
+                              color: item.type === 'Video'
+                                ? '#207ca9'
+                                : isLight ? '#23296b' : 'rgba(255,255,255,0.7)',
+                            }}
+                          />
+                          <span style={{
+                            fontFamily: 'Inter, sans-serif',
+                            fontSize: '10px',
+                            fontWeight: 600,
+                            letterSpacing: '0.12em',
+                            textTransform: 'uppercase',
+                            color: item.type === 'Video'
+                              ? '#207ca9'
+                              : isLight ? '#23296b' : 'rgba(255,255,255,0.6)',
+                          }}>
+                            {item.type}
+                          </span>
+                        </div>
+                      )}
                     </div>
                   );
                 })}

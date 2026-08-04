@@ -496,22 +496,10 @@ export default function Footer() {
             zIndex: 20,
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: 'flex-end',
             padding: '24px clamp(12px, 4vw, 64px) 32px',
             borderTop: '1px solid #E5E7EB',
           }}>
-
-            {/* Copyright */}
-            <span style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: '11px',
-              fontWeight: 500,
-              letterSpacing: '0.15em',
-              color: '#9CA3AF',
-              textTransform: 'uppercase',
-            }}>
-              © 2026 Mohammed Yessin Driss
-            </span>
 
             {/* Back to top */}
             <button

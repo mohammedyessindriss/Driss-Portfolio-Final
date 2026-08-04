@@ -28,15 +28,15 @@ export const PROJECTS = [
       { value: "10K+", label: "LinkedIn impressions" },
     ],
     creatives: [
-      { img: 'https://i.ibb.co/tT9pjP8F/Screenshot-2026-06-17-001525.png', href: 'https://www.instagram.com/p/DNOOo5jMZAj/', platform: 'instagram' },
-      { img: 'https://i.ibb.co/WpsQxHNL/1-3.png', href: 'https://www.instagram.com/p/DO9SkNTDfS-/?img_index=1', platform: 'instagram' },
-      { img: 'https://i.ibb.co/jPp64JBN/Screenshot-2026-06-17-011326.png', href: 'https://www.instagram.com/p/DO6pNYfFXGC/', platform: 'instagram' },
-      { img: 'https://i.ibb.co/nspfxJqq/Screenshot-2026-06-17-012721.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7444732741302169600', platform: 'instagram' },
-      { img: 'https://i.ibb.co/Nn78zq3N/Screenshot-2026-06-17-011659.png', href: 'https://www.instagram.com/p/DWZiG8RDsxM/?img_index=1', platform: 'instagram' },
-      { img: 'https://i.ibb.co/QvCSnpk9/Screenshot-2026-06-17-012958.png', href: 'https://www.instagram.com/p/DXNJuZXjSDQ/', platform: 'instagram' },
-      { img: 'https://i.ibb.co/hFhg5DtT/Screenshot-2026-06-17-012331.png', href: 'https://www.instagram.com/p/DXIKMfiDYiM/', platform: 'instagram' },
-      { img: 'https://i.ibb.co/1GKxNjwN/Screenshot-2026-06-17-012134.png', href: 'https://www.instagram.com/p/DXC40I4DQLu/', platform: 'instagram' },
-      { img: 'https://i.ibb.co/zTC9PTVJ/Screenshot-2026-06-17-011522.png', href: 'https://www.instagram.com/p/DPKDnN5AkHV/', platform: 'instagram' },
+      { img: 'https://i.ibb.co/tT9pjP8F/Screenshot-2026-06-17-001525.png', href: 'https://www.instagram.com/p/DNOOo5jMZAj/', platform: 'instagram', type: 'Static Post' },
+      { img: 'https://i.ibb.co/WpsQxHNL/1-3.png', href: 'https://www.instagram.com/p/DO9SkNTDfS-/?img_index=1', platform: 'instagram', type: 'Static Post' },
+      { img: 'https://i.ibb.co/jPp64JBN/Screenshot-2026-06-17-011326.png', href: 'https://www.instagram.com/p/DO6pNYfFXGC/', platform: 'instagram', type: 'Static Post' },
+      { img: 'https://i.ibb.co/nspfxJqq/Screenshot-2026-06-17-012721.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7444732741302169600', platform: 'instagram', type: 'Static Post' },
+      { img: 'https://i.ibb.co/Nn78zq3N/Screenshot-2026-06-17-011659.png', href: 'https://www.instagram.com/p/DWZiG8RDsxM/?img_index=1', platform: 'instagram', type: 'Static Post' },
+      { img: 'https://i.ibb.co/QvCSnpk9/Screenshot-2026-06-17-012958.png', href: 'https://www.instagram.com/p/DXNJuZXjSDQ/', platform: 'instagram', type: 'Static Post' },
+      { img: 'https://i.ibb.co/hFhg5DtT/Screenshot-2026-06-17-012331.png', href: 'https://www.instagram.com/p/DXIKMfiDYiM/', platform: 'instagram', type: 'Video' },
+      { img: 'https://i.ibb.co/1GKxNjwN/Screenshot-2026-06-17-012134.png', href: 'https://www.instagram.com/p/DXC40I4DQLu/', platform: 'instagram', type: 'Video' },
+      { img: 'https://i.ibb.co/zTC9PTVJ/Screenshot-2026-06-17-011522.png', href: 'https://www.instagram.com/p/DPKDnN5AkHV/', platform: 'instagram', type: 'Video' },
     ],
   },
   {
@@ -57,9 +57,9 @@ export const PROJECTS = [
       { value: "60", label: "Paying students" },
     ],
     creatives: [
-      { img: 'https://i.ibb.co/7tGxRP95/Screenshot-2026-06-16-030538.png', href: 'https://www.tiktok.com/@bume.tn/video/7528161061174791430' },
-      { img: 'https://i.ibb.co/fd2LQjz1/Screenshot-2026-06-16-030711.png', href: 'https://www.tiktok.com/@bume.tn/video/7532238543142341893' },
-      { img: 'https://i.ibb.co/23vjjcxC/Artboard-1.png', href: '#' },
+      { img: 'https://i.ibb.co/7tGxRP95/Screenshot-2026-06-16-030538.png', href: 'https://www.tiktok.com/@bume.tn/video/7528161061174791430', type: 'Video' },
+      { img: 'https://i.ibb.co/fd2LQjz1/Screenshot-2026-06-16-030711.png', href: 'https://www.tiktok.com/@bume.tn/video/7532238543142341893', type: 'Video' },
+      { img: 'https://i.ibb.co/23vjjcxC/Artboard-1.png', href: '#', type: 'Static Post' },
     ],
   },
   {
@@ -81,9 +81,9 @@ export const PROJECTS = [
       { value: "1", label: "Webinar organized to drive signups" },
     ],
     creatives: [
-      { img: 'https://i.ibb.co/gbGnc3y9/Artboard-5.png', href: 'https://www.instagram.com/p/DF_H3RDspxt/?img_index=1' },
-      { img: 'https://i.ibb.co/9HgJ8128/Screenshot-2026-06-16-031447.png', href: 'https://www.instagram.com/p/DHgzZics4BQ/' },
-      { img: 'https://i.ibb.co/9ktDbS2z/Screenshot-2026-06-16-033933.png', href: 'https://www.tiktok.com/@croki.tn/video/7473239488903384326' },
+      { img: 'https://i.ibb.co/gbGnc3y9/Artboard-5.png', href: 'https://www.instagram.com/p/DF_H3RDspxt/?img_index=1', type: 'Static Post' },
+      { img: 'https://i.ibb.co/9HgJ8128/Screenshot-2026-06-16-031447.png', href: 'https://www.instagram.com/p/DHgzZics4BQ/', type: 'Video' },
+      { img: 'https://i.ibb.co/9ktDbS2z/Screenshot-2026-06-16-033933.png', href: 'https://www.tiktok.com/@croki.tn/video/7473239488903384326', type: 'Video' },
     ],
   },
   {
@@ -104,9 +104,9 @@ export const PROJECTS = [
       { value: "Direct", label: "CEO coordination" },
     ],
     creatives: [
-      { img: 'https://i.ibb.co/xShC2FPx/Screenshot-2026-06-17-013156.png', href: 'https://www.linkedin.com/posts/export360-decision-export_tutorials-activity-7373634258042544128-4Ws_', platform: 'instagram' },
-      { img: 'https://i.ibb.co/jZ30BvCL/Screenshot-2026-06-17-013313.png', href: 'https://www.linkedin.com/posts/export360-decision-export_ce-que-vous-avez-manqu%C3%A9-cet-%C3%A9t%C3%A9-activity-7370735170909536256-X0ez', platform: 'instagram' },
-      { img: 'https://i.ibb.co/LdT038TG/Screenshot-2026-06-17-013508.png', href: 'https://www.linkedin.com/posts/export360-decision-export_learning-by-doing-activity-7383430048495878144-A6YM', platform: 'instagram' },
+      { img: 'https://i.ibb.co/xShC2FPx/Screenshot-2026-06-17-013156.png', href: 'https://www.linkedin.com/posts/export360-decision-export_tutorials-activity-7373634258042544128-4Ws_', platform: 'instagram', type: 'Static Post' },
+      { img: 'https://i.ibb.co/jZ30BvCL/Screenshot-2026-06-17-013313.png', href: 'https://www.linkedin.com/posts/export360-decision-export_ce-que-vous-avez-manqu%C3%A9-cet-%C3%A9t%C3%A9-activity-7370735170909536256-X0ez', platform: 'instagram', type: 'Static Post' },
+      { img: 'https://i.ibb.co/LdT038TG/Screenshot-2026-06-17-013508.png', href: 'https://www.linkedin.com/posts/export360-decision-export_learning-by-doing-activity-7383430048495878144-A6YM', platform: 'instagram', type: 'Static Post' },
     ],
   },
 ] as const;

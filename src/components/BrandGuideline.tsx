@@ -192,21 +192,13 @@ export default function BrandGuideline() {
               <div style={labelStyle} className="!mb-3">03. Color Palette</div>
               <div className="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-3 gap-3">
                 {COLORS.map((color) => (
-                  <div key={color.hex} className="flex flex-col gap-1.5 p-2 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                  <div key={color.hex} className="flex flex-col gap-2 p-2 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
                     <div 
-                      className="w-full h-11 rounded-lg border border-black/5 shadow-2xs" 
+                      className="w-full h-20 rounded-lg border border-black/5 shadow-2xs transition-transform duration-300 hover:scale-[1.02]" 
                       style={{ background: color.hex }} 
                     />
-                    <div>
-                      <div className="font-['Outfit'] font-bold text-xs text-[#16193e] truncate">
-                        {color.name}
-                      </div>
-                      <div className="font-['Inter'] font-semibold text-[11px] text-[#207ca9]">
-                        {color.hex.toUpperCase()}
-                      </div>
-                      <div className="font-['Inter'] text-[10px] text-slate-500 leading-tight mt-0.5 line-clamp-1" title={color.usage}>
-                        {color.usage}
-                      </div>
+                    <div className="font-['Outfit'] font-bold text-xs text-[#16193e] text-center truncate">
+                      {color.name}
                     </div>
                   </div>
                 ))}
