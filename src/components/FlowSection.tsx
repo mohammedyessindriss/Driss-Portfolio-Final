@@ -1,6 +1,8 @@
 import { motion } from 'motion/react';
 import React from 'react';
 import { Heart, MessageCircle, Send, Bookmark, Sparkles } from 'lucide-react';
+import { useLanguage } from '@/lib/LanguageContext';
+import SocialCards from '@/components/ui/card-fan-carousel';
 
 interface Metric {
   value: string;
@@ -48,6 +50,7 @@ export default function FlowSection({
   creatives,
   children,
 }: FlowSectionProps) {
+  const { t } = useLanguage();
   const mutedColor = isLight ? 'rgba(15,15,15,0.45)' : 'rgba(255,255,255,0.5)';
   const metricBg = isLight ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.06)';
   const accentColor = isLight ? '#207ca9' : 'rgba(255,255,255,0.9)';
@@ -339,7 +342,7 @@ export default function FlowSection({
           height: '1px',
           background: borderColor,
           marginTop: '28px',
-          marginBottom: '24px',
+          marginBottom: '16px',
         }} />
 
         {/* SECTION LABEL & GRIDS */}
@@ -353,7 +356,7 @@ export default function FlowSection({
               visible: { transition: { staggerChildren: 0.15 } }
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '56px', marginBottom: '32px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '16px', marginBottom: '20px' }}>
               <motion.div
                 variants={{
                   hidden: { opacity: 0 },
@@ -381,186 +384,17 @@ export default function FlowSection({
               />
             </div>
 
-            <div 
-              data-scrollable="true" 
-              style={{ 
-                width: '100%', 
-                overflowX: 'auto', 
-                WebkitOverflowScrolling: 'touch', 
-                paddingBottom: '20px',
-                touchAction: 'pan-x',
-              }}
-            >
-              <div 
-                data-scrollable="true" 
-                style={{ 
-                  display: 'grid', 
-                  gridTemplateColumns: 'repeat(3, minmax(280px, 1fr))', 
-                  gap: '32px', 
-                  marginTop: '24px', 
-                  width: '100%', 
-                  maxWidth: '1024px', 
-                  margin: '24px auto 0',
-                  touchAction: 'pan-x',
-                }}
-              >
-                {creatives.map((item, i) => {
-                  const hasLink = item.href && item.href !== '#';
-                  return (
-                    <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                      {hasLink ? (
-                        <motion.a
-                          href={item.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          variants={{
-                            hidden: { opacity: 0, y: 30 },
-                            visible: { opacity: 1, y: 0, transition: { duration: 0.8, "ease": TWEEN_EASE } }
-                          }}
-                          style={{
-                            aspectRatio: '1080 / 1350',
-                            borderRadius: '12px',
-                            overflow: 'hidden',
-                            display: 'block',
-                            position: 'relative',
-                            background: 'linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.05) 100%)',
-                            cursor: 'pointer',
-                            border: `1px solid ${borderColor}`,
-                            willChange: 'transform, opacity',
-                          }}
-                        >
-                          <motion.img
-                            variants={{
-                              hidden: { filter: 'blur(10px)', opacity: 0 },
-                              visible: { filter: 'blur(0px)', opacity: 1, transition: { duration: 1, delay: 0.2, "ease": TWEEN_EASE } }
-                            }}
-                            src={item.img}
-                            alt={`Creative ${i + 1}`}
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                              objectFit: 'cover',
-                              display: 'block',
-                            }}
-                            loading="lazy"
-                          />
-                          <div style={{
-                            position: 'absolute',
-                            inset: 0,
-                            background: 'rgba(32,124,169,0.8)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            opacity: 0,
-                            transition: 'opacity 0.25s ease',
-                          }}
-                          onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
-                          onMouseLeave={(e) => { e.currentTarget.style.opacity = '0'; }}
-                          >
-                            <span style={{
-                              fontFamily: 'Inter, sans-serif',
-                              fontWeight: 600,
-                              fontSize: '15px',
-                              color: '#ffffff',
-                              letterSpacing: '0.1em',
-                              textTransform: 'uppercase',
-                            }}>
-                              View
-                            </span>
-                          </div>
-                        </motion.a>
-                      ) : (
-                        <motion.div
-                          variants={{
-                            hidden: { opacity: 0, y: 30 },
-                            visible: { opacity: 1, y: 0, transition: { duration: 0.8, "ease": TWEEN_EASE } }
-                          }}
-                          style={{
-                            aspectRatio: '1080 / 1350',
-                            borderRadius: '12px',
-                            overflow: 'hidden',
-                            display: 'block',
-                            position: 'relative',
-                            background: 'linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.05) 100%)',
-                            cursor: 'default',
-                            border: `1px solid ${borderColor}`,
-                            willChange: 'transform, opacity',
-                          }}
-                        >
-                          <motion.img
-                            variants={{
-                              hidden: { filter: 'blur(10px)', opacity: 0 },
-                              visible: { filter: 'blur(0px)', opacity: 1, transition: { duration: 1, delay: 0.2, "ease": TWEEN_EASE } }
-                            }}
-                            src={item.img}
-                            alt={`Creative ${i + 1}`}
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                              objectFit: 'cover',
-                              display: 'block',
-                            }}
-                            loading="lazy"
-                          />
-                        </motion.div>
-                      )}
-                      <motion.div
-                        variants={{
-                          hidden: { opacity: 0 },
-                          visible: { opacity: 1, transition: { duration: 0.8, delay: 0.3, "ease": TWEEN_EASE } }
-                        }}
-                        style={{ 
-                          display: 'flex', 
-                          justifyContent: 'space-between', 
-                          alignItems: 'center',
-                          padding: '0 4px',
-                          color: '#6B7280'
-                        }}
-                      >
-                        <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-                          <Heart size={24} strokeWidth={1.5} style={{ cursor: 'pointer', transition: 'color 0.2s', ...({':hover':{color: '#111827'}} as any) }} />
-                          <MessageCircle size={24} strokeWidth={1.5} style={{ cursor: 'pointer', transition: 'color 0.2s', ...({':hover':{color: '#111827'}} as any) }} />
-                          <Send size={24} strokeWidth={1.5} style={{ cursor: 'pointer', transition: 'color 0.2s', ...({':hover':{color: '#111827'}} as any) }} />
-                        </div>
-                        <Bookmark size={24} strokeWidth={1.5} style={{ cursor: 'pointer', transition: 'color 0.2s', ...({':hover':{color: '#111827'}} as any) }} />
-                      </motion.div>
-
-                      {item.type && (
-                        <div style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '6px',
-                          marginTop: '4px',
-                          paddingLeft: '2px',
-                        }}>
-                          <Sparkles
-                            size={11}
-                            style={{
-                              flexShrink: 0,
-                              color: item.type === 'Video'
-                                ? '#207ca9'
-                                : isLight ? '#23296b' : 'rgba(255,255,255,0.7)',
-                            }}
-                          />
-                          <span style={{
-                            fontFamily: 'Inter, sans-serif',
-                            fontSize: '10px',
-                            fontWeight: 600,
-                            letterSpacing: '0.12em',
-                            textTransform: 'uppercase',
-                            color: item.type === 'Video'
-                              ? '#207ca9'
-                              : isLight ? '#23296b' : 'rgba(255,255,255,0.6)',
-                          }}>
-                            {item.type}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+            <SocialCards
+              cards={creatives
+                .filter(c => c.img && c.img !== '')
+                .map(c => ({
+                  imgUrl: c.img,
+                  alt: 'Creative',
+                  linkUrl: c.href !== '#' ? c.href : undefined,
+                  platform: (c as any).platform || 'instagram',
+                  type: c.type,
+                }))}
+            />
           </motion.div>
         )}
 

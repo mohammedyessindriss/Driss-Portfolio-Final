@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
+import { useLanguage } from '@/lib/LanguageContext';
+import SocialCards from '@/components/ui/card-fan-carousel';
 
 const COLORS = [
   { name: 'Deep Navy', hex: '#16193e', usage: 'H-stem primary' },
@@ -112,6 +114,7 @@ function PrintingFlipCard({ imgFront, imgBack, labelFront, labelBack }: { imgFro
 }
 
 export default function BrandGuideline() {
+  const { t } = useLanguage();
   return (
     <div style={{ width: '100%', padding: '60px 0' }}>
 
@@ -143,7 +146,7 @@ export default function BrandGuideline() {
             color: 'transparent',
           }}
         >
-          Event Rebranding · HEXideate
+          {t('brand.title')}
         </motion.div>
         <motion.div 
           variants={{
@@ -160,7 +163,7 @@ export default function BrandGuideline() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
         variants={blockVariants}
-        style={{ marginBottom: '80px' }}
+        style={{ marginTop: '32px', marginBottom: '32px' }}
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch w-full">
           {/* LEFT COLUMN: 01. The Concept & 03. Color Palette */}
@@ -170,7 +173,7 @@ export default function BrandGuideline() {
               variants={fadeUpVariant}
               className="bg-white/90 backdrop-blur-sm border border-slate-200/80 rounded-2xl p-6 md:p-8 shadow-xs flex flex-col justify-center flex-1"
             >
-              <div style={labelStyle} className="!mb-4">01. The Concept</div>
+              <div style={labelStyle} className="!mb-4">{t('brand.conceptTitle')}</div>
               <h3 style={{
                 fontFamily: 'Outfit, sans-serif',
                 fontWeight: 700,
@@ -180,7 +183,7 @@ export default function BrandGuideline() {
                 letterSpacing: '-0.01em',
                 margin: 0,
               }}>
-                HEXideate is TBS Junior Enterprise's annual hackathon: minimalist, sharp, and built for ideas worth building.
+                {t('brand.conceptDesc')}
               </h3>
             </motion.div>
 
@@ -189,7 +192,7 @@ export default function BrandGuideline() {
               variants={fadeUpVariant}
               className="bg-white/90 backdrop-blur-sm border border-slate-200/80 rounded-2xl p-6 shadow-xs"
             >
-              <div style={labelStyle} className="!mb-3">03. Color Palette</div>
+              <div style={labelStyle} className="!mb-3">{t('brand.colorPalette')}</div>
               <div className="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-3 gap-3">
                 {COLORS.map((color) => (
                   <div key={color.hex} className="flex flex-col gap-2 p-2 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
@@ -213,7 +216,7 @@ export default function BrandGuideline() {
               variants={fadeUpVariant}
               className="bg-white/90 backdrop-blur-sm border border-slate-200/80 rounded-2xl p-6 shadow-xs flex-1 flex flex-col"
             >
-              <div style={labelStyle} className="!mb-3">02. Logo Suite</div>
+              <div style={labelStyle} className="!mb-3">{t('brand.logoSuite')}</div>
               <div className="grid grid-cols-2 gap-3 flex-1">
                 {LOGOS.map((logo) => (
                   <div key={logo.label} className="bg-slate-50/70 border border-slate-200/70 rounded-xl overflow-hidden flex items-center justify-center p-4 group hover:border-slate-300 transition-all min-h-[100px]">
@@ -232,14 +235,14 @@ export default function BrandGuideline() {
               variants={fadeUpVariant}
               className="bg-white/90 backdrop-blur-sm border border-slate-200/80 rounded-2xl p-6 shadow-xs"
             >
-              <div style={labelStyle} className="!mb-3">04. Typography</div>
+              <div style={labelStyle} className="!mb-3">{t('brand.typography')}</div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col justify-between">
                   <div className="font-['Big_Shoulders_Display',sans-serif] font-bold text-3xl text-[#16193e] tracking-tight leading-none mb-2">
                     IDEATE
                   </div>
                   <div className="font-['Inter'] text-[10px] text-[#23296b] font-medium leading-tight">
-                    Big Shoulders Display Bold · Titles
+                    {t('brand.type1')}
                   </div>
                 </div>
 
@@ -248,16 +251,16 @@ export default function BrandGuideline() {
                     HEX
                   </div>
                   <div className="font-['Inter'] text-[10px] text-[#23296b] font-medium leading-tight">
-                    Big Shoulders Regular · Subheadings
+                    {t('brand.type2')}
                   </div>
                 </div>
 
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col justify-between">
                   <div className="font-['Outfit'] font-medium text-xs text-slate-700 leading-snug mb-2">
-                    Minimalist & sharp type system.
+                    {t('brand.typeDesc')}
                   </div>
                   <div className="font-['Inter'] text-[10px] text-[#23296b] font-medium leading-tight">
-                    Outfit Regular · Body Copy
+                    {t('brand.type3')}
                   </div>
                 </div>
               </div>
@@ -272,9 +275,9 @@ export default function BrandGuideline() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={blockVariants}
-        style={{ marginBottom: '100px' }}
+        style={{ marginTop: '32px', marginBottom: '32px' }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '56px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
           <motion.div 
             variants={{
               hidden: { opacity: 0 },
@@ -291,7 +294,7 @@ export default function BrandGuideline() {
               color: 'transparent',
             }}
           >
-            Presentation Materials
+            {t('brand.presentation')}
           </motion.div>
           <motion.div 
             variants={{
@@ -301,40 +304,16 @@ export default function BrandGuideline() {
             style={{ flex: 1, height: '2px', background: 'linear-gradient(90deg, rgba(32,124,169,0.3), transparent)', transformOrigin: 'left' }}
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-          {[
-            { img: 'https://i.ibb.co/spfbLptJ/Screenshot-2026-06-18-015737.png' },
-            { img: 'https://i.ibb.co/QjN6bH0R/Screenshot-2026-06-18-015747.png' },
-            { img: 'https://i.ibb.co/QvZ1GNT4/Screenshot-2026-06-18-015757.png' },
-            { img: 'https://i.ibb.co/mFrfTxGM/Screenshot-2026-06-18-015805.png' },
-          ].map((item, i) => (
-            <motion.div key={i} variants={fadeUpVariant} style={{
-              width: '100%',
-              aspectRatio: '1920 / 1080',
-              borderRadius: '14px',
-              overflow: 'hidden',
-              border: '1px solid #E5E7EB',
-              background: 'rgba(32,124,169,0.04)',
-              position: 'relative',
-              margin: '0 auto',
-            }}>
-              <motion.img
-                variants={{
-                  hidden: { filter: 'blur(10px)', opacity: 0 },
-                  visible: { filter: 'blur(0px)', opacity: 1, transition: { duration: 1, delay: 0.2, ease: TWEEN_EASE } }
-                }}
-                src={item.img}
-                alt={`Presentation material ${i + 1}`}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain',
-                  display: 'block',
-                  willChange: 'opacity, filter',
-                }}
-              />
-            </motion.div>
-          ))}
+        <div className="grid grid-cols-1 gap-6 w-full">
+          <SocialCards
+            aspectRatio="presentation"
+            cards={[
+              { imgUrl: 'https://i.ibb.co/spfbLptJ/Screenshot-2026-06-18-015737.png', alt: 'Presentation slide 1' },
+              { imgUrl: 'https://i.ibb.co/QjN6bH0R/Screenshot-2026-06-18-015747.png', alt: 'Presentation slide 2' },
+              { imgUrl: 'https://i.ibb.co/QvZ1GNT4/Screenshot-2026-06-18-015757.png', alt: 'Presentation slide 3' },
+              { imgUrl: 'https://i.ibb.co/mFrfTxGM/Screenshot-2026-06-18-015805.png', alt: 'Presentation slide 4' },
+            ]}
+          />
         </div>
       </motion.div>
 
@@ -344,8 +323,9 @@ export default function BrandGuideline() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={blockVariants}
+        style={{ marginTop: '32px', marginBottom: '32px' }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '56px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
           <motion.div 
             variants={{
               hidden: { opacity: 0 },
@@ -362,7 +342,7 @@ export default function BrandGuideline() {
               color: 'transparent',
             }}
           >
-            Printing Materials
+            {t('brand.printing')}
           </motion.div>
           <motion.div 
             variants={{
@@ -372,153 +352,16 @@ export default function BrandGuideline() {
             style={{ flex: 1, height: '2px', background: 'linear-gradient(90deg, rgba(32,124,169,0.3), transparent)', transformOrigin: 'left' }}
           />
         </div>
-        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 w-full">
-          {[
-            {
-              type: 'link',
-              img: 'https://i.ibb.co/Fqfp5P1t/Screenshot-2026-06-18-020135.png',
-              href: 'https://drive.google.com/file/d/11kSMt1Ktkkg4NwvsuGqsU7FX3tXMlQF7/view?usp=sharing',
-              label: 'View TBS JE Brochure',
-            },
-            {
-              type: 'link',
-              img: 'https://i.ibb.co/SXHcS8mf/Screenshot-2026-06-18-021447.png',
-              href: '#',
-              label: 'Agenda',
-            },
-            {
-              type: 'flip',
-              imgFront: 'https://i.ibb.co/6R2hNxtv/Screenshot-2026-06-18-021736.png',
-              imgBack: 'https://i.ibb.co/Ps3cWCrr/Screenshot-2026-06-18-021956.png',
-              labelFront: 'Notebook Front',
-              labelBack: 'Notebook Back',
-            },
-            {
-              type: 'link',
-              img: 'https://i.ibb.co/v4qkt3qW/agendaday.jpg',
-              href: '#',
-              label: 'Agenda',
-            },
-          ].map((item, i) => {
-            if (item.type === 'flip') {
-              return <PrintingFlipCard key={i} imgFront={item.imgFront!} imgBack={item.imgBack!} labelFront={item.labelFront!} labelBack={item.labelBack!} />;
-            }
-            return (
-              <React.Fragment key={i}>
-                {i === 0 ? (
-                  <motion.a
-                    variants={fadeUpVariant}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      width: '100%',
-                      aspectRatio: '2480 / 3508',
-                      borderRadius: '14px',
-                      overflow: 'hidden',
-                      border: '1px solid #E5E7EB',
-                      background: 'rgba(32,124,169,0.04)',
-                      position: 'relative',
-                      margin: '0 auto',
-                      display: 'block',
-                      textDecoration: 'none',
-                      cursor: 'pointer',
-                      willChange: 'transform, opacity',
-                    }}
-                  >
-                    <motion.img
-                      variants={{
-                        hidden: { filter: 'blur(10px)', opacity: 0 },
-                        visible: { filter: 'blur(0px)', opacity: 1, transition: { duration: 1, delay: 0.2, ease: TWEEN_EASE } }
-                      }}
-                      src={item.img}
-                      alt={item.label}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', willChange: 'filter, opacity' }}
-                    />
-                    <div
-                      style={{
-                        position: 'absolute',
-                        inset: 0,
-                        background: 'rgba(32,124,169,0.85)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        opacity: 0,
-                        transition: 'opacity 0.25s ease',
-                      }}
-                      onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
-                      onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
-                    >
-                      <span style={{
-                        fontFamily: 'Inter, sans-serif',
-                        fontWeight: 600,
-                        fontSize: '13px',
-                        color: '#ffffff',
-                        letterSpacing: '0.08em',
-                        textTransform: 'uppercase',
-                      }}>
-                        {item.label}
-                      </span>
-                    </div>
-                  </motion.a>
-                ) : (
-                  <motion.div
-                    variants={fadeUpVariant}
-                    style={{
-                      width: '100%',
-                      aspectRatio: '2480 / 3508',
-                      borderRadius: '14px',
-                      overflow: 'hidden',
-                      border: '1px solid #E5E7EB',
-                      background: 'rgba(32,124,169,0.04)',
-                      position: 'relative',
-                      margin: '0 auto',
-                      display: 'block',
-                      cursor: 'default',
-                      willChange: 'transform, opacity',
-                    }}
-                  >
-                    <motion.img
-                      variants={{
-                        hidden: { filter: 'blur(10px)', opacity: 0 },
-                        visible: { filter: 'blur(0px)', opacity: 1, transition: { duration: 1, delay: 0.2, ease: TWEEN_EASE } }
-                      }}
-                      src={item.img}
-                      alt={item.label}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', willChange: 'filter, opacity' }}
-                    />
-                    <div
-                      style={{
-                        position: 'absolute',
-                        inset: 0,
-                        background: 'rgba(32,124,169,0.85)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        opacity: 0,
-                        transition: 'opacity 0.25s ease',
-                      }}
-                      onMouseEnter={e => (e.currentTarget.style.opacity = '0.9')}
-                      onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
-                    >
-                      <span style={{
-                        fontFamily: 'Inter, sans-serif',
-                        fontWeight: 600,
-                        fontSize: '13px',
-                        color: '#ffffff',
-                        letterSpacing: '0.08em',
-                        textTransform: 'uppercase',
-                        textAlign: 'center',
-                        padding: '0 8px',
-                      }}>
-                        {item.label}
-                      </span>
-                    </div>
-                  </motion.div>
-                )}
-              </React.Fragment>
-            );
-          })}
+        <div className="grid grid-cols-1 gap-6 w-full">
+          <SocialCards
+            aspectRatio="A4"
+            cards={[
+              { imgUrl: 'https://i.ibb.co/Fqfp5P1t/Screenshot-2026-06-18-020135.png', linkUrl: 'https://drive.google.com/file/d/11kSMt1Ktkkg4NwvsuGqsU7FX3tXMlQF7/view?usp=sharing', alt: 'Brochure' },
+              { imgUrl: 'https://i.ibb.co/SXHcS8mf/Screenshot-2026-06-18-021447.png', alt: 'Agenda' },
+              { imgUrl: 'https://i.ibb.co/6R2hNxtv/Screenshot-2026-06-18-021736.png', alt: 'Notebook Front' },
+              { imgUrl: 'https://i.ibb.co/v4qkt3qW/agendaday.jpg', alt: 'Agenda Day' },
+            ]}
+          />
         </div>
       </motion.div>
 
@@ -528,9 +371,9 @@ export default function BrandGuideline() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={blockVariants}
-        style={{ marginTop: '96px' }}
+        style={{ marginTop: '32px', marginBottom: '32px' }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '56px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
           <motion.div 
             variants={{
               hidden: { opacity: 0 },
@@ -547,7 +390,7 @@ export default function BrandGuideline() {
               color: 'transparent',
             }}
           >
-            Social Media Performance Metrics
+            {t('brand.social')}
           </motion.div>
           <motion.div 
             variants={{
@@ -559,9 +402,9 @@ export default function BrandGuideline() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
           {[
-            { url: 'https://i.ibb.co/1fHfWbD4/Screenshot-2025-10-07-003034.png', label: 'Facebook Metrics', background: 'rgba(24, 119, 242, 0.8)' },
-            { url: 'https://i.ibb.co/LdLBXcmQ/image-6.png', label: 'Instagram Metrics', background: 'linear-gradient(45deg, rgba(250, 126, 30, 0.8), rgba(214, 41, 118, 0.8), rgba(150, 47, 191, 0.8), rgba(79, 91, 213, 0.8))' },
-            { url: 'https://i.ibb.co/gM7b3WML/image-1-2.png', label: 'Linkedin Metrics', background: 'rgba(10, 102, 194, 0.8)' }
+            { url: 'https://i.ibb.co/1fHfWbD4/Screenshot-2025-10-07-003034.png', label: t('brand.fb'), background: 'rgba(24, 119, 242, 0.8)' },
+            { url: 'https://i.ibb.co/LdLBXcmQ/image-6.png', label: t('brand.ig'), background: 'linear-gradient(45deg, rgba(250, 126, 30, 0.8), rgba(214, 41, 118, 0.8), rgba(150, 47, 191, 0.8), rgba(79, 91, 213, 0.8))' },
+            { url: 'https://i.ibb.co/gM7b3WML/image-1-2.png', label: t('brand.li'), background: 'rgba(10, 102, 194, 0.8)' }
           ].map((item, i) => (
             <motion.div
               key={i}

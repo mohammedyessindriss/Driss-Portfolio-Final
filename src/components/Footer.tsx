@@ -2,17 +2,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SITE_CONFIG } from '@/lib/constants';
-
-const MARQUEE_CONTENT = [
-  'Six brands, two years',
-  '✦',
-  'Based in Tunis',
-  '✦',
-  'Open to remote work',
-  '✦',
-  'Marketing, mostly figured out by doing it',
-  '✦',
-];
+import { useLanguage } from '@/lib/LanguageContext';
 
 const FOOTER_STYLES = `
   @keyframes footer-marquee {
@@ -120,6 +110,25 @@ const FOOTER_STYLES = `
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
 
+  .footer-whatsapp-btn {
+    background: #ffffff;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.08);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-style: preserve-3d;
+  }
+
+  .footer-whatsapp-btn:hover {
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.16);
+    transform: translateY(-3px) scale(1.02);
+    border-color: rgba(16, 185, 129, 0.5);
+  }
+
+  .footer-whatsapp-btn:active {
+    transform: translateY(0px) scale(0.98);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.06);
+  }
+
   .footer-back-top {
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
@@ -132,6 +141,7 @@ const FOOTER_STYLES = `
 `;
 
 export default function Footer() {
+  const { t } = useLanguage();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const giantTextRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -256,6 +266,7 @@ export default function Footer() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const MARQUEE_CONTENT = t('footer.marquee') as unknown as string[];
   const marqueeItems = [...MARQUEE_CONTENT, ...MARQUEE_CONTENT];
 
   return (
@@ -395,7 +406,7 @@ export default function Footer() {
               textTransform: 'uppercase',
               marginBottom: '32px',
             }}>
-              Contact Me
+              {t('footer.contactLabel')}
             </div>
 
             {/* Main heading */}
@@ -411,8 +422,8 @@ export default function Footer() {
                 margin: '0 0 24px',
               }}
             >
-              Ready to{' '}
-              <span style={{ color: '#207ca9' }}>begin?</span>
+              {t('footer.readyTo')}{' '}
+              <span style={{ color: '#207ca9' }}>{t('footer.begin')}</span>
             </h2>
 
             {/* Sub text */}
@@ -428,7 +439,7 @@ export default function Footer() {
                 margin: '0 0 48px',
               }}
             >
-              I'm available for remote work. If you're building something and need an extra hand, let's talk.
+              {t('footer.sub')}
             </p>
 
             {/* Actions */}
@@ -460,7 +471,7 @@ export default function Footer() {
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffffff">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
-                Find me on LinkedIn ↗
+                {t('footer.linkedin')}
               </a>
 
               {/* Email CTA — secondary button */}
@@ -485,7 +496,33 @@ export default function Footer() {
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                   <polyline points="22,6 12,13 2,6"></polyline>
                 </svg>
-                Email me ↗
+                {t('footer.email')}
+              </a>
+
+              {/* WhatsApp / Phone Direct CTA */}
+              <a
+                href={SITE_CONFIG.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-whatsapp-btn"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  padding: '16px 40px',
+                  borderRadius: '100px',
+                  fontFamily: 'Outfit, sans-serif',
+                  fontWeight: 700,
+                  fontSize: '15px',
+                  color: '#059669',
+                  textDecoration: 'none',
+                  letterSpacing: '0.02em',
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.24-.19-.49-.31z"/>
+                </svg>
+                {t('footer.whatsapp')}
               </a>
             </div>
           </div>

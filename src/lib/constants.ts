@@ -6,6 +6,10 @@ export const SITE_CONFIG = {
   available: true,
   linkedin: "https://www.linkedin.com/in/medyessin-driss/",
   email: "mohammedyessindriss@gmail.com",
+  phone: "+216 93 276 999",
+  phoneNumber: "93276999",
+  whatsapp: "https://wa.me/21693276999",
+  tel: "tel:+21693276999",
 } as const;
 
 export const PROJECTS = [
@@ -57,9 +61,9 @@ export const PROJECTS = [
       { value: "60", label: "Paying students" },
     ],
     creatives: [
-      { img: 'https://i.ibb.co/7tGxRP95/Screenshot-2026-06-16-030538.png', href: 'https://www.tiktok.com/@bume.tn/video/7528161061174791430', type: 'Video' },
-      { img: 'https://i.ibb.co/fd2LQjz1/Screenshot-2026-06-16-030711.png', href: 'https://www.tiktok.com/@bume.tn/video/7532238543142341893', type: 'Video' },
-      { img: 'https://i.ibb.co/23vjjcxC/Artboard-1.png', href: '#', type: 'Static Post' },
+      { img: 'https://i.ibb.co/7tGxRP95/Screenshot-2026-06-16-030538.png', href: 'https://www.tiktok.com/@bume.tn/video/7528161061174791430', platform: 'instagram', type: 'Video' },
+      { img: 'https://i.ibb.co/fd2LQjz1/Screenshot-2026-06-16-030711.png', href: 'https://www.tiktok.com/@bume.tn/video/7532238543142341893', platform: 'instagram', type: 'Video' },
+      { img: 'https://i.ibb.co/23vjjcxC/Artboard-1.png', href: '#', platform: 'instagram', type: 'Static Post' },
     ],
   },
   {
@@ -81,9 +85,9 @@ export const PROJECTS = [
       { value: "1", label: "Webinar organized to drive signups" },
     ],
     creatives: [
-      { img: 'https://i.ibb.co/gbGnc3y9/Artboard-5.png', href: 'https://www.instagram.com/p/DF_H3RDspxt/?img_index=1', type: 'Static Post' },
-      { img: 'https://i.ibb.co/9HgJ8128/Screenshot-2026-06-16-031447.png', href: 'https://www.instagram.com/p/DHgzZics4BQ/', type: 'Video' },
-      { img: 'https://i.ibb.co/9ktDbS2z/Screenshot-2026-06-16-033933.png', href: 'https://www.tiktok.com/@croki.tn/video/7473239488903384326', type: 'Video' },
+      { img: 'https://i.ibb.co/gbGnc3y9/Artboard-5.png', href: 'https://www.instagram.com/p/DF_H3RDspxt/?img_index=1', platform: 'instagram', type: 'Static Post' },
+      { img: 'https://i.ibb.co/9HgJ8128/Screenshot-2026-06-16-031447.png', href: 'https://www.instagram.com/p/DHgzZics4BQ/', platform: 'instagram', type: 'Video' },
+      { img: 'https://i.ibb.co/9ktDbS2z/Screenshot-2026-06-16-033933.png', href: 'https://www.tiktok.com/@croki.tn/video/7473239488903384326', platform: 'instagram', type: 'Video' },
     ],
   },
   {

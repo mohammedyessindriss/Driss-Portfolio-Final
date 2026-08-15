@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SparkleBackground from '@/components/SparkleBackground';
+import { useLanguage } from '@/lib/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.config({
@@ -33,16 +34,6 @@ const SOFTWARE_ITEMS: SoftwareItem[] = [
   { name: 'Asana', slug: 'asana', color: 'F06A6A' },
 ];
 
-const CURRENTLY = [
-  'Reading about how AI is changing marketing',
-  'Learning the skills that are actually in demand right now',
-  'Open to remote roles',
-];
-
-const paragraphText = "I'm drawn to problems that don't have obvious answers. How do you build an audience with no following? How do you position a startup nobody has heard of? I've been working through those questions in real organizations for the past two years. I'm still asking them.";
-const paragraphWords = paragraphText.split(' ');
-const highlightedWords = ['problems', 'obvious', 'answers', 'audience', 'position', 'startup', 'organizations', 'years'];
-
 const GlassPill = ({ children, className, style }: any) => (
   <div className={className} style={{
     padding: '14px 26px',
@@ -71,6 +62,19 @@ const GlassPill = ({ children, className, style }: any) => (
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const { t, language } = useLanguage();
+
+  const CURRENTLY = [
+    t('hero.current1'),
+    t('hero.current2'),
+    t('hero.current3'),
+  ];
+
+  const paragraphText = t('hero.paragraph');
+  const paragraphWords = paragraphText.split(' ');
+  const highlightedWords = language === 'en' 
+    ? ['problems', 'obvious', 'answers', 'audience', 'position', 'startup', 'organizations', 'years']
+    : ['problèmes', 'évidentes', 'réponses', 'audience', 'positionner', 'startup', 'organisations', 'ans'];
 
   useGSAP(() => {
     if (typeof window !== 'undefined' && ScrollTrigger.isTouch === 1) {
@@ -499,7 +503,7 @@ export default function Hero() {
               <svg width="15" height="15" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" clipRule="evenodd" d="M5 4a.75.75 0 0 1 .738.616l.252 1.388A1.25 1.25 0 0 0 6.996 7.01l1.388.252a.75.75 0 0 1 0 1.476l-1.388.252A1.25 1.25 0 0 0 5.99 9.996l-.252 1.388a.75.75 0 0 1-1.476 0L4.01 9.996A1.25 1.25 0 0 0 3.004 8.99l-1.388-.252a.75.75 0 0 1 0-1.476l1.388-.252A1.25 1.25 0 0 0 4.01 6.004l.252-1.388A.75.75 0 0 1 5 4m7-3a.75.75 0 0 1 .721.544l.195.682c.118.415.443.74.858.858l.682.195a.75.75 0 0 1 0 1.442l-.682.195a1.25 1.25 0 0 0-.858.858l-.195.682a.75.75 0 0 1-1.442 0l-.195-.682a1.25 1.25 0 0 0-.858-.858l-.682-.195a.75.75 0 0 1 0-1.442l.682-.195a1.25 1.25 0 0 0 .858-.858l.195-.682A.75.75 0 0 1 12 1m-2 10a.75.75 0 0 1 .728.568.97.97 0 0 0 .704.704.75.75 0 0 1 0 1.456.97.97 0 0 0-.704.704.75.75 0 0 1-1.456 0 .97.97 0 0 0-.704-.704.75.75 0 0 1 0-1.456.97.97 0 0 0 .704-.704A.75.75 0 0 1 10 11" fill="#ffffff"/>
               </svg>
-              Available for remote work
+              {t('hero.remote')}
             </span>
             <span style={{ color: 'rgba(255, 255, 255, 0.5)', fontSize: '14px', lineHeight: '1' }}>•</span>
             <a
@@ -518,7 +522,7 @@ export default function Hero() {
               onMouseEnter={e => (e.currentTarget.style.color = '#ffffff')}
               onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)')}
             >
-              Tunis, Tunisia
+              {t('hero.location')}
               <svg style={{ marginTop: '1px' }} width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="m1 1 4 3.5L1 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -539,7 +543,7 @@ export default function Hero() {
             textShadow: '0 0 16px rgba(56, 189, 248, 0.35), 0 0 30px rgba(32, 124, 169, 0.2)',
           }}
         >
-          Hi. I'm Yessin
+          {t('hero.hi')}
         </h1>
         <h1
           className="hero-line-2"
@@ -554,7 +558,7 @@ export default function Hero() {
             textShadow: '0 0 16px rgba(96, 165, 250, 0.3), 0 0 30px rgba(35, 41, 107, 0.18)',
           }}
         >
-          I study business and I do marketing.
+          {t('hero.study')}
         </h1>
 
         <p
@@ -569,7 +573,7 @@ export default function Hero() {
             marginTop: '28px',
           }}
         >
-          For the past two years, I've worked with six organizations on their marketing. A few numbers from that time are below.
+          {t('hero.sub')}
         </p>
 
         <div
@@ -589,7 +593,7 @@ export default function Hero() {
             color: '#9CA3AF',
             textTransform: 'uppercase',
           }}>
-            scroll to explore
+            {t('hero.scroll')}
           </span>
           <div style={{
             width: '1.5px',
@@ -677,7 +681,7 @@ export default function Hero() {
                       <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
                         <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                       </svg>
-                      Connect on LinkedIn
+                      {t('hero.connect')}
                     </div>
                   </div>
                 </a>
@@ -685,7 +689,7 @@ export default function Hero() {
                 {/* Leftside balanced floating capsules */}
                 <GlassPill className="card-float-1 animate-float-1 absolute top-[12%] -left-[24%] md:-left-[36%] hover:scale-105">
                   <span className="flex h-2.5 w-2.5 rounded-full bg-yellow-400" />
-                  Brand Launch
+                  {t('hero.pills.launch')}
                 </GlassPill>
 
                 {/* Open to remote work capsule dynamically arranged far on the left flanking edge, completely clearing the portrait clothing */}
@@ -694,23 +698,23 @@ export default function Hero() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                   </span>
-                  Open to remote work
+                  {t('hero.pills.remote')}
                 </GlassPill>
 
                 <GlassPill className="card-float-3 animate-float-3 absolute bottom-[18%] -left-[22%] md:-left-[34%] hover:scale-105">
                   <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
-                  SaaS Growth
+                  {t('hero.pills.saas')}
                 </GlassPill>
 
                 {/* Rightside balanced floating capsules */}
                 <GlassPill className="card-float-2 animate-float-2 absolute top-[26%] -right-[24%] md:-right-[36%] hover:scale-105">
                   <span className="flex h-2.5 w-2.5 rounded-full bg-blue-400" />
-                  B2B Marketing
+                  {t('hero.pills.b2b')}
                 </GlassPill>
 
                 <GlassPill className="card-float-4 animate-float-4 absolute bottom-[32%] -right-[20%] md:-right-[32%] hover:scale-105">
                   <span className="flex h-2.5 w-2.5 rounded-full bg-purple-400" />
-                  Community & Ads
+                  {t('hero.pills.community')}
                 </GlassPill>
               </div>
             </div>
@@ -789,7 +793,7 @@ export default function Hero() {
                           marginBottom: '42px',
                           textTransform: 'uppercase',
                           display: 'block'
-                        }}>Education</div>
+                        }}>{t('hero.education')}</div>
                         <div 
                            className="relative group overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-md flex items-center transition-all duration-350 hover:border-[#207ca9]/40 hover:bg-white/[0.06] max-w-xl shadow-lg education-card"
                         >
@@ -805,9 +809,9 @@ export default function Hero() {
                             />
                           </div>
                           <div className="relative z-10 flex flex-col gap-1 sm:gap-1.5">
-                            <div className="text-white font-outfit text-base xs:text-lg sm:text-xl md:text-2xl font-bold tracking-tight">Tunis Business School</div>
-                            <div className="text-white/70 text-xs xs:text-sm md:text-base font-medium">BSc Business Administration · Sophomore</div>
-                            <div className="text-[#207ca9] text-[8px] xs:text-[9px] sm:text-[9.5px] uppercase tracking-[0.2em] font-mono mt-1 font-semibold leading-relaxed">First Public English-Speaking Business School in Tunisia</div>
+                            <div className="text-white font-outfit text-base xs:text-lg sm:text-xl md:text-2xl font-bold tracking-tight">{t('hero.tbs')}</div>
+                            <div className="text-white/70 text-xs xs:text-sm md:text-base font-medium">{t('hero.degree')}</div>
+                            <div className="text-[#207ca9] text-[8px] xs:text-[9px] sm:text-[9.5px] uppercase tracking-[0.2em] font-mono mt-1 font-semibold leading-relaxed">{t('hero.schoolDesc')}</div>
                           </div>
                         </div>
                       </div>
@@ -823,7 +827,7 @@ export default function Hero() {
                           marginBottom: '42px',
                           textTransform: 'uppercase',
                           display: 'block'
-                        }}>Tools & Software</div>
+                        }}>{t('hero.tools')}</div>
                         <div className="flex flex-wrap gap-1.5 xs:gap-2 sm:gap-3 lg:gap-3.5 w-full max-w-full">
                             {SOFTWARE_ITEMS.map(item => (
                               <span 
@@ -862,7 +866,7 @@ export default function Hero() {
                           marginBottom: '42px',
                           textTransform: 'uppercase',
                           display: 'block'
-                        }}>Currently</div>
+                        }}>{t('hero.currently')}</div>
                         <div className="flex flex-col gap-6 sm:gap-8">
                           {CURRENTLY.map((item, i) => (
                             <div 
@@ -892,7 +896,7 @@ export default function Hero() {
                           </div>
                           
                           <p className="italic text-white/85 font-outfit font-light text-sm xs:text-lg sm:text-xl m-0 leading-relaxed max-w-[460px] tracking-wide relative z-10">
-                            The learning happens in production, not just in textbooks.
+                            {t('hero.quote')}
                           </p>
                         </div>
                       </div>
@@ -908,8 +912,8 @@ export default function Hero() {
                           marginBottom: '42px',
                           textTransform: 'uppercase',
                           display: 'block'
-                        }}>Languages</div>
-                        <div className="text-white font-semibold text-base xs:text-xl md:text-2xl tracking-wide">Arabic · French · English</div>
+                        }}>{t('hero.languages')}</div>
+                        <div className="text-white font-semibold text-base xs:text-xl md:text-2xl tracking-wide">{t('hero.langs')}</div>
                       </div>
                   </div>
 
@@ -947,7 +951,7 @@ export default function Hero() {
           letterSpacing: '-0.02em',
           marginBottom: '24px',
         }}>
-          The work.
+          {t('hero.theWork')}
         </h2>
         <p style={{
           fontFamily: 'Inter, sans-serif',
@@ -958,7 +962,7 @@ export default function Hero() {
           lineHeight: 1.7,
           marginBottom: '40px',
         }}>
-          Six brands over two years, broken down piece by piece.
+          {t('hero.sixBrands')}
         </p>
         <a
           href="#work"
@@ -984,7 +988,7 @@ export default function Hero() {
             e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
           }}
         >
-          Explore the work ↓
+          {t('hero.explore')}
         </a>
       </div>
     </div>

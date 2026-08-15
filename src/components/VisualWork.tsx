@@ -1,8 +1,35 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '@/lib/LanguageContext';
+import SocialCards from '@/components/ui/card-fan-carousel';
+
+const VISUAL_WORK_CARDS = [
+  // Kamka Social & Campaign Visuals
+  { imgUrl: 'https://i.ibb.co/ZpBXyJLH/Screenshot-2026-06-17-013608.png', linkUrl: 'https://www.linkedin.com/posts/kamka_the-architecture-activity-7471184583817023489-WbQD', platform: 'instagram' as const, alt: 'Kamka Design 1' },
+  { imgUrl: 'https://i.ibb.co/b5FvzWnD/Screenshot-2026-06-17-013714.png', linkUrl: 'https://www.linkedin.com/feed/update/urn:li:activity:7470037072959922176', platform: 'instagram' as const, alt: 'Kamka Design 2' },
+  { imgUrl: 'https://i.ibb.co/Rp3tsBLh/Screenshot-2026-06-17-013800.png', linkUrl: 'https://www.linkedin.com/feed/update/urn:li:activity:7468964911960711169', platform: 'instagram' as const, alt: 'Kamka Design 3' },
+  { imgUrl: 'https://i.ibb.co/tPX4bHPK/10th-Post-Kamka.png', linkUrl: 'https://www.linkedin.com/feed/update/urn:li:activity:7463166787321278464', platform: 'instagram' as const, alt: 'Kamka Design 4' },
+  { imgUrl: 'https://i.ibb.co/fVz3qDCC/Screenshot-2026-06-17-014020.png', linkUrl: 'https://www.linkedin.com/feed/update/urn:li:activity:7460705580635164673', platform: 'instagram' as const, alt: 'Kamka Design 5' },
+  { imgUrl: 'https://i.ibb.co/Vcb7y1MD/Screenshot-2026-06-17-014116.png', linkUrl: 'https://www.linkedin.com/feed/update/urn:li:activity:7454816699846967296', platform: 'instagram' as const, alt: 'Kamka Design 6' },
+  { imgUrl: 'https://i.ibb.co/VpNwYXhH/Screenshot-2026-06-17-014202.png', linkUrl: 'https://www.linkedin.com/feed/update/urn:li:activity:7447206616883519488', platform: 'instagram' as const, alt: 'Kamka Design 7' },
+  { imgUrl: 'https://i.ibb.co/9km7crcB/Screenshot-2026-06-18-185154.png', linkUrl: 'https://www.linkedin.com/feed/update/urn:li:activity:7473359019823362048', platform: 'instagram' as const, alt: 'Kamka Design 8' },
+  { imgUrl: 'https://i.ibb.co/ymFvqfqK/8th-Post-Kamka.png', linkUrl: 'https://www.linkedin.com/feed/update/urn:li:activity:7455888805896781824', platform: 'instagram' as const, alt: 'Kamka Design 9' },
+
+  // Graphic Design & Artboard Visual Works (1080x1080 Square)
+  { imgUrl: 'https://i.ibb.co/JwVkzmQY/Artboard-3-1.png', linkUrl: '#', platform: 'instagram' as const, aspectRatio: 'square' as const, alt: 'Artboard Design 1' },
+  { imgUrl: 'https://i.ibb.co/bj9yYChH/Artboard-1-2.png', linkUrl: '#', platform: 'instagram' as const, aspectRatio: 'square' as const, alt: 'Artboard Design 2' },
+  { imgUrl: 'https://i.ibb.co/992LR1X9/Artboard-3.png', linkUrl: '#', platform: 'instagram' as const, aspectRatio: 'square' as const, alt: 'Artboard Design 3' },
+  { imgUrl: 'https://i.ibb.co/G45KLqR5/Artboard-1-3.png', linkUrl: '#', platform: 'instagram' as const, aspectRatio: 'square' as const, alt: 'Artboard Design 4' },
+  { imgUrl: 'https://i.ibb.co/Zpmkh55h/Artboard-2-1.png', linkUrl: '#', platform: 'instagram' as const, aspectRatio: 'square' as const, alt: 'Artboard Design 5' },
+  { imgUrl: 'https://i.ibb.co/vCbLYbjR/Artboard-1.png', linkUrl: '#', platform: 'instagram' as const, aspectRatio: 'square' as const, alt: 'Artboard Design 6' },
+  { imgUrl: 'https://i.ibb.co/27bkSfKb/5-3.png', linkUrl: '#', platform: 'instagram' as const, aspectRatio: 'square' as const, alt: 'Artboard Design 7' },
+  { imgUrl: 'https://i.ibb.co/5b9JdWm/Artboard-1-4.png', linkUrl: '#', platform: 'instagram' as const, aspectRatio: 'square' as const, alt: 'Artboard Design 8' },
+  { imgUrl: 'https://i.ibb.co/4wskvwwd/Artboard-1-1.png', linkUrl: '#', platform: 'instagram' as const, aspectRatio: 'square' as const, alt: 'Artboard Design 9' },
+];
 
 export default function VisualWork() {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -98,7 +125,7 @@ export default function VisualWork() {
           color: 'rgba(32,124,169,0.45)',
           textTransform: 'uppercase',
         }}>
-          05 · Creative
+          05 · {t('visual.category')}
         </span>
         <span style={{
           fontFamily: 'Inter, sans-serif',
@@ -107,7 +134,7 @@ export default function VisualWork() {
           letterSpacing: '0.1em',
           textTransform: 'uppercase',
         }}>
-          Social Media · 1080 × 1350 & 1080 × 1080
+          {t('visual.spec')}
         </span>
       </div>
 
@@ -116,7 +143,7 @@ export default function VisualWork() {
         position: 'relative',
         zIndex: 1,
         textAlign: 'center',
-        marginBottom: '48px',
+        marginBottom: '40px',
       }}>
         <h2 className="visual-work-title" style={{
           fontFamily: 'Outfit, sans-serif',
@@ -127,7 +154,7 @@ export default function VisualWork() {
           letterSpacing: '-0.02em',
           margin: 0,
         }}>
-          The Visual Work
+          {t('visual.title')}
         </h2>
         <p className="visual-work-subtitle" style={{
           fontFamily: 'Inter, sans-serif',
@@ -139,143 +166,13 @@ export default function VisualWork() {
           margin: '16px auto 0',
           lineHeight: 1.65,
         }}>
-          Designs, campaigns, and creative executions across multiple brands and platforms.
+          {t('visual.subtitle')}
         </p>
       </div>
 
-      {/* 3xX IMAGE GRID */}
-      <div 
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-8 gap-x-3 sm:gap-x-4 w-[95%] sm:w-[90%] md:w-[80%]"
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          margin: '0 auto',
-        }}
-      >
-        {[
-          { img: 'https://i.ibb.co/ZpBXyJLH/Screenshot-2026-06-17-013608.png', href: 'https://www.linkedin.com/posts/kamka_the-architecture-activity-7471184583817023489-WbQD', clickable: true, ratio: '1080 / 1350' },
-          { img: 'https://i.ibb.co/b5FvzWnD/Screenshot-2026-06-17-013714.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7470037072959922176', clickable: true, ratio: '1080 / 1350' },
-          { img: 'https://i.ibb.co/Rp3tsBLh/Screenshot-2026-06-17-013800.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7468964911960711169', clickable: true, ratio: '1080 / 1350' },
-          { img: 'https://i.ibb.co/tPX4bHPK/10th-Post-Kamka.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7463166787321278464', clickable: true, ratio: '1080 / 1350' },
-          { img: 'https://i.ibb.co/fVz3qDCC/Screenshot-2026-06-17-014020.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7460705580635164673', clickable: true, ratio: '1080 / 1350' },
-          { img: 'https://i.ibb.co/Vcb7y1MD/Screenshot-2026-06-17-014116.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7454816699846967296', clickable: true, ratio: '1080 / 1350' },
-          { img: 'https://i.ibb.co/VpNwYXhH/Screenshot-2026-06-17-014202.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7447206616883519488', clickable: true, ratio: '1080 / 1350' },
-          { img: 'https://i.ibb.co/9km7crcB/Screenshot-2026-06-18-185154.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7473359019823362048', clickable: true, ratio: '1080 / 1350' },
-          { img: 'https://i.ibb.co/ymFvqfqK/8th-Post-Kamka.png', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7455888805896781824', clickable: true, ratio: '1080 / 1350' },
-          
-          // Additional 9 photo placeholders with aspect ratios of 1080*1080
-          { img: 'https://i.ibb.co/JwVkzmQY/Artboard-3-1.png', href: '#', clickable: false, ratio: '1080 / 1080' },
-          { img: 'https://i.ibb.co/bj9yYChH/Artboard-1-2.png', href: '#', clickable: false, ratio: '1080 / 1080' },
-          { img: 'https://i.ibb.co/992LR1X9/Artboard-3.png', href: '#', clickable: false, ratio: '1080 / 1080' },
-          { img: 'https://i.ibb.co/G45KLqR5/Artboard-1-3.png', href: '#', clickable: false, ratio: '1080 / 1080' },
-          { img: 'https://i.ibb.co/Zpmkh55h/Artboard-2-1.png', href: '#', clickable: false, ratio: '1080 / 1080' },
-          { img: 'https://i.ibb.co/vCbLYbjR/Artboard-1.png', href: '#', clickable: false, ratio: '1080 / 1080' },
-          { img: 'https://i.ibb.co/27bkSfKb/5-3.png', href: '#', clickable: false, ratio: '1080 / 1080' },
-          { img: 'https://i.ibb.co/5b9JdWm/Artboard-1-4.png', href: '#', clickable: false, ratio: '1080 / 1080' },
-          { img: 'https://i.ibb.co/4wskvwwd/Artboard-1-1.png', href: '#', clickable: false, ratio: '1080 / 1080' },
-        ].map((item, index) => (
-          <div key={index} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <a
-              href={item.clickable ? item.href : undefined}
-              target={item.clickable ? '_blank' : undefined}
-              rel={item.clickable ? 'noopener noreferrer' : undefined}
-              style={{
-                position: 'relative',
-                width: '100%',
-                aspectRatio: item.ratio,
-                height: 'auto',
-                borderRadius: '10px',
-                overflow: 'hidden',
-                display: 'block',
-                cursor: item.clickable ? 'pointer' : 'default',
-                border: '1px solid rgba(32,124,169,0.12)',
-                textDecoration: 'none',
-              }}
-            >
-              <img
-                src={item.img}
-                alt={`Visual work ${index + 1}`}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'top',
-                  display: 'block',
-                  position: 'absolute',
-                  inset: 0,
-                }}
-              />
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'linear-gradient(160deg, rgba(32,124,169,0.12) 0%, rgba(35,41,107,0.22) 100%)',
-                mixBlendMode: 'multiply',
-                pointerEvents: 'none',
-                zIndex: 1,
-              }} />
-              {item.clickable && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'rgba(32,124,169,0.88)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '8px',
-                    opacity: 0,
-                    transition: 'opacity 0.25s ease',
-                    borderRadius: '10px',
-                    zIndex: 2,
-                  }}
-                  onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
-                  onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                    <polyline points="15 3 21 3 21 9" />
-                    <line x1="10" y1="14" x2="21" y2="3" />
-                  </svg>
-                  <span style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontWeight: 500,
-                    fontSize: '11px',
-                    color: '#ffffff',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                  }}>
-                    View post
-                  </span>
-                </div>
-              )}
-            </a>
-            {/* Instagram icon strip */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '6px 4px',
-              borderTop: '1px solid rgba(32,124,169,0.12)',
-            }}>
-              <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="1.5">
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                </svg>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="1.5">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                </svg>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="1.5">
-                  <line x1="22" y1="2" x2="11" y2="13"/>
-                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                </svg>
-              </div>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="1.5">
-                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-              </svg>
-            </div>
-          </div>
-        ))}
+      {/* FAN CAROUSEL WITH SOCIAL POST FEATURES */}
+      <div style={{ position: 'relative', zIndex: 1, width: '100%', marginTop: '16px' }}>
+        <SocialCards cards={VISUAL_WORK_CARDS} />
       </div>
 
       {/* BOTTOM LINE */}
@@ -290,3 +187,4 @@ export default function VisualWork() {
     </section>
   );
 }
+
