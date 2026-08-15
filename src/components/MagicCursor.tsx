@@ -21,6 +21,38 @@ function calcDistance(a: Point, b: Point) {
   return Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2));
 }
 
+// 4-pointed glowing spark matching the Hero section floating sparkles in brand blue
+const HERO_SPARK_SVG = `
+<svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="cursorSpkGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="1" />
+      <stop offset="45%" stop-color="#207ca9" stop-opacity="0.95" />
+      <stop offset="80%" stop-color="#23296b" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#141842" stop-opacity="0.4" />
+    </radialGradient>
+    <filter id="cursorSpkGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="1.2" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <path
+    d="M12 0L13.8 8.2L22 12L13.8 15.8L12 24L10.2 15.8L2 12L10.2 8.2L12 0Z"
+    fill="url(#cursorSpkGrad)"
+    filter="url(#cursorSpkGlow)"
+  />
+  <path
+    d="M12 5.5L12.8 9.2L16.5 12L12.8 14.8L12 18.5L11.2 14.8L7.5 12L11.2 9.2L12 5.5Z"
+    fill="#207ca9"
+    opacity="0.95"
+  />
+  <circle cx="12" cy="12" r="1.6" fill="#38bdf8" />
+</svg>
+`;
+
 export default function MagicCursor() {
   const config = React.useRef({
     starAnimationDuration: 1500,
@@ -28,7 +60,7 @@ export default function MagicCursor() {
     minimumDistanceBetweenStars: 75,
     glowDuration: 75,
     maximumGlowPointSpacing: 10,
-    colors: ["32 124 169", "35 41 107"],
+    colors: ["32 124 169", "35 41 107", "56 189 248"],
     sizes: ["1.2rem", "0.9rem", "0.6rem"],
     animations: ["fall-1", "fall-2", "fall-3"],
   });
@@ -132,6 +164,7 @@ export default function MagicCursor() {
     last.current.mousePosition = mousePosition;
   }, [createStar, createGlow]);
 
+  // Trail effect listeners
   React.useEffect(() => {
     const onMove = (e: MouseEvent) => handleMove(e);
     const onLeave = () => { last.current.mousePosition = { x: 0, y: 0 }; };
@@ -145,18 +178,20 @@ export default function MagicCursor() {
     };
   }, [handleMove]);
 
+  // Spotlight effect (brand blue glow following cursor)
   React.useEffect(() => {
     const spotlight = document.createElement("div");
     spotlight.id = "cursor-spotlight";
     spotlight.style.cssText = `
       position: fixed;
-      width: 400px;
-      height: 400px;
+      width: 450px;
+      height: 450px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(32,124,169,0.08) 0%, rgba(35,41,107,0.04) 40%, transparent 70%);
+      background: radial-gradient(circle, rgba(32,124,169,0.22) 0%, rgba(56,189,248,0.12) 30%, rgba(35,41,107,0.05) 60%, transparent 75%);
       transform: translate(-50%, -50%);
       pointer-events: none;
       z-index: 9990;
+      filter: blur(28px);
       transition: opacity 0.3s ease;
       opacity: 0;
       top: 0;
@@ -182,6 +217,65 @@ export default function MagicCursor() {
       document.body.removeEventListener("mouseleave", hideSpotlight);
       if (document.body.contains(spotlight)) {
         document.body.removeChild(spotlight);
+      }
+    };
+  }, []);
+
+  // Custom Cursor (Hero Sparkle as the cursor itself)
+  React.useEffect(() => {
+    const isPointerFine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (!isPointerFine) return;
+
+    const sparkCursor = document.createElement("div");
+    sparkCursor.className = "spark-cursor-element";
+    sparkCursor.innerHTML = HERO_SPARK_SVG;
+    document.body.appendChild(sparkCursor);
+    document.body.classList.add("custom-spark-cursor-active");
+
+    const onMouseMove = (e: MouseEvent) => {
+      sparkCursor.style.left = `${e.clientX}px`;
+      sparkCursor.style.top = `${e.clientY}px`;
+      sparkCursor.style.opacity = "1";
+
+      const target = e.target as HTMLElement | null;
+      if (target) {
+        const isClickable = Boolean(
+          target.closest("a, button, [role='button'], input, textarea, select, label, .clickable, [onclick]")
+        );
+        if (isClickable) {
+          sparkCursor.classList.add("hovering");
+        } else {
+          sparkCursor.classList.remove("hovering");
+        }
+      }
+    };
+
+    const onMouseDown = () => {
+      sparkCursor.classList.add("clicking");
+    };
+
+    const onMouseUp = () => {
+      sparkCursor.classList.remove("clicking");
+    };
+
+    const onMouseLeave = () => {
+      sparkCursor.style.opacity = "0";
+      sparkCursor.classList.remove("hovering", "clicking");
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mousedown", onMouseDown);
+    window.addEventListener("mouseup", onMouseUp);
+    document.body.addEventListener("mouseleave", onMouseLeave);
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mousedown", onMouseDown);
+      window.removeEventListener("mouseup", onMouseUp);
+      document.body.removeEventListener("mouseleave", onMouseLeave);
+      document.body.classList.remove("custom-spark-cursor-active");
+      if (document.body.contains(sparkCursor)) {
+        document.body.removeChild(sparkCursor);
       }
     };
   }, []);
