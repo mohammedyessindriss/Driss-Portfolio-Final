@@ -5,6 +5,7 @@ import FlowArt from '@/components/FlowArt';
 import FlowSection from '@/components/FlowSection';
 import BrandGuideline from '@/components/BrandGuideline';
 import VisualWork from '@/components/VisualWork';
+import Skills4TradeDocs from '@/components/Skills4TradeDocs';
 import Footer from '@/components/Footer';
 import { SITE_CONFIG, PROJECTS } from '@/lib/constants';
 import { useLanguage } from '@/lib/LanguageContext';
@@ -45,6 +46,7 @@ export default function App() {
             }))}
           >
             {i === 0 && <BrandGuideline />}
+            {project.id === 'skills4trade' && <Skills4TradeDocs />}
           </FlowSection>
         ))}
         <VisualWork />
