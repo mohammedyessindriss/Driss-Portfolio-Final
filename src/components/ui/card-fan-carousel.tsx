@@ -7,6 +7,7 @@ export interface CardItem {
   imgUrl: string;
   alt?: string;
   linkUrl?: string;
+  downloadName?: string;
   platform?: 'instagram' | 'tiktok' | 'none';
   type?: string;
   aspectRatio?: 'social' | 'square' | '1:1' | '4:5' | 'presentation' | '16:9' | 'A4' | 'print';
@@ -402,7 +403,15 @@ export default function SocialCards({
             };
 
             return card.linkUrl ? (
-              <a key={index} href={card.linkUrl} target="_blank" rel="noopener noreferrer" className="fan-card-inner" style={wrapperStyle}>
+              <a 
+                key={index} 
+                href={card.linkUrl} 
+                target={card.downloadName ? undefined : "_blank"} 
+                rel={card.downloadName ? undefined : "noopener noreferrer"} 
+                download={card.downloadName}
+                className="fan-card-inner" 
+                style={wrapperStyle}
+              >
                 {inner}
               </a>
             ) : (

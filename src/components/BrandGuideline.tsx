@@ -308,10 +308,26 @@ export default function BrandGuideline() {
           <SocialCards
             aspectRatio="presentation"
             cards={[
-              { imgUrl: 'https://i.ibb.co/spfbLptJ/Screenshot-2026-06-18-015737.png', alt: 'Presentation slide 1' },
-              { imgUrl: 'https://i.ibb.co/QjN6bH0R/Screenshot-2026-06-18-015747.png', alt: 'Presentation slide 2' },
-              { imgUrl: 'https://i.ibb.co/QvZ1GNT4/Screenshot-2026-06-18-015757.png', alt: 'Presentation slide 3' },
-              { imgUrl: 'https://i.ibb.co/mFrfTxGM/Screenshot-2026-06-18-015805.png', alt: 'Presentation slide 4' },
+              { 
+                imgUrl: 'https://i.ibb.co/spfbLptJ/Screenshot-2026-06-18-015737.png', 
+                alt: 'Presentation slide 1',
+                linkUrl: 'https://drive.google.com/file/d/1BQ3PXxg4jeeaVszX-ZPLHEvM6sWwY5Yq/view?usp=sharing'
+              },
+              { 
+                imgUrl: 'https://i.ibb.co/mFVLWzXW/Screenshot-2026-08-23-185219.png', 
+                alt: 'Presentation slide 2',
+                linkUrl: 'https://1drv.ms/p/c/b654c3a523bedc7e/IQAn7935B4PDSoMgKumZNEQXAXrjoWPuAJJfu7lhH5vn7RU?e=FHcoG1&download=1'
+              },
+              { 
+                imgUrl: 'https://i.ibb.co/XZr1nkzW/Screenshot-2026-08-23-173323.png', 
+                alt: 'Presentation slide 3',
+                linkUrl: 'https://drive.google.com/file/d/1fpWbLN6Kxqzd6h8r8RqdlB91-37t099f/view?usp=sharing'
+              },
+              { 
+                imgUrl: 'https://i.ibb.co/MDfz46F8/Screenshot-2026-08-23-173404.png', 
+                alt: 'Presentation slide 4',
+                linkUrl: 'https://drive.google.com/file/d/119yeoMnJodNQfIo_neCyWU8NZUMmHpNl/view?usp=sharing'
+              },
             ]}
           />
         </div>

@@ -1,6 +1,6 @@
 {
-  "name": "",
-  "description": "",
+  "name": "Driss Portfolio",
+  "description": "Marketing operator and brand builder. Sophomore at Tunis Business School. Five brands built in one year.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
