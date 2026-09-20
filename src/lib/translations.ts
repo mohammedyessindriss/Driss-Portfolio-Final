@@ -20,7 +20,7 @@ export const translations = {
     },
     hero: {
       hi: "Hi. I'm Yessin",
-      study: "I study business and I do marketing.",
+      study: "I'm a B2B digital marketing professional.",
       sub: "For the past two years, I've worked with six organizations on their marketing. A few numbers from that time are below.",
       scroll: "scroll to explore",
       remote: "Available for remote work",
@@ -184,7 +184,7 @@ export const translations = {
     },
     hero: {
       hi: "Salut. Je suis Yessin",
-      study: "J'étudie le business et je fais du marketing.",
+      study: "Je suis un professionnel du marketing digital B2B.",
       sub: "Ces deux dernières années, j'ai travaillé avec six organisations sur leur marketing. Quelques chiffres de cette période ci-dessous.",
       scroll: "défilez pour explorer",
       remote: "Disponible pour travailler à distance",
